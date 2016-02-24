@@ -24,4 +24,20 @@ public class Movement {
 	{
 		cmd.setLedsAnimation(LEDAnimation.BLINK_ORANGE, 3, 10);
 	}
+	public void goLeft(int speed, long ms)
+	{
+		cmd.goLeft(speed).doFor(ms);
+	}
+	
+	public void goRight(int speed, long ms)
+	{
+		cmd.goRight(speed).doFor(ms);
+	}
+	
+	public void hoover(long ms)
+	{
+		cmd.hover().doFor(ms);
+	}
+	
+	//public void 
 }
