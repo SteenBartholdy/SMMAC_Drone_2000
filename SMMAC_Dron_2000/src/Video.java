@@ -16,9 +16,9 @@ public class Video extends JFrame {
 	
 	 private BufferedImage image = null;
 	    
-	    public Video(final IARDrone drone)
+	    public Video (final IARDrone drone)
 	    {
-	        super("Så flyver vi sgu!");
+	        super("Flyv!");
 	        
 	        setSize(640,360);
 	        setVisible(true);
@@ -43,7 +43,6 @@ public class Video extends JFrame {
 	            }
 	        });
 
-	        // close the 
 	        addWindowListener(new WindowAdapter() {
 				public void windowClosing(WindowEvent e) 
 				{

@@ -9,7 +9,7 @@ public class Commands {
 	private CommandManager cmd;
 	private IARDrone drone;
 
-	public Commands(IARDrone drone)
+	public Commands(final IARDrone drone)
 	{
 		this.cmd = drone.getCommandManager();
 		this.drone = drone;
@@ -34,5 +34,9 @@ public class Commands {
 
 			public void voltageChanged(int vbat_raw) { }
 		});
+	}
+	
+	public void waitFor(long ms){
+		cmd.waitFor(ms);
 	}
 }

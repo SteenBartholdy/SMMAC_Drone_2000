@@ -9,42 +9,34 @@ public class Main {
 	{	
 		IARDrone drone = null;
 		Movement mov = null;
+		Commands cmd = null;
 		
 		try
 		{
 			drone = new ARDrone();
+			
 			drone.addExceptionListener(new IExceptionListener() {
 				public void exeptionOccurred(ARDroneException exc)
 				{
 					exc.printStackTrace();
 				}
-			});
-					
+			});		
 			
 			drone.start();
 			
+			mov = new Movement(drone);
+			cmd = new Commands(drone);
+			
 			new Video(drone);
 			
+			cmd.waitFor(10000);
 			
-			mov = new Movement(drone);
-			
-			mov.takeoff();
-			mov.waitFor(5000);
-			mov.forward(30, 1000);
-			mov.backwards(30, 1000);
+			cmd.printBattery();
 		}
 		catch (Exception e)
 		{
 			e.printStackTrace();
 			System.out.println(e.getMessage());
-		}
-		finally
-		{
-			if (drone != null)
-			{
-				mov.landing();
-				drone.stop();
-			}
 		}
 	}
 }

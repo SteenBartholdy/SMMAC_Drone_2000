@@ -4,7 +4,7 @@ import de.yadrone.base.command.CommandManager;
 public class Movement {
 	private CommandManager cmd;
 	
-	public Movement(IARDrone drone)
+	public Movement(final IARDrone drone)
 	{
 		cmd = drone.getCommandManager();
 	}
