@@ -22,7 +22,7 @@ public class Video extends JFrame {
 	        
 	        setSize(640,360);
 	        setVisible(true);
-	        
+	 
 	        drone.getVideoManager().addImageListener(new ImageListener() {
 	            public void imageUpdated(BufferedImage newImage)
 	            {
