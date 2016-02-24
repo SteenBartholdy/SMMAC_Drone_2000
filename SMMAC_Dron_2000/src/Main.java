@@ -1,8 +1,5 @@
 import de.yadrone.base.ARDrone;
 import de.yadrone.base.IARDrone;
-import de.yadrone.base.command.CommandManager;
-import de.yadrone.base.exception.ARDroneException;
-import de.yadrone.base.exception.IExceptionListener;
 
 public class Main {
 
@@ -15,13 +12,14 @@ public class Main {
 			drone.start();
 			Movement mov = new Movement(drone);
 			
-			mov.color();
-			mov.takeof(5000);
+			mov.takeoff();
+			mov.waitFor(5000);
 			mov.landing();
 		}
-		catch (Exception exc)
+		catch (Exception e)
 		{
-			exc.printStackTrace();
+			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 		finally
 		{

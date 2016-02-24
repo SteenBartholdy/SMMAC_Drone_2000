@@ -10,7 +10,7 @@ public class Movement {
 		cmd = drone.getCommandManager();
 	}
 	
-	public void takeof ()
+	public void takeoff ()
 	{
 		cmd.takeOff();
 	}
