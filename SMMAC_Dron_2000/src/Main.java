@@ -1,5 +1,7 @@
 import de.yadrone.base.ARDrone;
 import de.yadrone.base.IARDrone;
+import de.yadrone.base.exception.ARDroneException;
+import de.yadrone.base.exception.IExceptionListener;
 
 public class Main {
 
@@ -11,7 +13,19 @@ public class Main {
 		try
 		{
 			drone = new ARDrone();
+			drone.addExceptionListener(new IExceptionListener() {
+				public void exeptionOccurred(ARDroneException exc)
+				{
+					exc.printStackTrace();
+				}
+			});
+					
+			
 			drone.start();
+			
+			new Video(drone);
+			
+			
 			mov = new Movement(drone);
 			
 			mov.takeoff();
