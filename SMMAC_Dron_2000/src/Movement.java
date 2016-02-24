@@ -64,4 +64,14 @@ public class Movement {
 	{
 		cmd.spinLeft(speed).doFor(ms);
 	}
+
+	public void moveUp(int speed, long ms)
+	{
+		cmd.up(speed).doFor(ms);
+	}
+	
+	public void moveDown(int speed, long ms)
+	{
+		cmd.down(speed).doFor(ms);
+	}
 }
