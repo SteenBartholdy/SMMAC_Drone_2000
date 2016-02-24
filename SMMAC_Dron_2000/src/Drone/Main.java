@@ -22,18 +22,11 @@ public class Main {
 			//cmd.printBattery();
 			
 			new Video(drone);
-			
-			cmd.waitFor(100);
 		}
 		catch (Exception e)
 		{
 			e.printStackTrace();
 			System.out.println(e.getMessage());
-		}
-		finally 
-		{
-			drone.stop();
-			System.exit(0);
 		}
 	}
 }

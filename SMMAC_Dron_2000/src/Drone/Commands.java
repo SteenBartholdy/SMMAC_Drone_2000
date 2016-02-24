@@ -36,8 +36,4 @@ public class Commands {
 			public void voltageChanged(int vbat_raw) { }
 		});
 	}
-	
-	public void waitFor(long ms){
-		cmd.waitFor(ms);
-	}
 }
