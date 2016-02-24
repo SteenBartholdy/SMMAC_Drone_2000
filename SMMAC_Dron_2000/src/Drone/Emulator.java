@@ -22,11 +22,12 @@ public class Emulator {
 			cmd.printBattery();
 			
 			new Video(drone);
+			
+			mov.takeoff();
 		}
 		catch (Exception e)
 		{
 			e.printStackTrace();
-			System.out.println(e.getMessage());
 		}
 	}
 }
