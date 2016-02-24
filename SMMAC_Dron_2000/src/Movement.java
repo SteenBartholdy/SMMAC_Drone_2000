@@ -54,4 +54,14 @@ public class Movement {
 	{
 		cmd.forward(speed).doFor(ms);
 	}
+
+	public void spinRight(int speed, long ms)
+	{
+		cmd.spinRight(speed).doFor(ms);
+	}
+	
+	public void spinLeft(int speed, long ms)
+	{
+		cmd.spinLeft(speed).doFor(ms);
+	}
 }
