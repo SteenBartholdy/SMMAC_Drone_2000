@@ -16,6 +16,7 @@ public class Main {
 			
 			mov.takeoff();
 			mov.waitFor(5000);
+			mov.forward(100, 1000);
 		}
 		catch (Exception e)
 		{
