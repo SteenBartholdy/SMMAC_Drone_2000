@@ -15,6 +15,7 @@ public class Main {
 			drone.start();
 			Movement mov = new Movement(drone);
 			
+			mov.color();
 			mov.takeof(5000);
 			mov.landing();
 		}

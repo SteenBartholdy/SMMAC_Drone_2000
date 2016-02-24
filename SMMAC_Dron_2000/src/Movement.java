@@ -1,5 +1,6 @@
 import de.yadrone.base.IARDrone;
 import de.yadrone.base.command.CommandManager;
+import de.yadrone.base.command.LEDAnimation;
 
 public class Movement {
 	private CommandManager cmd;
@@ -17,5 +18,10 @@ public class Movement {
 	public void landing()
 	{
 		cmd.landing();
+	}
+	
+	public void color()
+	{
+		cmd.setLedsAnimation(LEDAnimation.BLINK_ORANGE, 3, 10);
 	}
 }
