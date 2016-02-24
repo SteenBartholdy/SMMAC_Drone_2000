@@ -6,15 +6,16 @@ public class Main {
 	public static void main(String[] args)
 	{	
 		IARDrone drone = null;
+		Movement mov = null;
+		
 		try
 		{
 			drone = new ARDrone();
 			drone.start();
-			Movement mov = new Movement(drone);
+			mov = new Movement(drone);
 			
 			mov.takeoff();
 			mov.waitFor(5000);
-			mov.landing();
 		}
 		catch (Exception e)
 		{
@@ -24,7 +25,10 @@ public class Main {
 		finally
 		{
 			if (drone != null)
+			{
+				mov.landing();
 				drone.stop();
+			}
 		}
 	}
 }
