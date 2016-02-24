@@ -10,9 +10,9 @@ public class Movement {
 		cmd = drone.getCommandManager();
 	}
 	
-	public void takeof (long ms)
+	public void takeof ()
 	{
-		cmd.takeOff().doFor(ms);
+		cmd.takeOff();
 	}
 	
 	public void landing()
@@ -24,6 +24,7 @@ public class Movement {
 	{
 		cmd.setLedsAnimation(LEDAnimation.BLINK_ORANGE, 3, 10);
 	}
+	
 	public void goLeft(int speed, long ms)
 	{
 		cmd.goLeft(speed).doFor(ms);
@@ -34,10 +35,23 @@ public class Movement {
 		cmd.goRight(speed).doFor(ms);
 	}
 	
-	public void hoover(long ms)
+	public void hover(long ms)
 	{
 		cmd.hover().doFor(ms);
 	}
 	
-	//public void 
+	public void waitFor(long ms)
+	{
+		cmd.waitFor(ms);
+	}
+
+	public void backwards(int speed, long ms)
+	{
+		cmd.backward(speed).doFor(ms);
+	}
+
+	public void forward(int speed, long ms)
+	{
+		cmd.forward(speed).doFor(ms);
+	}
 }
