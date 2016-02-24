@@ -19,7 +19,7 @@ public class Video extends JFrame {
 	    
 	    public Video (final IARDrone drone)
 	    {
-	        super("Flyv!");
+	        super("SMMAC Drone 2000");
 	        
 	        setSize(640,360);
 	        setVisible(true);

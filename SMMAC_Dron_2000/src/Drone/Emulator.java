@@ -2,7 +2,7 @@ package Drone;
 import de.yadrone.base.ARDrone;
 import de.yadrone.base.IARDrone;
 
-public class Main {
+public class Emulator {
 
 	public static void main(String[] args)
 	{	
@@ -19,7 +19,7 @@ public class Main {
 			mov = new Movement(drone);
 			cmd = new Commands(drone);
 			
-			//cmd.printBattery();
+			cmd.printBattery();
 			
 			new Video(drone);
 		}
