@@ -18,12 +18,11 @@ public class Emulator {
 			
 			mov = new Movement(drone);
 			cmd = new Commands(drone);
-			
-			cmd.printBattery();
-			
+
+			new Listener(drone);
 			new Video(drone);
 			
-			mov.takeoff();
+			//mov.takeoff();
 		}
 		catch (Exception e)
 		{

@@ -24,16 +24,4 @@ public class Commands {
 	public boolean wifi(){
 		return cmd.isConnected();
 	}
-
-	public void printBattery(){
-		drone.getNavDataManager().addBatteryListener(new BatteryListener() {
-
-			public void batteryLevelChanged(int percentage)
-			{
-				System.out.println("Battery: " + percentage + " %");
-			}
-
-			public void voltageChanged(int vbat_raw) { }
-		});
-	}
 }
