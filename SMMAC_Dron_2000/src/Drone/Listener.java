@@ -22,25 +22,8 @@ public class Listener extends JFrame {
 		super("Facts");
 
 		setSize(150,225);
-		setBackground(Color.WHITE);
 		setVisible(true);
-
-		drone.getNavDataManager().addBatteryListener(new BatteryListener() {
-
-			public void batteryLevelChanged(int percentage)
-			{
-				sBattery = "Battery: " + percentage + " %";
-				SwingUtilities.invokeLater(new Runnable() {
-					public void run()
-					{
-						repaint();
-					}
-				});
-			}
-
-			public void voltageChanged(int vbat_raw) { }
-		});
-
+		
 		drone.getNavDataManager().addAttitudeListener(new AttitudeListener() {
 
 			@Override
@@ -62,11 +45,32 @@ public class Listener extends JFrame {
 			@Override
 			public void windCompensation(float arg0, float arg1) { }
 		});	
+		
+		drone.getNavDataManager().addBatteryListener(new BatteryListener() {
+
+			public void batteryLevelChanged(int percentage)
+			{
+				sBattery = "Battery: " + percentage + " %";
+				SwingUtilities.invokeLater(new Runnable() {
+					public void run()
+					{
+						repaint();
+					}
+				});
+			}
+
+			public void voltageChanged(int vbat_raw) { }
+		});
 
 	}
 
 	public synchronized void paint(Graphics g)
 	{
+		g.setColor(Color.WHITE);
+		g.fillRect(0, 0, 150, 225);
+		
+		g.setColor(Color.BLACK);
+		
 		if(sBattery != null)
 			g.drawString(sBattery, 25, 50);
 
@@ -76,10 +80,10 @@ public class Listener extends JFrame {
 		if(sRoll != null)
 			g.drawString(sRoll, 25, 150);
 		
-		if(sYaw != null)
+		if(sYaw != null) {
 			g.drawString(sYaw, 25, 200);
-		
-		System.out.println(sPitch);
+			System.out.println(sYaw);
+		}
 	}
 
 }
