@@ -80,10 +80,8 @@ public class Listener extends JFrame {
 		if(sRoll != null)
 			g.drawString(sRoll, 25, 150);
 		
-		if(sYaw != null) {
+		if(sYaw != null) 
 			g.drawString(sYaw, 25, 200);
-			System.out.println(sYaw);
-		}
 	}
 
 }
