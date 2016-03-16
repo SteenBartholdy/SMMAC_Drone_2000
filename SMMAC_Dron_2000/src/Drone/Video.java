@@ -42,7 +42,7 @@ public class Video extends JFrame {
 			public void imageUpdated(BufferedImage newImage)
 			{
 				image = newImage;
-				matImage = bufferedImageToMat(image);
+//				matImage = bufferedImageToMat(image);
 //				vc = new VideoCapture(0);
 				
 				SwingUtilities.invokeLater(new Runnable() {
