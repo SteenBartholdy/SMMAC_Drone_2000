@@ -9,7 +9,13 @@ import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
+
+import org.opencv.core.Core;
+import org.opencv.core.Mat;
+import org.opencv.imgproc.Imgproc;
+import org.opencv.videoio.VideoCapture;
 
 import de.yadrone.base.IARDrone;
 import de.yadrone.base.command.VideoChannel;
@@ -25,10 +31,15 @@ public class GUI extends JFrame {
 	private String sRoll;
 	private String sYaw;
 	private Color backgroud = Color.WHITE;
+	private Mat matImage = null;
+	private Mat old_matImage = null;
+	private ImageProcessor imageP = new ImageProcessor();
 
 	public GUI (final IARDrone drone)
 	{
 		super("SMMAC Drone 2000");
+		
+		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 		
 		setSize(1040,560);
 		setBackground(backgroud);
@@ -38,6 +49,18 @@ public class GUI extends JFrame {
 			public void imageUpdated(BufferedImage newImage)
 			{
 				image = newImage;
+				
+				matImage = imageP.toMatImage(newImage);
+				if(old_matImage == null)
+				{
+					old_matImage = matImage;
+				}
+				
+				Imgproc.cvtColor(matImage, matImage, Imgproc.COLOR_BGR2GRAY);
+				
+				
+				image = (BufferedImage) imageP.toBufferedImage(matImage);
+				
 				SwingUtilities.invokeLater(new Runnable() {
 					public void run()
 					{

@@ -22,8 +22,8 @@ public class Emulator {
 			cmd = new Commands(drone);
 
 			//new Listener(drone);
-			new Video(drone);
-			//new GUI(drone);
+			//new Video(drone);
+			new GUI(drone);
 			
 			//mov.takeoff();
 		}
