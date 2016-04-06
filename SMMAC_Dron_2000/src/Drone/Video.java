@@ -12,7 +12,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
 
+import org.opencv.core.Core;
 import org.opencv.core.Mat;
+import org.opencv.imgproc.Imgproc;
 import org.opencv.videoio.VideoCapture;
 
 import de.yadrone.base.IARDrone;
@@ -42,13 +44,16 @@ public class Video extends JFrame {
 			public void imageUpdated(BufferedImage newImage)
 			{
 				image = newImage;
-				matImage = imageP.toMatImage(newImage);
-				if(old_matImage == null)
-				{
-					old_matImage = matImage;
-				}
-
+//				matImage = imageP.toMatImage(newImage);
+//				if(old_matImage == null)
+//				{
+//					old_matImage = matImage;
+//				}
+//				
+//				Imgproc.cvtColor(matImage, matImage, Imgproc.COLOR_BGR2GRAY);
 				
+				
+				//image = (BufferedImage) imageP.toBufferedImage(matImage);
 				//				vc = new VideoCapture(0);
 
 				SwingUtilities.invokeLater(new Runnable() {
