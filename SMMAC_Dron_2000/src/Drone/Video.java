@@ -33,7 +33,9 @@ public class Video extends JFrame {
 	public Video (final IARDrone drone)
 	{
 		super("SMMAC Drone 2000");
-
+		
+		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+		
 		setSize(640,360);
 		//		label = new JLabel();
 		//		add(label);
@@ -44,16 +46,16 @@ public class Video extends JFrame {
 			public void imageUpdated(BufferedImage newImage)
 			{
 				image = newImage;
-//				matImage = imageP.toMatImage(newImage);
-//				if(old_matImage == null)
-//				{
-//					old_matImage = matImage;
-//				}
-//				
-//				Imgproc.cvtColor(matImage, matImage, Imgproc.COLOR_BGR2GRAY);
+				matImage = imageP.toMatImage(newImage);
+				if(old_matImage == null)
+				{
+					old_matImage = matImage;
+				}
+				
+				Imgproc.cvtColor(matImage, matImage, Imgproc.COLOR_BGR2GRAY);
 				
 				
-				//image = (BufferedImage) imageP.toBufferedImage(matImage);
+				image = (BufferedImage) imageP.toBufferedImage(matImage);
 				//				vc = new VideoCapture(0);
 
 				SwingUtilities.invokeLater(new Runnable() {

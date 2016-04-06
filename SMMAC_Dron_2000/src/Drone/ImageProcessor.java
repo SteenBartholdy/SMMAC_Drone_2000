@@ -60,7 +60,7 @@ public class ImageProcessor {
 	public Mat toMatImage(BufferedImage image) {
 
 		byte[] pixels = ((DataBufferByte) image.getRaster().getDataBuffer()).getData();
-		Mat imageMat = new Mat(image.getHeight(), image.getWidth(), CvType.CV_8UC1);
+		Mat imageMat = new Mat(image.getHeight(), image.getWidth(), CvType.CV_8UC3);
 		imageMat.put(0, 0, pixels);
 
 		return imageMat;
