@@ -1,4 +1,6 @@
 package Drone;
+import java.util.Scanner;
+
 import de.yadrone.base.ARDrone;
 import de.yadrone.base.IARDrone;
 
@@ -9,18 +11,19 @@ public class Emulator {
 		IARDrone drone = null;
 		Movement mov = null;
 		Commands cmd = null;
-		
+
 		try
 		{
 			drone = new ARDrone();	
-			
+
 			drone.start();
-			
+
 			mov = new Movement(drone);
 			cmd = new Commands(drone);
 
-			new Listener(drone);
-			new Video(drone);
+			//new Listener(drone);
+			//new Video(drone);
+			new GUI(drone);
 			
 			//mov.takeoff();
 		}
@@ -29,4 +32,5 @@ public class Emulator {
 			e.printStackTrace();
 		}
 	}
+
 }
