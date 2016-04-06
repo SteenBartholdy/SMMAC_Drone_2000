@@ -6,14 +6,12 @@ import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
-import java.awt.image.DataBufferByte;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
 
-import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.videoio.VideoCapture;
 
@@ -25,31 +23,39 @@ public class Video extends JFrame {
 
 	private BufferedImage image = null;
 	private Mat matImage = null;
+	private Mat old_matImage = null;
 	private JLabel label = null;
 	private VideoCapture vc;
+	private ImageProcessor imageP = new ImageProcessor();
 
 	public Video (final IARDrone drone)
 	{
 		super("SMMAC Drone 2000");
 
 		setSize(640,360);
-//		label = new JLabel();
-//		add(label);
+		//		label = new JLabel();
+		//		add(label);
 		setVisible(true);
-		
+
 
 		drone.getVideoManager().addImageListener(new ImageListener() {
 			public void imageUpdated(BufferedImage newImage)
 			{
 				image = newImage;
-//				matImage = bufferedImageToMat(image);
-//				vc = new VideoCapture(0);
+				matImage = imageP.toMatImage(newImage);
+				if(old_matImage == null)
+				{
+					old_matImage = matImage;
+				}
+
 				
+				//				vc = new VideoCapture(0);
+
 				SwingUtilities.invokeLater(new Runnable() {
 					public void run()
 					{
-//						vc.read(matImage);
-//						imagePainter();
+						//						vc.read(matImage);
+						//						imagePainter();
 						repaint();
 					}
 				});
@@ -72,7 +78,7 @@ public class Video extends JFrame {
 			}
 		});
 	}
-	
+
 	public void imagePainter()
 	{
 		ImageProcessor imageP = new ImageProcessor();
@@ -88,10 +94,4 @@ public class Video extends JFrame {
 			g.drawImage(image, 0, 0, image.getWidth(), image.getHeight(), null);
 	}
 
-	public static Mat bufferedImageToMat(BufferedImage buffImage) {
-		Mat mat = new Mat(buffImage.getHeight(), buffImage.getWidth(), CvType.CV_8UC3);
-		byte[] data = ((DataBufferByte) buffImage.getRaster().getDataBuffer()).getData();
-		mat.put(0, 0, data);
-		return mat;
-	}
 }
