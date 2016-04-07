@@ -7,15 +7,20 @@ import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Vector;
 
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
 
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
+import org.opencv.core.MatOfPoint;
+import org.opencv.core.Point;
+import org.opencv.core.Scalar;
+import org.opencv.core.Size;
 import org.opencv.imgproc.Imgproc;
-import org.opencv.videoio.VideoCapture;
 
 import de.yadrone.base.IARDrone;
 import de.yadrone.base.command.VideoChannel;
@@ -33,8 +38,12 @@ public class GUI extends JFrame {
 	private Color backgroud = Color.WHITE;
 	private Mat matImage = null;
 	private Mat old_matImage = null;
+	private Mat canneyOutput = null;
+	private Mat blurImage = null;
+	private Mat contourOutput = null;
 	private ImageProcessor imageP = new ImageProcessor();
-
+	private int tresh = 100;
+	
 	public GUI (final IARDrone drone)
 	{
 		super("SMMAC Drone 2000");
@@ -58,8 +67,14 @@ public class GUI extends JFrame {
 				
 				Imgproc.cvtColor(matImage, matImage, Imgproc.COLOR_BGR2GRAY);
 				
+				Imgproc.blur(matImage, blurImage, new Size(14, 14));
 				
-				image = (BufferedImage) imageP.toBufferedImage(matImage);
+				Imgproc.Canny(blurImage, canneyOutput, tresh, tresh*2);
+				
+				contourOutput = findContours(canneyOutput, contourOutput);
+				
+				//Parameteren i toBufferedImage() skal være det sidst behandlede Mat objekt
+				image = (BufferedImage) imageP.toBufferedImage(contourOutput);
 				
 				SwingUtilities.invokeLater(new Runnable() {
 					public void run()
@@ -146,6 +161,25 @@ public class GUI extends JFrame {
 		
 		if(sYaw != null) 
 			g.drawString(sYaw, 865, 200);
+	}
+	
+	private Mat findContours(Mat image, Mat contourOutput)
+	{
+		List<MatOfPoint> contours = new ArrayList<>();
+		Mat hierarchy = new Mat();
+		
+		Imgproc.findContours(image, contours, hierarchy, Imgproc.RETR_CCOMP, Imgproc.CHAIN_APPROX_SIMPLE);
+		
+		if (hierarchy.size().height > 0 && hierarchy.size().width > 0)
+		{
+			// for each contour, display it in blue
+			for (int idx = 0; idx >= 0; idx = (int) hierarchy.get(0, idx)[0])
+			{
+				Imgproc.drawContours(contourOutput, contours, idx, new Scalar(250, 0, 0));
+			}
+		}
+		
+		return contourOutput;
 	}
 	
 }
