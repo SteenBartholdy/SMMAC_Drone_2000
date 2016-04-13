@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
+import javax.swing.GrayFilter;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
@@ -70,15 +71,15 @@ public class GUI extends JFrame {
 				if(!matImage.empty())
 				{
 					Imgproc.blur(matImage, blurImage, new Size(7, 7));
-					
+				
 					Imgproc.cvtColor(blurImage, greyImage, Imgproc.COLOR_BGR2GRAY);
 
-					Imgproc.Canny(blurImage, canneyOutput, tresh, tresh*2);
+					//Imgproc.Canny(blurImage, canneyOutput, tresh, tresh*2);
 
-					contourOutput = imageP.findContours(canneyOutput, contourOutput);
+					//contourOutput = imageP.findContours(blurImage, contourOutput);
 					
 					//Parameteren i toBufferedImage() skal være det sidst behandlede Mat objekt
-					image = (BufferedImage) imageP.toBufferedImage(matImage);
+					image = (BufferedImage) imageP.toBufferedImage(greyImage);
 				}
 				
 				SwingUtilities.invokeLater(new Runnable() {

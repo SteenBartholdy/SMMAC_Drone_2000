@@ -89,5 +89,4 @@ public class ImageProcessor {
 		return contourOutput;
 	}
 
-
 }
