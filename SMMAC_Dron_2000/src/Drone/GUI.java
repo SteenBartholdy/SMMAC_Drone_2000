@@ -31,6 +31,7 @@ import de.yadrone.base.video.ImageListener;
 public class GUI extends JFrame {
 
 	private BufferedImage image = null;
+	private BufferedImage processedImage = null;
 	private String sBattery;
 	private String sPitch;
 	private String sRoll;
@@ -41,40 +42,44 @@ public class GUI extends JFrame {
 	private Mat canneyOutput = null;
 	private Mat blurImage = null;
 	private Mat contourOutput = null;
+	private Mat greyImage = null;
 	private ImageProcessor imageP = new ImageProcessor();
 	private int tresh = 100;
-	
+
 	public GUI (final IARDrone drone)
 	{
 		super("SMMAC Drone 2000");
-		
+
 		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
-		
+
 		setSize(1040,560);
 		setBackground(backgroud);
 		setVisible(true);
-		
+
 		drone.getVideoManager().addImageListener(new ImageListener() {
 			public void imageUpdated(BufferedImage newImage)
 			{
 				image = newImage;
-				
-				matImage = imageP.toMatImage(newImage);
+
+				matImage = imageP.toMatImage(image);
 				if(old_matImage == null)
 				{
 					old_matImage = matImage;
 				}
 				
-				Imgproc.cvtColor(matImage, matImage, Imgproc.COLOR_BGR2GRAY);
-				
-				Imgproc.blur(matImage, blurImage, new Size(14, 14));
-				
-				Imgproc.Canny(blurImage, canneyOutput, tresh, tresh*2);
-				
-				contourOutput = imageP.findContours(canneyOutput, contourOutput);
-				
-				//Parameteren i toBufferedImage() skal være det sidst behandlede Mat objekt
-				image = (BufferedImage) imageP.toBufferedImage(contourOutput);
+				if(!matImage.empty())
+				{
+					Imgproc.blur(matImage, blurImage, new Size(7, 7));
+					
+					Imgproc.cvtColor(blurImage, greyImage, Imgproc.COLOR_BGR2GRAY);
+
+					Imgproc.Canny(blurImage, canneyOutput, tresh, tresh*2);
+
+					contourOutput = imageP.findContours(canneyOutput, contourOutput);
+					
+					//Parameteren i toBufferedImage() skal være det sidst behandlede Mat objekt
+					image = (BufferedImage) imageP.toBufferedImage(matImage);
+				}
 				
 				SwingUtilities.invokeLater(new Runnable() {
 					public void run()
@@ -144,26 +149,26 @@ public class GUI extends JFrame {
 	{
 		if (image != null)
 			g.drawImage(image, 0, 0, 840, 560, null);
-		
+
 		g.setColor(backgroud);
 		g.fillRect(840, 0, 150, 225);
-		
+
 		g.setColor(Color.BLACK);
-		
+
 		if(sBattery != null)
 			g.drawString(sBattery, 865, 50);
 
 		if(sPitch != null)
 			g.drawString(sPitch, 865, 100);
-		
+
 		if(sRoll != null)
 			g.drawString(sRoll, 865, 150);
-		
+
 		if(sYaw != null) 
 			g.drawString(sYaw, 865, 200);
 	}
-	
 
-	
+
+
 }
 
