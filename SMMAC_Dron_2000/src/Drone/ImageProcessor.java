@@ -3,9 +3,13 @@ package Drone;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
+import org.opencv.core.MatOfPoint;
+import org.opencv.core.Scalar;
 import org.opencv.core.Size;
 import org.opencv.imgproc.Imgproc;
 
@@ -64,6 +68,25 @@ public class ImageProcessor {
 		imageMat.put(0, 0, pixels);
 
 		return imageMat;
+	}
+	
+	public Mat findContours(Mat image, Mat contourOutput)
+	{
+		List<MatOfPoint> contours = new ArrayList<>();
+		Mat hierarchy = new Mat();
+		
+		Imgproc.findContours(image, contours, hierarchy, Imgproc.RETR_CCOMP, Imgproc.CHAIN_APPROX_SIMPLE);
+		
+		if (hierarchy.size().height > 0 && hierarchy.size().width > 0)
+		{
+			// for each contour, display it in blue
+			for (int idx = 0; idx >= 0; idx = (int) hierarchy.get(0, idx)[0])
+			{
+				Imgproc.drawContours(contourOutput, contours, idx, new Scalar(250, 0, 0));
+			}
+		}
+		
+		return contourOutput;
 	}
 
 
