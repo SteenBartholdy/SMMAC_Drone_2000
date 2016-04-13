@@ -2,6 +2,7 @@ package Drone;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
@@ -63,23 +64,25 @@ public class GUI extends JFrame {
 				image = newImage;
 
 				matImage = imageP.toMatImage(image);
-				if(old_matImage == null)
+				if(old_matImage.empty())
 				{
 					old_matImage = matImage;
 				}
-				
-				if(!matImage.empty())
+				System.out.println(matImage);
+				if(matImage != null)
 				{
+					System.out.println("Hej");
 					Imgproc.blur(matImage, blurImage, new Size(7, 7));
-				
-					Imgproc.cvtColor(blurImage, greyImage, Imgproc.COLOR_BGR2GRAY);
+					System.out.println(blurImage.toString());
+					Mat temp = new Mat();
+					Imgproc.cvtColor(blurImage, temp, Imgproc.COLOR_BGR2GRAY);
 
 					//Imgproc.Canny(blurImage, canneyOutput, tresh, tresh*2);
 
 					//contourOutput = imageP.findContours(blurImage, contourOutput);
 					
 					//Parameteren i toBufferedImage() skal være det sidst behandlede Mat objekt
-					image = (BufferedImage) imageP.toBufferedImage(greyImage);
+					image = (BufferedImage) imageP.toBufferedImage(temp);
 				}
 				
 				SwingUtilities.invokeLater(new Runnable() {
@@ -148,8 +151,13 @@ public class GUI extends JFrame {
 
 	public synchronized void paint(Graphics g)
 	{
-		if (image != null)
-			g.drawImage(image, 0, 0, 840, 560, null);
+		if (blurImage != null)
+		{
+			//image = (BufferedImage) imageP.toBufferedImage(blurImage);
+			//g.drawImage(image, 0, 0, 840, 560, null);
+			
+		}
+			
 
 		g.setColor(backgroud);
 		g.fillRect(840, 0, 150, 225);
