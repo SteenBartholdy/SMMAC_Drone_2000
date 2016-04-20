@@ -46,7 +46,7 @@ public class GUI extends JFrame {
 	private Mat contourOutput = null;
 	private Mat greyImage = null;
 	private ImageProcessor imageP = new ImageProcessor();
-	private int tresh = 100;
+	private int tresh = 80;
 
 	public GUI (final IARDrone drone)
 	{
@@ -62,6 +62,13 @@ public class GUI extends JFrame {
 			public void imageUpdated(BufferedImage newImage)
 			{
 				image = newImage;
+				
+				matImage = new Mat();
+				old_matImage = new Mat();
+				greyImage = new Mat();
+				blurImage = new Mat();
+				contourOutput = new Mat();
+				canneyOutput = new Mat();
 			
 				matImage = imageP.toMatImage(image);
 				if(old_matImage == null)
@@ -72,18 +79,18 @@ public class GUI extends JFrame {
 				System.out.println(matImage);
 				
 					System.out.println("Hej");
-					//Imgproc.GaussianBlur(matImage, blurImage, new Size(15,15), 0);
+					Imgproc.GaussianBlur(matImage, blurImage, new Size(5,5), 0);
 					System.out.println("Blur "  + blurImage);
-					Mat temp = new Mat();
 					
-					Imgproc.cvtColor(matImage, temp, Imgproc.COLOR_BGR2GRAY);
+					
+					Imgproc.cvtColor(blurImage, greyImage, Imgproc.COLOR_BGR2GRAY);
 
-					//Imgproc.Canny(temp, canneyOutput, tresh, tresh*2);
-					
+					Imgproc.Canny(greyImage, canneyOutput, tresh, tresh*2);
+
 					//contourOutput = imageP.findContours(blurImage, contourOutput);
 					
 					//Parameteren i toBufferedImage() skal være det sidst behandlede Mat objekt
-					processedImage = (BufferedImage) imageP.toBufferedImage(temp);
+					processedImage = (BufferedImage) imageP.toBufferedImage(canneyOutput);
 				
 				
 				SwingUtilities.invokeLater(new Runnable() {
