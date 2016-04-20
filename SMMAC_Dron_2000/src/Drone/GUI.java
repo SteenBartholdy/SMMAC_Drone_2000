@@ -62,28 +62,29 @@ public class GUI extends JFrame {
 			public void imageUpdated(BufferedImage newImage)
 			{
 				image = newImage;
-
+			
 				matImage = imageP.toMatImage(image);
-				if(old_matImage.empty())
+				if(old_matImage == null)
 				{
 					old_matImage = matImage;
 				}
+				
 				System.out.println(matImage);
-				if(matImage != null)
-				{
+				
 					System.out.println("Hej");
-					Imgproc.blur(matImage, blurImage, new Size(7, 7));
-					System.out.println(blurImage.toString());
+					//Imgproc.GaussianBlur(matImage, blurImage, new Size(15,15), 0);
+					System.out.println("Blur "  + blurImage);
 					Mat temp = new Mat();
-					Imgproc.cvtColor(blurImage, temp, Imgproc.COLOR_BGR2GRAY);
+					
+					Imgproc.cvtColor(matImage, temp, Imgproc.COLOR_BGR2GRAY);
 
-					//Imgproc.Canny(blurImage, canneyOutput, tresh, tresh*2);
-
+					//Imgproc.Canny(temp, canneyOutput, tresh, tresh*2);
+					
 					//contourOutput = imageP.findContours(blurImage, contourOutput);
 					
 					//Parameteren i toBufferedImage() skal være det sidst behandlede Mat objekt
-					image = (BufferedImage) imageP.toBufferedImage(temp);
-				}
+					processedImage = (BufferedImage) imageP.toBufferedImage(temp);
+				
 				
 				SwingUtilities.invokeLater(new Runnable() {
 					public void run()
@@ -151,10 +152,10 @@ public class GUI extends JFrame {
 
 	public synchronized void paint(Graphics g)
 	{
-		if (blurImage != null)
+		if (processedImage  != null)
 		{
-			//image = (BufferedImage) imageP.toBufferedImage(blurImage);
-			//g.drawImage(image, 0, 0, 840, 560, null);
+			
+			g.drawImage(processedImage, 0, 0, 840, 560, null);
 			
 		}
 			
