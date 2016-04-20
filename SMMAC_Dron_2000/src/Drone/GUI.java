@@ -87,7 +87,9 @@ public class GUI extends JFrame {
 
 					Imgproc.Canny(greyImage, canneyOutput, tresh, tresh*2);
 
-					//contourOutput = imageP.findContours(blurImage, contourOutput);
+					//contourOutput = imageP.findContours(canneyOutput, contourOutput);
+					
+					//imageP.findContours(canneyOutput, contourOutput);
 					
 					//Parameteren i toBufferedImage() skal være det sidst behandlede Mat objekt
 					processedImage = (BufferedImage) imageP.toBufferedImage(canneyOutput);
