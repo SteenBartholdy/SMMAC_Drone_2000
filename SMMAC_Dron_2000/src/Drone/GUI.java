@@ -45,6 +45,7 @@ public class GUI extends JFrame {
 	private Mat blurImage = null;
 	private Mat contourOutput = null;
 	private Mat greyImage = null;
+	private Mat circleImage = null;
 	private ImageProcessor imageP = new ImageProcessor();
 	private int tresh = 80;
 
@@ -62,39 +63,67 @@ public class GUI extends JFrame {
 			public void imageUpdated(BufferedImage newImage)
 			{
 				image = newImage;
-				
+
 				matImage = new Mat();
 				old_matImage = new Mat();
 				greyImage = new Mat();
 				blurImage = new Mat();
 				contourOutput = new Mat();
 				canneyOutput = new Mat();
-			
+				circleImage = new Mat();
+
 				matImage = imageP.toMatImage(image);
 				if(old_matImage == null)
 				{
 					old_matImage = matImage;
 				}
-				
+
 				System.out.println(matImage);
-				
-					System.out.println("Hej");
-					Imgproc.GaussianBlur(matImage, blurImage, new Size(5,5), 0);
-					System.out.println("Blur "  + blurImage);
-					
-					
-					Imgproc.cvtColor(blurImage, greyImage, Imgproc.COLOR_BGR2GRAY);
 
-					Imgproc.Canny(greyImage, canneyOutput, tresh, tresh*2);
+				//Kør en while løkke med to if statements. Når der fx er gået et sekundt
+				//skal cvtColor canney og find cirkler kører
+				//Optical flow algoritmen skal køre meget hurtigere og kun måske med GaussioanBlur
+				//eller bare på råt matImage
+				
+				Imgproc.GaussianBlur(matImage, blurImage, new Size(5,5), 0);
+				System.out.println("Blur "  + blurImage);
 
-					//contourOutput = imageP.findContours(canneyOutput, contourOutput);
-					
-					//imageP.findContours(canneyOutput, contourOutput);
-					
-					//Parameteren i toBufferedImage() skal være det sidst behandlede Mat objekt
-					processedImage = (BufferedImage) imageP.toBufferedImage(canneyOutput);
+				Imgproc.cvtColor(blurImage, greyImage, Imgproc.COLOR_BGR2GRAY);
+
+				Imgproc.Canny(greyImage, canneyOutput, tresh, tresh*2);
+
+				//contourOutput = imageP.findContours(canneyOutput, contourOutput);
+
+				//imageP.findContours(canneyOutput, contourOutput);
+
 				
+				//Virker ikke rigtigt endnu
+//				Imgproc.HoughCircles(canneyOutput, circleImage, Imgproc.CV_HOUGH_GRADIENT, 1, 30, 200, 50, 0, 0 );
+//				circleImage.cols();
+//				for(int i = 0; i < circleImage.cols(); i++)
+//				{
+//					double vCircle[] = circleImage.get(0, i);
+//					
+//					if(vCircle == null)
+//					{
+//						break;
+//					}
+//					
+//					Point pt = new Point(Math.round(vCircle[0]), Math.round(vCircle[1]));
+//			        int radius = (int)Math.round(vCircle[2]);
+//			        System.out.println("point " + pt.toString());
+//			        //Mangler at kunne tegne selve cirklen
+//			        Imgproc.circle(canneyOutput, pt, radius,new Scalar(0,255,0), 5);
+//			        Imgproc.circle(canneyOutput, pt, 3, new Scalar(0,0,255), 2);
+//			        
+//				}
 				
+				//Parameteren i toBufferedImage() skal være det sidst behandlede Mat objekt
+				processedImage = (BufferedImage) imageP.toBufferedImage(canneyOutput);
+
+
+				old_matImage = matImage;
+
 				SwingUtilities.invokeLater(new Runnable() {
 					public void run()
 					{
@@ -163,11 +192,11 @@ public class GUI extends JFrame {
 	{
 		if (processedImage  != null)
 		{
-			
+
 			g.drawImage(processedImage, 0, 0, 840, 560, null);
-			
+
 		}
-			
+
 
 		g.setColor(backgroud);
 		g.fillRect(840, 0, 150, 225);
