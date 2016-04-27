@@ -48,6 +48,7 @@ public class GUI extends JFrame {
 	private Mat circleImage = null;
 	private ImageProcessor imageP = new ImageProcessor();
 	private int tresh = 80;
+	private int count = 0;
 
 	public GUI (final IARDrone drone)
 	{
@@ -84,45 +85,60 @@ public class GUI extends JFrame {
 				//skal cvtColor canney og find cirkler kører
 				//Optical flow algoritmen skal køre meget hurtigere og kun måske med GaussioanBlur
 				//eller bare på råt matImage
-				
+
 				Imgproc.GaussianBlur(matImage, blurImage, new Size(5,5), 0);
 				System.out.println("Blur "  + blurImage);
-
-				Imgproc.cvtColor(blurImage, greyImage, Imgproc.COLOR_BGR2GRAY);
-
-				Imgproc.Canny(greyImage, canneyOutput, tresh, tresh*2);
 
 				//contourOutput = imageP.findContours(canneyOutput, contourOutput);
 
 				//imageP.findContours(canneyOutput, contourOutput);
 
-				
+
 				//Virker ikke rigtigt endnu
-//				Imgproc.HoughCircles(canneyOutput, circleImage, Imgproc.CV_HOUGH_GRADIENT, 1, 30, 200, 50, 0, 0 );
-//				circleImage.cols();
-//				for(int i = 0; i < circleImage.cols(); i++)
-//				{
-//					double vCircle[] = circleImage.get(0, i);
-//					
-//					if(vCircle == null)
-//					{
-//						break;
-//					}
-//					
-//					Point pt = new Point(Math.round(vCircle[0]), Math.round(vCircle[1]));
-//			        int radius = (int)Math.round(vCircle[2]);
-//			        System.out.println("point " + pt.toString());
-//			        //Mangler at kunne tegne selve cirklen
-//			        Imgproc.circle(canneyOutput, pt, radius,new Scalar(0,255,0), 5);
-//			        Imgproc.circle(canneyOutput, pt, 3, new Scalar(0,0,255), 2);
-//			        
-//				}
-				
+				if(count == 0)
+				{
+					Imgproc.cvtColor(blurImage, greyImage, Imgproc.COLOR_BGR2GRAY);
+
+					Imgproc.Canny(greyImage, canneyOutput, tresh, tresh*2);
+					Imgproc.HoughCircles(canneyOutput, circleImage, Imgproc.CV_HOUGH_GRADIENT, 1, 30, 200, 50, 0, 0 );
+					circleImage.cols();
+					for(int i = 0; i < circleImage.cols(); i++)
+					{
+						double vCircle[] = circleImage.get(0, i);
+
+						if(vCircle == null)
+						{
+							break;
+						}
+
+						Point pt = new Point(Math.round(vCircle[0]), Math.round(vCircle[1]));
+						int radius = (int)Math.round(vCircle[2]);
+						System.out.println("point " + pt.toString());
+						//Mangler at kunne tegne selve cirklen
+						Imgproc.circle(canneyOutput, pt, radius,new Scalar(0,255,0), 5);
+						Imgproc.circle(canneyOutput, pt, 3, new Scalar(0,0,255), 2);
+
+					}
+				}
+
+				if(count < 10)
+				{
+					count++;
+				}
+				else
+				{
+					count = 0;
+				}
+
+				System.out.println("Count er " + count);
+
 				//Parameteren i toBufferedImage() skal være det sidst behandlede Mat objekt
 				processedImage = (BufferedImage) imageP.toBufferedImage(canneyOutput);
 
 
 				old_matImage = matImage;
+
+
 
 				SwingUtilities.invokeLater(new Runnable() {
 					public void run()
