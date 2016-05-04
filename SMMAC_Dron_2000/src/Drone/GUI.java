@@ -117,8 +117,8 @@ public class GUI extends JFrame {
 						int radius = (int)Math.round(vCircle[2]);
 						System.out.println("point " + pt.toString());
 						//Mangler at kunne tegne selve cirklen
-						Imgproc.circle(blurImage, pt, radius,new Scalar(0,255,0), 5);
-						Imgproc.circle(blurImage, pt, 3, new Scalar(0,0,255), 2);
+						Imgproc.circle(matImage, pt, radius,new Scalar(0,255,0), 5);
+						Imgproc.circle(matImage, pt, 3, new Scalar(0,0,255), 2);
 					}
 				}
 
@@ -134,7 +134,7 @@ public class GUI extends JFrame {
 				System.out.println("Count er " + count);
 
 				//Parameteren i toBufferedImage() skal være det sidst behandlede Mat objekt
-				processedImage = (BufferedImage) imageP.toBufferedImage(blurImage);
+				processedImage = (BufferedImage) imageP.toBufferedImage(matImage);
 
 
 				old_matImage = matImage;

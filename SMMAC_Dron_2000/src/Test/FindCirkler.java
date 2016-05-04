@@ -66,12 +66,12 @@ public class FindCirkler {
 			int radius = (int)Math.round(vCircle[2]);
 			System.out.println("point " + pt.toString());
 			//Mangler at kunne tegne selve cirklen
-			Imgproc.circle(blurImage, pt, radius,new Scalar(0,255,0), 5);
-			Imgproc.circle(blurImage, pt, 3, new Scalar(0,0,255), 2);
+			Imgproc.circle(matImage, pt, radius,new Scalar(0,255,0), 5);
+			Imgproc.circle(matImage, pt, 3, new Scalar(0,0,255), 2);
 		}
 		
 		String filename = "/Users/Steen Bartholdy/hullahop1.png";
-		Imgcodecs.imwrite(filename, blurImage);
+		Imgcodecs.imwrite(filename, matImage);
 		endtime = System.currentTimeMillis();
 		System.out.println(endtime - starttime); 
 		System.out.println("Done. Writing " + filename);
