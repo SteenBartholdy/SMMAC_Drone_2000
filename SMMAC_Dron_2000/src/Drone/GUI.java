@@ -47,7 +47,7 @@ public class GUI extends JFrame {
 	private Mat greyImage = null;
 	private Mat circleImage = null;
 	private ImageProcessor imageP = new ImageProcessor();
-	private int tresh = 80;
+	private int tresh = 40;
 	private int count = 0;
 
 	public GUI (final IARDrone drone)
@@ -86,8 +86,8 @@ public class GUI extends JFrame {
 				//Optical flow algoritmen skal køre meget hurtigere og kun måske med GaussioanBlur
 				//eller bare på råt matImage
 
-				Imgproc.GaussianBlur(matImage, blurImage, new Size(5,5), 0);
-				System.out.println("Blur "  + blurImage);
+				//Imgproc.GaussianBlur(matImage, blurImage, new Size(5,5), 0);
+				//System.out.println("Blur "  + blurImage);
 
 				//contourOutput = imageP.findContours(canneyOutput, contourOutput);
 
@@ -97,14 +97,17 @@ public class GUI extends JFrame {
 				//Virker ikke rigtigt endnu
 				if(count == 0)
 				{
-					Imgproc.cvtColor(blurImage, greyImage, Imgproc.COLOR_BGR2GRAY);
-
-					Imgproc.Canny(greyImage, canneyOutput, tresh, tresh*2);
-					Imgproc.HoughCircles(canneyOutput, circleImage, Imgproc.CV_HOUGH_GRADIENT, 1, 30, 200, 50, 0, 0 );
+					Imgproc.cvtColor(matImage, greyImage, Imgproc.COLOR_BGR2GRAY);
+					Imgproc.GaussianBlur(greyImage, blurImage, new Size(3,3), 2,2);
+					
+					//Imgproc.Canny(greyImage, canneyOutput, tresh, tresh*2);
+					Imgproc.HoughCircles(blurImage, circleImage, Imgproc.CV_HOUGH_GRADIENT, 1, 500, tresh, tresh*2, 100, 200);
+					System.out.println(circleImage.toString());
 					for(int i = 0; i < circleImage.cols(); i++)
 					{
 						double vCircle[] = circleImage.get(0, i);
 
+						System.out.println(circleImage.toString());
 						if(vCircle == null)
 						{
 							break;
@@ -114,9 +117,8 @@ public class GUI extends JFrame {
 						int radius = (int)Math.round(vCircle[2]);
 						System.out.println("point " + pt.toString());
 						//Mangler at kunne tegne selve cirklen
-						Imgproc.circle(canneyOutput, pt, radius,new Scalar(0,255,0), 5);
-						Imgproc.circle(canneyOutput, pt, 3, new Scalar(0,0,255), 2);
-
+						Imgproc.circle(blurImage, pt, radius,new Scalar(0,255,0), 5);
+						Imgproc.circle(blurImage, pt, 3, new Scalar(0,0,255), 2);
 					}
 				}
 
@@ -132,7 +134,7 @@ public class GUI extends JFrame {
 				System.out.println("Count er " + count);
 
 				//Parameteren i toBufferedImage() skal være det sidst behandlede Mat objekt
-				processedImage = (BufferedImage) imageP.toBufferedImage(canneyOutput);
+				processedImage = (BufferedImage) imageP.toBufferedImage(blurImage);
 
 
 				old_matImage = matImage;
