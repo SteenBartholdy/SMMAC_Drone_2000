@@ -38,7 +38,7 @@ public class FindCirkler {
 		canneyOutput = new Mat();
 		circleImage = new Mat();
 		
-		Mat matImage = Imgcodecs.imread("/Users/Steen Bartholdy/cirkel.png");
+		Mat matImage = Imgcodecs.imread("/Users/Steen Bartholdy/hullahop.png");
 		
 		starttime = System.currentTimeMillis();
 		
@@ -50,7 +50,7 @@ public class FindCirkler {
 		Imgproc.GaussianBlur(greyImage, blurImage, new Size(3,3), 2,2);
 		
 		//Imgproc.Canny(greyImage, canneyOutput, tresh, tresh*2);
-		Imgproc.HoughCircles(blurImage, circleImage, Imgproc.CV_HOUGH_GRADIENT, 1, 500, tresh, tresh*2, 100, 200);
+		Imgproc.HoughCircles(blurImage, circleImage, Imgproc.CV_HOUGH_GRADIENT, 1, 500, tresh, tresh*2, 100, 500);
 		System.out.println(circleImage.toString());
 		for(int i = 0; i < circleImage.cols(); i++)
 		{
@@ -70,7 +70,7 @@ public class FindCirkler {
 			Imgproc.circle(blurImage, pt, 3, new Scalar(0,0,255), 2);
 		}
 		
-		String filename = "/Users/Steen Bartholdy/cirkel13.png";
+		String filename = "/Users/Steen Bartholdy/hullahop1.png";
 		Imgcodecs.imwrite(filename, blurImage);
 		endtime = System.currentTimeMillis();
 		System.out.println(endtime - starttime); 

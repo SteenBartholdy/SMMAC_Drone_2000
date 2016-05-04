@@ -101,7 +101,7 @@ public class GUI extends JFrame {
 					Imgproc.GaussianBlur(greyImage, blurImage, new Size(3,3), 2,2);
 					
 					//Imgproc.Canny(greyImage, canneyOutput, tresh, tresh*2);
-					Imgproc.HoughCircles(blurImage, circleImage, Imgproc.CV_HOUGH_GRADIENT, 1, 500, tresh, tresh*2, 100, 200);
+					Imgproc.HoughCircles(blurImage, circleImage, Imgproc.CV_HOUGH_GRADIENT, 1, 500, tresh, tresh*2, 100, 500);
 					System.out.println(circleImage.toString());
 					for(int i = 0; i < circleImage.cols(); i++)
 					{
