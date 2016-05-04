@@ -6,7 +6,7 @@ public class CirkelTest {
 		
 		FindCirkler cirkler = new FindCirkler();
 		
-		
+		cirkler.run();
 		
 	}
 

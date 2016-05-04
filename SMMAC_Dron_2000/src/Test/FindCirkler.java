@@ -23,9 +23,17 @@ public class FindCirkler {
 	private int tresh = 80;
 	private int count = 0;
 
-	public FindCirkler(){
+	public void run(){
 
 		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+		
+		matImage = new Mat();
+		old_matImage = new Mat();
+		greyImage = new Mat();
+		blurImage = new Mat();
+		contourOutput = new Mat();
+		canneyOutput = new Mat();
+		circleImage = new Mat();
 		
 		Mat matImage = Imgcodecs.imread("/Users/cirkel.png");
 		
