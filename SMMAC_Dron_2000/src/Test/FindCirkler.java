@@ -20,11 +20,14 @@ public class FindCirkler {
 	private Mat greyImage = null;
 	private Mat circleImage = null;
 	private ImageProcessor imageP = new ImageProcessor();
-	private int tresh = 80;
+	private int tresh = 40;
 	private int count = 0;
+	private long starttime, endtime, duration;
 
 	public void run(){
 
+		
+		
 		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 		
 		matImage = new Mat();
@@ -35,21 +38,25 @@ public class FindCirkler {
 		canneyOutput = new Mat();
 		circleImage = new Mat();
 		
-		Mat matImage = Imgcodecs.imread("/Users/cirkel.png");
+		Mat matImage = Imgcodecs.imread("/Users/Steen Bartholdy/cirkel.png");
 		
-		Imgproc.GaussianBlur(matImage, blurImage, new Size(5,5), 0);
+		starttime = System.currentTimeMillis();
+		
+		//Imgproc.blur(matImage, blurImage, new Size(3,3));
 		System.out.println("Blur "  + blurImage);
 
 
-		Imgproc.cvtColor(blurImage, greyImage, Imgproc.COLOR_BGR2GRAY);
-
-		Imgproc.Canny(greyImage, canneyOutput, tresh, tresh*2);
-		Imgproc.HoughCircles(canneyOutput, circleImage, Imgproc.CV_HOUGH_GRADIENT, 1, 30, 200, 50, 0, 0 );
-		circleImage.cols();
+		Imgproc.cvtColor(matImage, greyImage, Imgproc.COLOR_BGR2GRAY);
+		Imgproc.GaussianBlur(greyImage, blurImage, new Size(3,3), 2,2);
+		
+		//Imgproc.Canny(greyImage, canneyOutput, tresh, tresh*2);
+		Imgproc.HoughCircles(blurImage, circleImage, Imgproc.CV_HOUGH_GRADIENT, 1, 500, tresh, tresh*2, 100, 200);
+		System.out.println(circleImage.toString());
 		for(int i = 0; i < circleImage.cols(); i++)
 		{
 			double vCircle[] = circleImage.get(0, i);
 
+			System.out.println(circleImage.toString());
 			if(vCircle == null)
 			{
 				break;
@@ -59,13 +66,16 @@ public class FindCirkler {
 			int radius = (int)Math.round(vCircle[2]);
 			System.out.println("point " + pt.toString());
 			//Mangler at kunne tegne selve cirklen
-			Imgproc.circle(canneyOutput, pt, radius,new Scalar(0,255,0), 5);
-			Imgproc.circle(canneyOutput, pt, 3, new Scalar(0,0,255), 2);
+			Imgproc.circle(blurImage, pt, radius,new Scalar(0,255,0), 5);
+			Imgproc.circle(blurImage, pt, 3, new Scalar(0,0,255), 2);
 		}
 		
-		String filename = "/Users/cirkel1.png";
+		String filename = "/Users/Steen Bartholdy/cirkel13.png";
+		Imgcodecs.imwrite(filename, blurImage);
+		endtime = System.currentTimeMillis();
+		System.out.println(endtime - starttime); 
 		System.out.println("Done. Writing " + filename);
-		Imgcodecs.imwrite(filename, canneyOutput);
+		
 
 	}
 }

@@ -101,7 +101,6 @@ public class GUI extends JFrame {
 
 					Imgproc.Canny(greyImage, canneyOutput, tresh, tresh*2);
 					Imgproc.HoughCircles(canneyOutput, circleImage, Imgproc.CV_HOUGH_GRADIENT, 1, 30, 200, 50, 0, 0 );
-					circleImage.cols();
 					for(int i = 0; i < circleImage.cols(); i++)
 					{
 						double vCircle[] = circleImage.get(0, i);
