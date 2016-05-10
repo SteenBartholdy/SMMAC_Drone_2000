@@ -93,8 +93,6 @@ public class GUI extends JFrame {
 
 				//imageP.findContours(canneyOutput, contourOutput);
 
-
-				//Virker ikke rigtigt endnu
 				if(count == 0)
 				{
 					Imgproc.cvtColor(matImage, greyImage, Imgproc.COLOR_BGR2GRAY);
@@ -116,7 +114,6 @@ public class GUI extends JFrame {
 						Point pt = new Point(Math.round(vCircle[0]), Math.round(vCircle[1]));
 						int radius = (int)Math.round(vCircle[2]);
 						System.out.println("point " + pt.toString());
-						//Mangler at kunne tegne selve cirklen
 						Imgproc.circle(matImage, pt, radius,new Scalar(0,255,0), 5);
 						Imgproc.circle(matImage, pt, 3, new Scalar(0,0,255), 2);
 					}
