@@ -41,9 +41,7 @@ public class GUI extends JFrame {
 	private Color backgroud = Color.WHITE;
 	private Mat matImage = null;
 	private Mat old_matImage = null;
-	private Mat canneyOutput = null;
 	private Mat blurImage = null;
-	private Mat contourOutput = null;
 	private Mat greyImage = null;
 	private Mat circleImage = null;
 	private ImageProcessor imageP = new ImageProcessor();
@@ -69,8 +67,6 @@ public class GUI extends JFrame {
 				old_matImage = new Mat();
 				greyImage = new Mat();
 				blurImage = new Mat();
-				contourOutput = new Mat();
-				canneyOutput = new Mat();
 				circleImage = new Mat();
 
 				matImage = imageP.toMatImage(image);
@@ -85,13 +81,6 @@ public class GUI extends JFrame {
 				//skal cvtColor canney og find cirkler kører
 				//Optical flow algoritmen skal køre meget hurtigere og kun måske med GaussioanBlur
 				//eller bare på råt matImage
-
-				//Imgproc.GaussianBlur(matImage, blurImage, new Size(5,5), 0);
-				//System.out.println("Blur "  + blurImage);
-
-				//contourOutput = imageP.findContours(canneyOutput, contourOutput);
-
-				//imageP.findContours(canneyOutput, contourOutput);
 
 				if(count == 0)
 				{

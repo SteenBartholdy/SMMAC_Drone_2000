@@ -15,11 +15,6 @@ import org.opencv.core.Size;
 import org.opencv.imgproc.Imgproc;
 
 public class ImageProcessor {
-	
-	private Mat greyImage;
-	private Mat blurImage;
-	private Mat circleImage; 
-	private int tresh = 40;
 
 	public Mat erode(Mat input, int elementSize, int elementShape) {
 		Mat outputImage = new Mat();
