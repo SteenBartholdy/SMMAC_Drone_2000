@@ -12,7 +12,7 @@ import org.opencv.video.Video;
 
 public class OpticalFlow {
 	
-	public void flow (Mat imagePrev, Mat imageNext) {
+	public void useOpticalFlow (Mat imagePrev, Mat imageNext) {
 		Mat grayImagePrev = new Mat();
 		Mat grayImageNext = new Mat();
 		MatOfByte status = new MatOfByte();
