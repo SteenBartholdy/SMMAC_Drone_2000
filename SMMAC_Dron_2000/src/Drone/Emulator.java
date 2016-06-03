@@ -1,6 +1,7 @@
 package Drone;
 import de.yadrone.base.ARDrone;
 import de.yadrone.base.command.CommandManager;
+import de.yadrone.base.command.LEDAnimation;
 
 public class Emulator {
 
@@ -21,13 +22,18 @@ public class Emulator {
 			//cmd = new Commands(drone);
 
 			new GUI(drone);
+			
+			drone.getCommandManager().setLedsAnimation(LEDAnimation.BLINK_ORANGE, 3, 10);
 
-			mov.takeoff();
-			mov.goRight(20, 100);
-			mov.goLeft(20, 100);
-			mov.spinLeft(50, 2000);
-			mov.hover(3000);
-			mov.spinRight(50, 2000);
+			mov.takeoff(2000);
+			Thread.sleep(2000);
+			mov.forward(15, 500);
+			Thread.sleep(2000);
+			mov.spinLeft(20, 2000);
+			Thread.sleep(2000);
+			//mov.goLeft(15, 500);
+			//Thread.sleep(3000);
+			// mov.spinRight(50, 5000);
 			mov.landing();
 		}
 		catch (Exception e)

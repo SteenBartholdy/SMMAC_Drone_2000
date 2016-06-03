@@ -101,7 +101,7 @@ public class ImageProcessor {
 		MatOfFloat err = new MatOfFloat();
 		MatOfPoint pointsPrev = new MatOfPoint();
 		Imgproc.cvtColor(imagePrev, grayImagePrev, Imgproc.COLOR_BGR2GRAY);
-		Imgproc.goodFeaturesToTrack(grayImagePrev, pointsPrev, 1000, 0.01, 1);
+		Imgproc.goodFeaturesToTrack(grayImagePrev, pointsPrev, 10, 0.01, 1);
 		Imgproc.cvtColor(imageNext, grayImageNext, Imgproc.COLOR_BGR2GRAY);
 		MatOfPoint2f c1 = new MatOfPoint2f(pointsPrev.toArray());
 		MatOfPoint2f c2 = new MatOfPoint2f();
