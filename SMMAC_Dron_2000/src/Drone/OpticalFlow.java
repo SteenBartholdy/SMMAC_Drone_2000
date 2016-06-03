@@ -7,12 +7,15 @@ import org.opencv.core.MatOfPoint;
 import org.opencv.core.MatOfPoint2f;
 import org.opencv.core.Point;
 import org.opencv.core.Scalar;
+import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
 import org.opencv.video.Video;
 
 public class OpticalFlow {
 	
 	public void useOpticalFlow (Mat imagePrev, Mat imageNext) {
+		
+		System.out.println("HHHHHHHAAAAAAAAAAAAAAAAAAAALLLLLLLLLLOOOOOOOOOOOOOOOO");
 		Mat grayImagePrev = new Mat();
 		Mat grayImageNext = new Mat();
 		MatOfByte status = new MatOfByte();
@@ -36,6 +39,13 @@ public class OpticalFlow {
 						 new Point(cornerPoints2[0], cornerPoints2[1]), new Scalar(255,50,0), 2);
 			}
 		}
+		
+		/* Skal fjernes
+		String filename = "/Users/Christoffer/Pictures/opticalFlows1.png";
+		System.out.println("Done. Writing " + filename);
+		Imgcodecs.imwrite(filename, imageNext);
+		System.out.println("Image saved");	
+		*/
 	}
 	
 

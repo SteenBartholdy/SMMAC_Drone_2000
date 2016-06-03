@@ -20,8 +20,8 @@ public class Emulator {
 			mov = new Movement(drone);
 			//cmd = new Commands(drone);
 
-			// new GUI(drone);
-			
+			new GUI(drone);
+			/*
 			mov.takeoff();
 			mov.goRight(20, 100);
 			mov.goLeft(20, 100);
@@ -29,6 +29,7 @@ public class Emulator {
 			mov.hover(3000);
 			mov.spinRight(50, 2000);
 			mov.landing();
+			*/
 			
 		}
 		catch (Exception e)

@@ -79,10 +79,10 @@ public class GUI extends JFrame {
 				{
 					old_matImage = matImage;
 				}
-
+				
 				//System.out.println(matImage);
 				
-				// op.useOpticalFlow(old_matImage, matImage);
+				op.useOpticalFlow(old_matImage, matImage);
 
 				//K�r en while l�kke med to if statements. N�r der fx er g�et et sekundt
 				//skal cvtColor canney og find cirkler k�rer
