@@ -25,6 +25,7 @@ import org.opencv.core.MatOfPoint2f;
 import org.opencv.core.Point;
 import org.opencv.core.Scalar;
 import org.opencv.core.Size;
+import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
 import org.opencv.video.Video;
 
@@ -67,20 +68,16 @@ public class GUI extends JFrame {
 			public void imageUpdated(BufferedImage newImage)
 			{
 				image = newImage;
-
-				matImage = new Mat();
-				old_matImage = new Mat();
+				matImage = imageP.toMatImage(image);
+				
 				greyImage = new Mat();
 				blurImage = new Mat();
 				circleImage = new Mat();
 
-				matImage = imageP.toMatImage(image);
 				if(old_matImage == null)
 				{
 					old_matImage = matImage;
 				}
-				
-				//System.out.println(matImage);
 				
 				op.useOpticalFlow(old_matImage, matImage);
 
@@ -93,9 +90,7 @@ public class GUI extends JFrame {
 				{
 					Imgproc.cvtColor(matImage, greyImage, Imgproc.COLOR_BGR2GRAY);
 					Imgproc.GaussianBlur(greyImage, blurImage, new Size(3,3), 2,2);
-					
-					//Imgproc.Canny(greyImage, canneyOutput, tresh, tresh*2);
-					Imgproc.HoughCircles(blurImage, circleImage, Imgproc.CV_HOUGH_GRADIENT, 1, 500, tresh, tresh*2, 100, 500);
+					Imgproc.HoughCircles(blurImage, circleImage, Imgproc.CV_HOUGH_GRADIENT, 1, 500, tresh, tresh*2, 50, 500);
 					//System.out.println(circleImage.toString());
 					for(int i = 0; i < circleImage.cols(); i++)
 					{
@@ -125,11 +120,11 @@ public class GUI extends JFrame {
 				}
 
 				System.out.println("Count er " + count);
-
+				
 				//Parameteren i toBufferedImage() skal v�re det sidst behandlede Mat objekt
 				processedImage = (BufferedImage) imageP.toBufferedImage(matImage);
 
-				//Gemmer det grå billede, så det kan bruges igen
+				//Gemmer billedet, så det kan bruges igen
 				old_matImage = matImage;
 
 				SwingUtilities.invokeLater(new Runnable() {

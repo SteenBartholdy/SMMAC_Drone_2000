@@ -7,15 +7,12 @@ import org.opencv.core.MatOfPoint;
 import org.opencv.core.MatOfPoint2f;
 import org.opencv.core.Point;
 import org.opencv.core.Scalar;
-import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
 import org.opencv.video.Video;
 
 public class OpticalFlow {
 	
 	public void useOpticalFlow (Mat imagePrev, Mat imageNext) {
-		
-		System.out.println("HHHHHHHAAAAAAAAAAAAAAAAAAAALLLLLLLLLLOOOOOOOOOOOOOOOO");
 		Mat grayImagePrev = new Mat();
 		Mat grayImageNext = new Mat();
 		MatOfByte status = new MatOfByte();
