@@ -18,11 +18,15 @@ import javax.swing.SwingUtilities;
 
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
+import org.opencv.core.MatOfByte;
+import org.opencv.core.MatOfFloat;
 import org.opencv.core.MatOfPoint;
+import org.opencv.core.MatOfPoint2f;
 import org.opencv.core.Point;
 import org.opencv.core.Scalar;
 import org.opencv.core.Size;
 import org.opencv.imgproc.Imgproc;
+import org.opencv.video.Video;
 
 import de.yadrone.base.IARDrone;
 import de.yadrone.base.command.VideoChannel;
@@ -77,10 +81,10 @@ public class GUI extends JFrame {
 
 				System.out.println(matImage);
 
-				//Kør en while løkke med to if statements. Når der fx er gået et sekundt
-				//skal cvtColor canney og find cirkler kører
-				//Optical flow algoritmen skal køre meget hurtigere og kun måske med GaussioanBlur
-				//eller bare på råt matImage
+				//Kï¿½r en while lï¿½kke med to if statements. Nï¿½r der fx er gï¿½et et sekundt
+				//skal cvtColor canney og find cirkler kï¿½rer
+				//Optical flow algoritmen skal kï¿½re meget hurtigere og kun mï¿½ske med GaussioanBlur
+				//eller bare pï¿½ rï¿½t matImage
 
 				if(count == 0)
 				{
@@ -106,6 +110,25 @@ public class GUI extends JFrame {
 						Imgproc.circle(matImage, pt, radius,new Scalar(0,255,0), 5);
 						Imgproc.circle(matImage, pt, 3, new Scalar(0,0,255), 2);
 					}
+					
+					MatOfPoint pointsPrev = new MatOfPoint();
+					MatOfByte status = new MatOfByte();
+					MatOfFloat err = new MatOfFloat();
+					Imgproc.goodFeaturesToTrack(old_matImage, pointsPrev, 1000, 0.01, 1);
+					MatOfPoint2f c1 = new MatOfPoint2f(pointsPrev.toArray());
+					MatOfPoint2f c2 = new MatOfPoint2f();
+					Video.calcOpticalFlowPyrLK(old_matImage, greyImage, c1, c2, status, err);
+					
+					for (int i = 0; i < status.rows(); i++) {
+						int statusInt = (int) status.get(i, 0)[0];
+						if (statusInt == 1) {
+							double[] cornerPoints1 = c1.get(i, 0);
+							double[] cornerPoints2 = c2.get(i, 0);
+							Imgproc.line(matImage, new Point(cornerPoints1[0], cornerPoints1[1]), 
+									 new Point(cornerPoints2[0], cornerPoints2[1]), new Scalar(255,50,0), 2);
+						}
+					}
+					
 				}
 
 				if(count < 10)
@@ -119,13 +142,11 @@ public class GUI extends JFrame {
 
 				System.out.println("Count er " + count);
 
-				//Parameteren i toBufferedImage() skal være det sidst behandlede Mat objekt
+				//Parameteren i toBufferedImage() skal vï¿½re det sidst behandlede Mat objekt
 				processedImage = (BufferedImage) imageP.toBufferedImage(matImage);
 
-
-				old_matImage = matImage;
-
-
+				//Gemmer det grÃ¥ billede, sÃ¥ det kan bruges igen
+				old_matImage = greyImage;
 
 				SwingUtilities.invokeLater(new Runnable() {
 					public void run()
