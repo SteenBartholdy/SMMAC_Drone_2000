@@ -69,4 +69,9 @@ public class Movement {
 	{
 		cmd.down(speed).doFor(ms);
 	}
+	
+	public void freeze(long ms)
+	{
+		cmd.freeze().doFor(ms);
+	}
 }
