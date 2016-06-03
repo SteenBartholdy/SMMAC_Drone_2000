@@ -19,22 +19,23 @@ public class Emulator {
 			drone.start();
 
 			mov = new Movement(drone);
-			//cmd = new Commands(drone);
 
 			new GUI(drone);
 			
 			drone.getCommandManager().setLedsAnimation(LEDAnimation.BLINK_ORANGE, 3, 10);
-
-			mov.takeoff(2000);
-			Thread.sleep(2000);
-			mov.forward(15, 500);
-			Thread.sleep(2000);
-			mov.spinLeft(20, 2000);
-			Thread.sleep(2000);
+			
+//			Thread.sleep(8000);
+//			
+//			mov.takeoff(2000);
+//			Thread.sleep(2000);
+//			mov.forward(15, 500);
+//			Thread.sleep(2000);
+//			mov.spinLeft(20, 2000);
+//			Thread.sleep(2000);
 			//mov.goLeft(15, 500);
 			//Thread.sleep(3000);
 			// mov.spinRight(50, 5000);
-			mov.landing();
+//			mov.landing();
 		}
 		catch (Exception e)
 		{

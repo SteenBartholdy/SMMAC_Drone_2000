@@ -69,13 +69,13 @@ public class GUI extends JFrame {
 				{
 					old_matImage = matImage;
 				}
-				
-				imageP.useOpticalFlow(old_matImage, matImage);
 
+				//imageP.useOpticalFlow(old_matImage, matImage);
+				
 				if(count == 0)
 				{
 					imageP.useCircleDetection(matImage);
-				}
+				}			
 				else if(count < 10)
 				{
 					count++;
