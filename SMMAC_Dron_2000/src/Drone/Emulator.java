@@ -1,16 +1,15 @@
 package Drone;
-import java.util.Scanner;
-
 import de.yadrone.base.ARDrone;
-import de.yadrone.base.IARDrone;
+import de.yadrone.base.command.CommandManager;
 
 public class Emulator {
 
 	public static void main(String[] args)
 	{	
-		IARDrone drone = null;
+		ARDrone drone = null;
 		Movement mov = null;
 		Commands cmd = null;
+		CommandManager c = null;
 
 		try
 		{
@@ -19,8 +18,8 @@ public class Emulator {
 			drone.start();
 
 			mov = new Movement(drone);
-			cmd = new Commands(drone);
-
+			//cmd = new Commands(drone);
+			
 			//new Listener(drone);
 			//new Video(drone);
 			new GUI(drone);
