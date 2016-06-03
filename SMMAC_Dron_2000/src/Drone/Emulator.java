@@ -23,22 +23,13 @@ public class Emulator {
 			// new GUI(drone);
 			
 			mov.takeoff();
-			mov.moveUp(20, 100);
-			// mov.freeze(1000);
-			mov.landing();
-			
-			/*
-			mov.hover(3000);
 			mov.goRight(20, 100);
-			mov.hover(3000);
 			mov.goLeft(20, 100);
-			mov.hover(3000);
 			mov.spinLeft(50, 2000);
 			mov.hover(3000);
 			mov.spinRight(50, 2000);
-			mov.hover(3000);
 			mov.landing();
-			*/
+			
 		}
 		catch (Exception e)
 		{
