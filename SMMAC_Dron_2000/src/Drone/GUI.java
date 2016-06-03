@@ -51,6 +51,7 @@ public class GUI extends JFrame {
 	private ImageProcessor imageP = new ImageProcessor();
 	private int tresh = 40;
 	private int count = 0;
+	private OpticalFlow op = new OpticalFlow();
 
 	public GUI (final IARDrone drone)
 	{
@@ -80,6 +81,8 @@ public class GUI extends JFrame {
 				}
 
 				System.out.println(matImage);
+				
+				op.flow(old_matImage, matImage);
 
 				//K�r en while l�kke med to if statements. N�r der fx er g�et et sekundt
 				//skal cvtColor canney og find cirkler k�rer
@@ -110,25 +113,6 @@ public class GUI extends JFrame {
 						Imgproc.circle(matImage, pt, radius,new Scalar(0,255,0), 5);
 						Imgproc.circle(matImage, pt, 3, new Scalar(0,0,255), 2);
 					}
-					
-					MatOfPoint pointsPrev = new MatOfPoint();
-					MatOfByte status = new MatOfByte();
-					MatOfFloat err = new MatOfFloat();
-					Imgproc.goodFeaturesToTrack(old_matImage, pointsPrev, 1000, 0.01, 1);
-					MatOfPoint2f c1 = new MatOfPoint2f(pointsPrev.toArray());
-					MatOfPoint2f c2 = new MatOfPoint2f();
-					Video.calcOpticalFlowPyrLK(old_matImage, greyImage, c1, c2, status, err);
-					
-					for (int i = 0; i < status.rows(); i++) {
-						int statusInt = (int) status.get(i, 0)[0];
-						if (statusInt == 1) {
-							double[] cornerPoints1 = c1.get(i, 0);
-							double[] cornerPoints2 = c2.get(i, 0);
-							Imgproc.line(matImage, new Point(cornerPoints1[0], cornerPoints1[1]), 
-									 new Point(cornerPoints2[0], cornerPoints2[1]), new Scalar(255,50,0), 2);
-						}
-					}
-					
 				}
 
 				if(count < 10)
@@ -146,7 +130,7 @@ public class GUI extends JFrame {
 				processedImage = (BufferedImage) imageP.toBufferedImage(matImage);
 
 				//Gemmer det grå billede, så det kan bruges igen
-				old_matImage = greyImage;
+				old_matImage = matImage;
 
 				SwingUtilities.invokeLater(new Runnable() {
 					public void run()
