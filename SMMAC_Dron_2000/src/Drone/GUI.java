@@ -2,32 +2,17 @@ package Drone;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Vector;
 
-import javax.swing.GrayFilter;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
-import org.opencv.core.MatOfByte;
-import org.opencv.core.MatOfFloat;
-import org.opencv.core.MatOfPoint;
-import org.opencv.core.MatOfPoint2f;
-import org.opencv.core.Point;
-import org.opencv.core.Scalar;
-import org.opencv.core.Size;
-import org.opencv.imgcodecs.Imgcodecs;
-import org.opencv.imgproc.Imgproc;
-import org.opencv.video.Video;
 
 import de.yadrone.base.IARDrone;
 import de.yadrone.base.command.VideoChannel;
@@ -70,7 +55,7 @@ public class GUI extends JFrame {
 					old_matImage = matImage;
 				}
 
-				//imageP.useOpticalFlow(old_matImage, matImage);
+				imageP.useOpticalFlow(old_matImage, matImage);
 				
 				if(count == 0)
 				{
