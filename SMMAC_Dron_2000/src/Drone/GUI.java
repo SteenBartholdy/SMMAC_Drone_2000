@@ -46,13 +46,8 @@ public class GUI extends JFrame {
 	private Color backgroud = Color.WHITE;
 	private Mat matImage = null;
 	private Mat old_matImage = null;
-	private Mat blurImage = null;
-	private Mat greyImage = null;
-	private Mat circleImage = null;
 	private ImageProcessor imageP = new ImageProcessor();
-	private int tresh = 40;
 	private int count = 0;
-	private OpticalFlow op = new OpticalFlow();
 
 	public GUI (final IARDrone drone)
 	{
@@ -69,48 +64,19 @@ public class GUI extends JFrame {
 			{
 				image = newImage;
 				matImage = imageP.toMatImage(image);
-				
-				greyImage = new Mat();
-				blurImage = new Mat();
-				circleImage = new Mat();
 
 				if(old_matImage == null)
 				{
 					old_matImage = matImage;
 				}
 				
-				op.useOpticalFlow(old_matImage, matImage);
-
-				//K�r en while l�kke med to if statements. N�r der fx er g�et et sekundt
-				//skal cvtColor canney og find cirkler k�rer
-				//Optical flow algoritmen skal k�re meget hurtigere og kun m�ske med GaussioanBlur
-				//eller bare p� r�t matImage
+				imageP.useOpticalFlow(old_matImage, matImage);
 
 				if(count == 0)
 				{
-					Imgproc.cvtColor(matImage, greyImage, Imgproc.COLOR_BGR2GRAY);
-					Imgproc.GaussianBlur(greyImage, blurImage, new Size(3,3), 2,2);
-					Imgproc.HoughCircles(blurImage, circleImage, Imgproc.CV_HOUGH_GRADIENT, 1, 500, tresh, tresh*2, 50, 500);
-					//System.out.println(circleImage.toString());
-					for(int i = 0; i < circleImage.cols(); i++)
-					{
-						double vCircle[] = circleImage.get(0, i);
-
-						System.out.println(circleImage.toString());
-						if(vCircle == null)
-						{
-							break;
-						}
-
-						Point pt = new Point(Math.round(vCircle[0]), Math.round(vCircle[1]));
-						int radius = (int)Math.round(vCircle[2]);
-						System.out.println("point " + pt.toString());
-						Imgproc.circle(matImage, pt, radius,new Scalar(0,255,0), 5);
-						Imgproc.circle(matImage, pt, 3, new Scalar(0,0,255), 2);
-					}
+					imageP.useCircleDetection(matImage);
 				}
-
-				if(count < 10)
+				else if(count < 10)
 				{
 					count++;
 				}
@@ -118,8 +84,6 @@ public class GUI extends JFrame {
 				{
 					count = 0;
 				}
-
-				System.out.println("Count er " + count);
 				
 				//Parameteren i toBufferedImage() skal v�re det sidst behandlede Mat objekt
 				processedImage = (BufferedImage) imageP.toBufferedImage(matImage);
@@ -195,11 +159,8 @@ public class GUI extends JFrame {
 	{
 		if (processedImage  != null)
 		{
-
 			g.drawImage(processedImage, 0, 0, 840, 560, null);
-
 		}
-
 
 		g.setColor(backgroud);
 		g.fillRect(840, 0, 150, 225);
