@@ -1,3 +1,4 @@
+
 package Test;
 
 import org.opencv.core.Core;
@@ -17,7 +18,7 @@ public class OpticalFlow {
 	public void run() {
 		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 		Mat imagePrev = Imgcodecs.imread("/Users/Christoffer/Pictures/b1.png");
-		Mat imageNext = Imgcodecs.imread("/Users/Christoffer/Pictures/b2.png");
+		Mat imageNext = Imgcodecs.imread("/Users/Christoffer/Pictures/b1.png");
 		Mat grayImagePrev = new Mat();
 		Mat grayImageNext = new Mat();
 		MatOfByte status = new MatOfByte();
