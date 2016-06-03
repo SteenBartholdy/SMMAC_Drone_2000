@@ -26,8 +26,10 @@ public class OpticalFlow {
 		Video.calcOpticalFlowPyrLK(grayImagePrev, grayImageNext, c1, c2, status, err);
 		
 		for (int i = 0; i < status.rows(); i++) {
+			System.out.println("For loop i optical flow");
 			int statusInt = (int) status.get(i, 0)[0];
 			if (statusInt == 1) {
+				System.out.println("Statusint:" + statusInt);
 				double[] cornerPoints1 = c1.get(i, 0);
 				double[] cornerPoints2 = c2.get(i, 0);
 				Imgproc.line(imageNext, new Point(cornerPoints1[0], cornerPoints1[1]), 
