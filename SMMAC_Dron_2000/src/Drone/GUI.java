@@ -33,6 +33,7 @@ public class GUI extends JFrame {
 	private Mat old_matImage = null;
 	private ImageProcessor imageP = new ImageProcessor();
 	private int count = 0;
+	private QRCode qr = new QRCode();
 
 	public GUI (final IARDrone drone)
 	{
@@ -48,6 +49,10 @@ public class GUI extends JFrame {
 			public void imageUpdated(BufferedImage newImage)
 			{
 				image = newImage;
+				
+				//QR detection
+				System.out.println(qr.readQRCode(image));
+				
 				matImage = imageP.toMatImage(image);
 
 				if(old_matImage == null)
