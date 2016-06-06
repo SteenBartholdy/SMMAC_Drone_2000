@@ -47,9 +47,10 @@ public class OpticalFlow {
 		
 		removeNoise();
 		
-		drawVectors(imageNext);
+		//drawVectors(imageNext);
 		
-		
+		Vector v = avgVector();
+		//Imgproc.line(imageNext, v.getA(), v.getB(), new Scalar(233,121,255), 2);
 	}
 	
 	public void setVectors(MatOfPoint2f prev, MatOfPoint2f next, MatOfByte status) {
@@ -85,7 +86,7 @@ public class OpticalFlow {
 		return avg /= vectorList.size();
 	}
 	
-	private void removeNoise() {
+	public void removeNoise() {
 		ArrayList<Vector> list = new ArrayList<Vector>();
 		double avg = averageVectorLength();
 		
@@ -95,6 +96,24 @@ public class OpticalFlow {
 		}
 		
 		vectorList = list;
+	}
+	
+	public Vector avgVector() {
+		double ax = 0, ay = 0, bx = 0, by = 0;
+		
+		for (Vector v : vectorList) {
+			ax += v.getA().x;
+			ay += v.getA().y;
+			bx += v.getB().x;
+			by += v.getB().y;
+		}
+		
+		ax /= vectorList.size();
+		ay /= vectorList.size();
+		bx /= vectorList.size();
+		by /= vectorList.size();
+		
+		return new Vector(new Point(ax, ay), new Point(bx, by));
 	}
 	
 }
