@@ -30,17 +30,43 @@ public class Emulator {
 				}
 			});
 
+			//drone.reset();
 			drone.start();
-			drone.reset();
-			//mov = new Movement(drone);
+			mov = new Movement(drone);
 			//cmd = new Commands(drone);
 			
 			
 
 			new GUI(drone);
-//			
-//			//cmd.orangeBlink();
-//			Thread.sleep(5000);
+			
+			//cmd.orangeBlink();
+			Thread.sleep(5000);
+			System.out.println("Køres denne??????");
+			
+	/*		mov.takeoff();
+			mov.waitFor(3000);
+			
+			mov.moveUp(100);
+			mov.waitFor(1000);
+			mov.moveUp(0);
+			
+			mov.moveDown(60);
+			mov.waitFor(1000);
+			mov.moveDown(0);
+			
+			mov.waitFor(1000);
+			
+			
+			
+			
+
+			mov.landing();
+			mov.landing();
+			mov.landing();
+			mov.landing();
+			mov.landing();
+	*/
+			
 //			drone.getCommandManager().takeOff();
 //			drone.getCommandManager().backward(0);			
 //			drone.getCommandManager().waitFor(5000);
@@ -62,32 +88,12 @@ public class Emulator {
 //			
 //			//mov.maxAltitude(600);
 //			
-//			//mov.takeoff();
-//			//mov.hover(2000);
-//			//Thread.sleep(3000);
-//		/*	mov.hover(1000);
-//			mov.forward(60, 300);
-//			mov.backwards(60, 200);
-//			
-//			mov.hover(1000);
-//			
-//			mov.goRight(40, 300);
-//			mov.goLeft(40, 200);
-//			
-//			mov.hover(1000);
-//			
-//			mov.goLeft(40, 300);
-//			mov.goRight(40, 200);
-//			
-//			mov.hover(1000); */
-//			
-//			//mov.landing();
+
 			
 		}
 		catch (Exception e)
 		{
 			System.out.println("catch");
-			drone.getCommandManager().landing();
 			e.printStackTrace();
 		}
 	}

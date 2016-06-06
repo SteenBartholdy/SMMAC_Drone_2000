@@ -12,9 +12,7 @@ public class Movement {
 	
 	public void takeoff ()
 	{
-		cmd.takeOff().doFor(3000);
-		forward(10, 3000);
-		
+		cmd.takeOff();
 	}
 	
 	public void landing()
@@ -48,34 +46,34 @@ public class Movement {
 		waitFor(ms);
 	}
 
-	public void forward(int speed, long ms)
+	public void forward(int speed)
 	{
-		cmd.forward(speed).doFor(ms);
+		cmd.forward(speed);
+	}
+	
+	public void spinRight(int speed)
+	{
+		cmd.spinRight(speed);
+	}
+	
+	public void spinLeft(int speed)
+	{
+		cmd.spinLeft(speed);
 	}
 
-	public void spinRight(int speed, long ms)
+	public void moveUp(int speed)
 	{
-		cmd.spinRight(speed).doFor(ms);
+		cmd.up(speed);
 	}
 	
-	public void spinLeft(int speed, long ms)
+	public void moveDown(int speed)
 	{
-		cmd.spinLeft(speed).doFor(ms);
-	}
-
-	public void moveUp(int speed, long ms)
-	{
-		cmd.up(speed).doFor(ms);
+		cmd.down(speed);
 	}
 	
-	public void moveDown(int speed, long ms)
+	public void freeze()
 	{
-		cmd.down(speed).doFor(ms);
-	}
-	
-	public void freeze(long ms)
-	{
-		cmd.freeze().doFor(ms);
+		cmd.freeze();
 	}
 
 	public void maxAltitude(int alt)

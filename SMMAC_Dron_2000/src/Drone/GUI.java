@@ -61,7 +61,7 @@ public class GUI extends JFrame {
 					old_matImage = matImage;
 				}
 
-				imageP.useOpticalFlow(old_matImage, matImage);
+				// imageP.useOpticalFlow(old_matImage, matImage);
 				
 				if(count == 0)
 				{
