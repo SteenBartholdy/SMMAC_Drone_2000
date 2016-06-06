@@ -119,6 +119,7 @@ public class ImageProcessor {
 			int radius = (int)Math.round(vCircle[2]);
 			Imgproc.circle(image, pt, radius,new Scalar(0,255,0), 5);
 			Imgproc.circle(image, pt, 3, new Scalar(0,0,255), 2);
+			System.out.println("Centrum af den fundne cirkel er: " + pt);
 		}
 	}
 
