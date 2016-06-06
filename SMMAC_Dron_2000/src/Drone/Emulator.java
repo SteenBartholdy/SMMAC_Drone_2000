@@ -19,10 +19,11 @@ public class Emulator {
 			drone.start();
 
 			mov = new Movement(drone);
+			cmd = new Commands(drone);
 
 			new GUI(drone);
 			
-			drone.getCommandManager().setLedsAnimation(LEDAnimation.BLINK_ORANGE, 3, 10);
+			cmd.orangeBlink();
 			
 //			Thread.sleep(8000);
 //			

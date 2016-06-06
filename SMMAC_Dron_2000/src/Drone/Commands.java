@@ -8,15 +8,13 @@ import de.yadrone.base.command.CommandManager;
 public class Commands {
 
 	private CommandManager cmd;
-	private IARDrone drone;
 
 	public Commands(final IARDrone drone)
 	{
 		this.cmd = drone.getCommandManager();
-		this.drone = drone;
 	}
 
-	public void ledAnimationOrangeBlink()
+	public void orangeBlink()
 	{
 		cmd.setLedsAnimation(LEDAnimation.BLINK_ORANGE, 3, 10);
 	}
