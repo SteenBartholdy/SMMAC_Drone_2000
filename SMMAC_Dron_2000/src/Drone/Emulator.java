@@ -23,9 +23,9 @@ public class Emulator {
 				@Override
 				public void exeptionOccurred(ARDroneException exc) {
 					exc.printStackTrace();
-					ARDrone drone;
-					drone = new ARDrone();
-					drone.getCommandManager().landing();
+//					ARDrone drone;
+//					drone = new ARDrone();
+//					drone.getCommandManager().landing();
 					System.out.println("Der skete en fejl__________________________________________________________________________________");
 				}
 			});
@@ -42,18 +42,22 @@ public class Emulator {
 			//cmd.orangeBlink();
 			Thread.sleep(5000);
 			drone.getCommandManager().takeOff();
-			drone.getCommandManager().backward(0);
-			
+			drone.getCommandManager().backward(0);			
 			drone.getCommandManager().waitFor(5000);
+			System.out.println("TakeOff færdig-----------------------------------------------------------------------------------------------");
 
 			drone.getCommandManager().forward(30);
 			drone.getCommandManager().waitFor(2000);
-			drone.getCommandManager().forward(0);
+			drone.getCommandManager().forward(0);			
 			drone.getCommandManager().waitFor(2000);
-			drone.getCommandManager().goRight(50);
+			System.out.println("Forward færdig-----------------------------------------------------------------------------------------------");
+			
+	/*		drone.getCommandManager().goRight(50);
 			drone.getCommandManager().waitFor(2000);
 			drone.getCommandManager().goRight(0);
 			drone.getCommandManager().waitFor(2000);
+			System.out.println("Right færdig-------------------------------------------------------------------------------------------------");
+	*/		
 			drone.getCommandManager().landing();
 			
 			//mov.maxAltitude(600);
