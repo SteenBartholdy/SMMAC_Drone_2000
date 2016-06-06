@@ -10,9 +10,11 @@ public class Movement {
 		cmd = drone.getCommandManager();
 	}
 	
-	public void takeoff (long ms)
+	public void takeoff ()
 	{
-		cmd.takeOff().doFor(ms);
+		cmd.takeOff().doFor(3000);
+		forward(10, 3000);
+		
 	}
 	
 	public void landing()
@@ -74,5 +76,10 @@ public class Movement {
 	public void freeze(long ms)
 	{
 		cmd.freeze().doFor(ms);
+	}
+
+	public void maxAltitude(int alt)
+	{
+		cmd.setMaxAltitude(alt);
 	}
 }
