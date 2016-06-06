@@ -96,35 +96,6 @@ public class ImageProcessor {
 		return contourOutput;
 	}
 
-	public void useOpticalFlow (Mat imagePrev, Mat imageNext) {
-		Mat processedImagePrev = new Mat();
-		Mat processedImageNext = new Mat();
-		MatOfByte status = new MatOfByte();
-		MatOfFloat err = new MatOfFloat();
-		MatOfPoint pointsPrev = new MatOfPoint();
-		
-		Imgproc.cvtColor(imagePrev, processedImagePrev, Imgproc.COLOR_BGR2GRAY);
-		Imgproc.Canny(processedImagePrev, processedImagePrev, THRESHOLD, THRESHOLD*2);
-		Imgproc.goodFeaturesToTrack(processedImagePrev, pointsPrev, 100, 0.1, 1);
-		
-		Imgproc.cvtColor(imageNext, processedImageNext, Imgproc.COLOR_BGR2GRAY);
-		Imgproc.Canny(processedImageNext, processedImageNext, THRESHOLD, THRESHOLD*2);
-		
-		MatOfPoint2f c1 = new MatOfPoint2f(pointsPrev.toArray());
-		MatOfPoint2f c2 = new MatOfPoint2f();
-		Video.calcOpticalFlowPyrLK(processedImagePrev, processedImageNext, c1, c2, status, err);
-
-		for (int i = 0; i < status.rows(); i++) {
-			int statusInt = (int) status.get(i, 0)[0];
-			if (statusInt == 1) {
-				double[] cornerPoints1 = c1.get(i, 0);
-				double[] cornerPoints2 = c2.get(i, 0);
-				Imgproc.line(imageNext, new Point(cornerPoints1[0], cornerPoints1[1]), 
-						new Point(cornerPoints2[0], cornerPoints2[1]), new Scalar(233,121,255), 2);
-			}
-		}
-	}
-
 	public void useCircleDetection(Mat image) {
 
 		Mat blurImage = new Mat();
