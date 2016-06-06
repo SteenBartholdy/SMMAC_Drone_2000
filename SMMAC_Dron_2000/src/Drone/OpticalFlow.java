@@ -16,7 +16,7 @@ import Math.Vector;
 
 public class OpticalFlow {
 
-	private final Point center = new Point(500, 500);
+	//private final Point center = new Point(500, 500);
 	private ArrayList<Vector> vectorList;
 	private final double THRESHOLD = 40;
 	private final double NOISE_FACTOR_X = 0.5;
@@ -40,38 +40,27 @@ public class OpticalFlow {
 		MatOfPoint2f c2 = new MatOfPoint2f();
 		Video.calcOpticalFlowPyrLK(processedImagePrev, processedImageNext, c1, c2, status, err);
 
-		setVectors(c1, c2, status, imageNext);
+		setVectors(c1, c2, status);
 		
 		//removeNoise();
 		
-		//drawVectors(imageNext);
+		drawVectors(imageNext);
 	}
 	
-	public void setVectors(MatOfPoint2f prev, MatOfPoint2f next, MatOfByte status, Mat img) {
+	public void setVectors(MatOfPoint2f prev, MatOfPoint2f next, MatOfByte status) {
 		for (int i = 0; i < status.rows(); i++) {
 			int statusInt = (int) status.get(i, 0)[0];
+			
 			if (statusInt == 1) {
 				double[] cornerPoints1 = prev.get(i, 0);
 				double[] cornerPoints2 = next.get(i, 0);
-				Imgproc.line(img, new Point(cornerPoints1[0], cornerPoints1[1]), 
-						new Point(cornerPoints2[0], cornerPoints2[1]), new Scalar(233,121,255), 2);
+				
+				Point point1 = new Point(cornerPoints1[0], cornerPoints1[1]);
+				Point point2 = new Point(cornerPoints2[0], cornerPoints2[1]);
+				
+				vectorList.add(new Vector(point1, point2));
 			}
 		}
-		
-		
-//		for (int i = 0; i < status.rows(); i++) {
-//			int statusInt = (int) status.get(i, 0)[0];
-//			
-//			if (statusInt == 1) {
-//				double[] cornerPoints1 = prev.get(i, 0);
-//				double[] cornerPoints2 = next.get(i, 0);
-//				
-//				Point point1 = new Point(cornerPoints1[0], cornerPoints1[1]);
-//				Point point2 = new Point(cornerPoints2[0], cornerPoints2[1]);
-//				
-//				vectorList.add(new Vector(point1, point2));
-//			}
-//		}
 	}
 	
 	public void drawVectors(Mat img) {
