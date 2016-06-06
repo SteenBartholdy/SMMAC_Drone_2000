@@ -31,57 +31,57 @@ public class Emulator {
 			});
 
 			drone.start();
-
+			drone.reset();
 			//mov = new Movement(drone);
 			//cmd = new Commands(drone);
 			
 			
 
 			new GUI(drone);
-			
-			//cmd.orangeBlink();
-			Thread.sleep(5000);
-			drone.getCommandManager().takeOff();
-			drone.getCommandManager().backward(0);			
-			drone.getCommandManager().waitFor(5000);
-			System.out.println("TakeOff færdig-----------------------------------------------------------------------------------------------");
-
-			drone.getCommandManager().forward(30);
-			drone.getCommandManager().waitFor(2000);
-			drone.getCommandManager().forward(0);			
-			drone.getCommandManager().waitFor(2000);
-			System.out.println("Forward færdig-----------------------------------------------------------------------------------------------");
-			
-	/*		drone.getCommandManager().goRight(50);
-			drone.getCommandManager().waitFor(2000);
-			drone.getCommandManager().goRight(0);
-			drone.getCommandManager().waitFor(2000);
-			System.out.println("Right færdig-------------------------------------------------------------------------------------------------");
-	*/		
-			drone.getCommandManager().landing();
-			
-			//mov.maxAltitude(600);
-			
-			//mov.takeoff();
-			//mov.hover(2000);
-			//Thread.sleep(3000);
-		/*	mov.hover(1000);
-			mov.forward(60, 300);
-			mov.backwards(60, 200);
-			
-			mov.hover(1000);
-			
-			mov.goRight(40, 300);
-			mov.goLeft(40, 200);
-			
-			mov.hover(1000);
-			
-			mov.goLeft(40, 300);
-			mov.goRight(40, 200);
-			
-			mov.hover(1000); */
-			
-			//mov.landing();
+//			
+//			//cmd.orangeBlink();
+//			Thread.sleep(5000);
+//			drone.getCommandManager().takeOff();
+//			drone.getCommandManager().backward(0);			
+//			drone.getCommandManager().waitFor(5000);
+//			System.out.println("TakeOff færdig-----------------------------------------------------------------------------------------------");
+//
+//			drone.getCommandManager().forward(30);
+//			drone.getCommandManager().waitFor(2000);
+//			drone.getCommandManager().forward(0);			
+//			drone.getCommandManager().waitFor(2000);
+//			System.out.println("Forward færdig-----------------------------------------------------------------------------------------------");
+//			
+//	/*		drone.getCommandManager().goRight(50);
+//			drone.getCommandManager().waitFor(2000);
+//			drone.getCommandManager().goRight(0);
+//			drone.getCommandManager().waitFor(2000);
+//			System.out.println("Right færdig-------------------------------------------------------------------------------------------------");
+//	*/		
+//			drone.getCommandManager().landing();
+//			
+//			//mov.maxAltitude(600);
+//			
+//			//mov.takeoff();
+//			//mov.hover(2000);
+//			//Thread.sleep(3000);
+//		/*	mov.hover(1000);
+//			mov.forward(60, 300);
+//			mov.backwards(60, 200);
+//			
+//			mov.hover(1000);
+//			
+//			mov.goRight(40, 300);
+//			mov.goLeft(40, 200);
+//			
+//			mov.hover(1000);
+//			
+//			mov.goLeft(40, 300);
+//			mov.goRight(40, 200);
+//			
+//			mov.hover(1000); */
+//			
+//			//mov.landing();
 			
 		}
 		catch (Exception e)

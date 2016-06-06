@@ -20,7 +20,7 @@ import org.opencv.video.Video;
 
 public class ImageProcessor {
 	
-	private double THRESHOLD = 40;
+	private final double THRESHOLD = 40;
 
 	public Mat erode(Mat input, int elementSize, int elementShape) {
 		Mat outputImage = new Mat();

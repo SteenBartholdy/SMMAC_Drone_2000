@@ -34,6 +34,7 @@ public class GUI extends JFrame {
 	private ImageProcessor imageP = new ImageProcessor();
 	private int count = 0;
 	private QRCode qr = new QRCode();
+	private OpticalFlow op = new OpticalFlow();
 
 	public GUI (final IARDrone drone)
 	{
@@ -60,7 +61,7 @@ public class GUI extends JFrame {
 					old_matImage = matImage;
 				}
 
-				//imageP.useOpticalFlow(old_matImage, matImage);
+				imageP.useOpticalFlow(old_matImage, matImage);
 				
 				if(count == 0)
 				{
