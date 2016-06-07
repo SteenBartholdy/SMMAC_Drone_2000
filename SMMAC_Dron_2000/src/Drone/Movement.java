@@ -3,7 +3,12 @@ import de.yadrone.base.IARDrone;
 import de.yadrone.base.command.CommandManager;
 
 public class Movement {
+	
 	private CommandManager cmd;
+	
+	private boolean forwardTimer = true;
+	private boolean backwardTimer = true;
+	private int backwardCounter = 0;
 	
 	public Movement(final IARDrone drone)
 	{
@@ -40,10 +45,15 @@ public class Movement {
 		cmd.waitFor(ms);
 	}
 
-	public void backwards(int speed, long ms)
+	public void backwards(int speed, int time)
 	{
-		cmd.backward(speed);
-		waitFor(ms);
+		while (this.backwardCounter < time)
+		{
+			cmd.backward(speed);
+			this.backwardCounter++;
+		}
+		//this.backwardTimer = true;
+		this.backwardCounter = 0;
 	}
 
 	public void forward(int speed)

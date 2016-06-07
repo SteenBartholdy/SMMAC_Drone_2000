@@ -43,52 +43,20 @@ public class Emulator {
 			Thread.sleep(5000);
 			System.out.println("Køres denne??????");
 			
-	/*		mov.takeoff();
-			mov.waitFor(3000);
+			mov.takeoff();
+			mov.waitFor(4000);
+			long startTime = System.currentTimeMillis();
+			mov.backwards(10, 10000);
 			
-			mov.moveUp(100);
-			mov.waitFor(1000);
-			mov.moveUp(0);
+			long endTime = System.currentTimeMillis();
+			long totalTime = endTime-startTime;
+			System.out.println("Tiden: " + totalTime + "***************************************" );
 			
-			mov.moveDown(60);
-			mov.waitFor(1000);
-			mov.moveDown(0);
-			
-			mov.waitFor(1000);
-			
-			
-			
-			
-
 			mov.landing();
 			mov.landing();
 			mov.landing();
 			mov.landing();
 			mov.landing();
-	*/
-			
-//			drone.getCommandManager().takeOff();
-//			drone.getCommandManager().backward(0);			
-//			drone.getCommandManager().waitFor(5000);
-//			System.out.println("TakeOff færdig-----------------------------------------------------------------------------------------------");
-//
-//			drone.getCommandManager().forward(30);
-//			drone.getCommandManager().waitFor(2000);
-//			drone.getCommandManager().forward(0);			
-//			drone.getCommandManager().waitFor(2000);
-//			System.out.println("Forward færdig-----------------------------------------------------------------------------------------------");
-//			
-//	/*		drone.getCommandManager().goRight(50);
-//			drone.getCommandManager().waitFor(2000);
-//			drone.getCommandManager().goRight(0);
-//			drone.getCommandManager().waitFor(2000);
-//			System.out.println("Right færdig-------------------------------------------------------------------------------------------------");
-//	*/		
-//			drone.getCommandManager().landing();
-//			
-//			//mov.maxAltitude(600);
-//			
-
 			
 		}
 		catch (Exception e)
