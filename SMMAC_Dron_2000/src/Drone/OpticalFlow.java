@@ -48,7 +48,7 @@ public class OpticalFlow {
 		
 		//drawVectors(imageNext);
 		
-		return getMovement(avgVector());
+		return get2Dmovement(avgVector());
 		//Imgproc.line(imageNext, v.getA(), v.getB(), new Scalar(233,121,255), 2);
 	}
 	
@@ -71,7 +71,7 @@ public class OpticalFlow {
 	
 	public void drawVectors(Mat img) {
 		for (Vector v : vectorList) {
-			Imgproc.line(img, v.getA(), v.getB(), new Scalar(233,121,255), 2);
+			Imgproc.arrowedLine(img, v.getA(), v.getB(), new Scalar(233,121,255));
 		}
 	}
 	
@@ -115,7 +115,7 @@ public class OpticalFlow {
 		return new Vector(new Point(ax, ay), new Point(bx, by));
 	}
 	
-	public String getMovement(Vector v) {
+	public String get2Dmovement(Vector v) {
 		String str = "";
 		
 		if (v.getB().y > v.getA().y) {
@@ -132,5 +132,4 @@ public class OpticalFlow {
 		
 		return str;
 	}
-	
 }
