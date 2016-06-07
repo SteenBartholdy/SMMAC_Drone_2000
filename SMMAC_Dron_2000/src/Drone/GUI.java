@@ -56,8 +56,7 @@ public class GUI extends JFrame {
 			{
 				image = newImage;
 
-				//QR detection
-				//System.out.println(qr.readQRCode(image));
+				qr.readQRCode(image);
 
 				matImage = imageP.toMatImage(image);
 
@@ -69,7 +68,7 @@ public class GUI extends JFrame {
 				if(counter.ready())
 				{
 					imageP.useCircleDetection(matImage);
-					sWay = "Direction: " + op.useOpticalFlow(old_matImage, matImage);
+					//sWay = "Direction: " + op.useOpticalFlow(old_matImage, matImage);
 				}			
 				else {
 					counter.count();

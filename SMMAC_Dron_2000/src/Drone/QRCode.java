@@ -27,6 +27,7 @@ public class QRCode {
 
         try {
             result = reader.decode(bitmap, hintMap);
+            System.out.println(result);
         } catch (NotFoundException e) {
             return "QR not found. Might have been partially detected but " +
                     "could not be confirmed.";
