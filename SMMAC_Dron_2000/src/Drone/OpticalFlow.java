@@ -19,10 +19,10 @@ public class OpticalFlow {
 
 	private List<Vector> vectorList = new ArrayList<Vector>();;
 	private final double THRESHOLD = 40;
-	private final double NOISE_X = 0.8;
-	private final double NOISE_Y = 1.2;
+	private final double NOISE_X = 0.9;
+	private final double NOISE_Y = 1.1;
 	
-	public void useOpticalFlow (Mat imagePrev, Mat imageNext) {
+	public String useOpticalFlow (Mat imagePrev, Mat imageNext) {
 		vectorList.clear();
 		
 		Mat processedImagePrev = new Mat();
@@ -33,7 +33,7 @@ public class OpticalFlow {
 		
 		Imgproc.cvtColor(imagePrev, processedImagePrev, Imgproc.COLOR_BGR2GRAY);
 		Imgproc.Canny(processedImagePrev, processedImagePrev, THRESHOLD, THRESHOLD*2);
-		Imgproc.goodFeaturesToTrack(processedImagePrev, pointsPrev, 100, 0.1, 1);
+		Imgproc.goodFeaturesToTrack(processedImagePrev, pointsPrev, 80, 0.1, 1);
 		
 		Imgproc.cvtColor(imageNext, processedImageNext, Imgproc.COLOR_BGR2GRAY);
 		Imgproc.Canny(processedImageNext, processedImageNext, THRESHOLD, THRESHOLD*2);
@@ -48,7 +48,7 @@ public class OpticalFlow {
 		
 		//drawVectors(imageNext);
 		
-		System.out.println(getMovement(avgVector()));
+		return getMovement(avgVector());
 		//Imgproc.line(imageNext, v.getA(), v.getB(), new Scalar(233,121,255), 2);
 	}
 	
@@ -125,9 +125,9 @@ public class OpticalFlow {
 		}
 		
 		if (v.getB().x > v.getA().x) {
-			str += "Højre";
+			str += "venstre";
 		} else {
-			str += "Venstre";
+			str += "højre";
 		}
 		
 		return str;

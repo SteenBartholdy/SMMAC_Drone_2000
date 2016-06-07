@@ -7,6 +7,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
@@ -28,11 +30,12 @@ public class GUI extends JFrame {
 	private String sPitch;
 	private String sRoll;
 	private String sYaw;
+	private String sWay;
 	private Color backgroud = Color.WHITE;
 	private Mat matImage = null;
 	private Mat old_matImage = null;
 	private ImageProcessor imageP = new ImageProcessor();
-	private int count = 0;
+	private long count = 0;
 	private QRCode qr = new QRCode();
 	private OpticalFlow op = new OpticalFlow();
 
@@ -50,10 +53,10 @@ public class GUI extends JFrame {
 			public void imageUpdated(BufferedImage newImage)
 			{
 				image = newImage;
-				
+
 				//QR detection
 				//System.out.println(qr.readQRCode(image));
-				
+
 				matImage = imageP.toMatImage(image);
 
 				if(old_matImage == null)
@@ -61,13 +64,11 @@ public class GUI extends JFrame {
 					old_matImage = matImage;
 				}
 
-				op.useOpticalFlow(old_matImage, matImage);
-				
 				if(count == 0)
 				{
 					//imageP.useCircleDetection(matImage);
 				}			
-				else if(count < 10)
+				else if(count < 922337203)
 				{
 					count++;
 				}
@@ -75,7 +76,7 @@ public class GUI extends JFrame {
 				{
 					count = 0;
 				}
-				
+
 				//Parameteren i toBufferedImage() skal v�re det sidst behandlede Mat objekt
 				processedImage = (BufferedImage) imageP.toBufferedImage(matImage);
 
@@ -144,6 +145,12 @@ public class GUI extends JFrame {
 				System.exit(0);
 			}
 		});
+
+		new Timer().schedule(new TimerTask() {
+			public void run()  {
+				sWay = op.useOpticalFlow(old_matImage, matImage);
+			}
+		}, 3000, 100);
 	}
 
 	public synchronized void paint(Graphics g)
@@ -154,7 +161,7 @@ public class GUI extends JFrame {
 		}
 
 		g.setColor(backgroud);
-		g.fillRect(840, 0, 150, 225);
+		g.fillRect(840, 0, 150, 275);
 
 		g.setColor(Color.BLACK);
 
@@ -169,6 +176,9 @@ public class GUI extends JFrame {
 
 		if(sYaw != null) 
 			g.drawString(sYaw, 865, 200);
+
+		if(sWay != null)
+			g.drawString(sWay, 865, 250);
 	}
 
 
