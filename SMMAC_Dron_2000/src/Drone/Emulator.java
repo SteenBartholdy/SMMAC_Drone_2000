@@ -43,8 +43,7 @@ public class Emulator {
 			Thread.sleep(5000);
 			System.out.println("Køres denne??????");
 			
-			mov.takeoff();
-			mov.waitFor(4000);
+			mov.takeoff(4000);
 			
 			long startTime1 = System.currentTimeMillis();
 			mov.forward(80, 100);
@@ -60,11 +59,6 @@ public class Emulator {
 			
 			mov.waitFor(2000);
 			
-			
-			mov.landing();
-			mov.landing();
-			mov.landing();
-			mov.landing();
 			mov.landing();
 			
 		}
