@@ -37,7 +37,6 @@ public class GUI extends JFrame {
 	private Mat matImage = null;
 	private Mat old_matImage = null;
 	private ImageProcessor imageP = new ImageProcessor();
-	private long count = 0;
 	private QRCode qr = new QRCode();
 	private OpticalFlow op = new OpticalFlow();
 	private Counter counter = new Counter();
