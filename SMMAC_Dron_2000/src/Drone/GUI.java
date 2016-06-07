@@ -28,16 +28,12 @@ public class GUI extends JFrame {
 
 	private BufferedImage image = null;
 	private BufferedImage processedImage = null;
-	private String sBattery;
-	private String sPitch;
-	private String sRoll;
-	private String sYaw;
-	private String sWay;
+	private String sBattery, sPitch, sRoll, sYaw, sWay, sQR;
 	private Color backgroud = Color.WHITE;
 	private Mat matImage = null;
 	private Mat old_matImage = null;
 	private ImageProcessor imageP = new ImageProcessor();
-	private QRCode qr = new QRCode();
+	private QRCode qr = new QRCode(6);
 	private OpticalFlow op = new OpticalFlow();
 	private Counter counter = new Counter();
 
@@ -56,7 +52,7 @@ public class GUI extends JFrame {
 			{	
 				image = newImage;
 
-				qr.readQRCode(image);
+				sQR = "QR-code: " + qr.readQRCode(image);
 
 				matImage = imageP.toMatImage(image);
 
@@ -152,7 +148,7 @@ public class GUI extends JFrame {
 		}
 
 		g.setColor(backgroud);
-		g.fillRect(840, 0, 175, 275);
+		g.fillRect(840, 0, 200, 325);
 
 		g.setColor(Color.BLACK);
 
@@ -170,6 +166,9 @@ public class GUI extends JFrame {
 
 		if(sWay != null)
 			g.drawString(sWay, 865, 250);
+		
+		if(sQR != null)
+			g.drawString(sQR, 865, 300);
 	}
 
 

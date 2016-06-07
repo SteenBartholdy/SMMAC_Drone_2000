@@ -1,7 +1,9 @@
 package Drone;
 
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.List;
 
 import com.google.zxing.BinaryBitmap;
 import com.google.zxing.ChecksumException;
@@ -14,7 +16,15 @@ import com.google.zxing.common.HybridBinarizer;
 import com.google.zxing.qrcode.QRCodeReader;
 
 public class QRCode {
+	
+	private List<String> circleQR = new ArrayList<String>();
 
+	public QRCode(int circleAmount) {
+		for (int i = 1; i <= circleAmount; i++) {
+			circleQR.add("P." + String.format("%02d", i));
+		}
+	}
+	
     public String readQRCode(BufferedImage qrcodeImage) {
         Hashtable<DecodeHintType, Object> hintMap = new Hashtable<>();
         hintMap.put(DecodeHintType.TRY_HARDER, Boolean.TRUE);
@@ -27,18 +37,24 @@ public class QRCode {
 
         try {
             result = reader.decode(bitmap, hintMap);
-            System.out.println(result);
         } catch (NotFoundException e) {
-            return "QR not found. Might have been partially detected but " +
-                    "could not be confirmed.";
+            return "None";
         } catch (ChecksumException e) {
-            return "Successfully detected and decoded, but was not returned " +
-                    "because its checksum feature failed.";
+            return "Can't decode";
         } catch (FormatException e) {
-            return "Detected, but some aspect did not conform to the format " +
-                    "rules.";
+            return "Unknow format";
         }
 
         return result != null ? result.getText() : "";
     }
+    
+    public boolean isCircle(BufferedImage image) {
+    	for(String str : circleQR) {
+    		if (str.equals(readQRCode(image))) 
+        		return true;
+    	}
+    	
+    	return false;
+    }
+    
 }
