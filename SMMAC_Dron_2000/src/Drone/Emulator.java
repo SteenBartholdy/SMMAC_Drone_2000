@@ -41,28 +41,15 @@ public class Emulator {
 			
 			//cmd.orangeBlink();
 			Thread.sleep(5000);
-			System.out.println("Køres denne??????");
 			
-//			mov.takeoff();
-//			
-////			mov.moveUp(100, 100);
-////			long startTime1 = System.currentTimeMillis();
-////			mov.forward(80, 100);
-////			long endTime1 = System.currentTimeMillis();
-////			long totalTime1 = endTime1-startTime1;
-////			System.out.println("Tiden backward: " + totalTime1 + "***************************************" );
-////			
-////			long startTime = System.currentTimeMillis();
-////			mov.backwards(30, 100);
-////			long endTime = System.currentTimeMillis();
-////			long totalTime = endTime-startTime;
-////			System.out.println("Tiden backward: " + totalTime + "***************************************" );
-////			mov.spinLeft(100, 500);
-//			
-//			mov.goRight(30, 100);
-//			mov.goLeft(30, 100);
-//			mov.hover(300);
-//			mov.landing();
+			
+			mov.takeoff();
+			
+//			mov.goRight(30, 50);
+//			mov.forward(100, 100);
+			mov.hover(200);
+			mov.forward(100, 200);
+			mov.landing();
 			
 		}
 		catch (Exception e)

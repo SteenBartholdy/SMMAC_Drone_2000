@@ -51,9 +51,9 @@ public class GUI extends JFrame {
 			public void imageUpdated(BufferedImage newImage)
 			{	
 				image = newImage;
-
+				
 				sQR = "QR-code: " + qr.readQRCode(image);
-
+				
 				matImage = imageP.toMatImage(image);
 
 				if(old_matImage == null)
@@ -62,8 +62,8 @@ public class GUI extends JFrame {
 				}
 
 				if(counter.ready())
-				{
-					//imageP.useCircleDetection(matImage);
+				{ 
+					imageP.useCircleDetection(matImage);
 					sWay = "Direction: " + op.useOpticalFlow(old_matImage, matImage);
 				}			
 				else {

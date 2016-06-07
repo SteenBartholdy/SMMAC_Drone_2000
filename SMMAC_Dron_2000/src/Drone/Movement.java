@@ -24,9 +24,9 @@ public class Movement {
 	{
 		cmd.takeOff();
 		waitFor(4000);	
-		forward(50, 50);
+		forward(50, 55);
 		hover(100);
-		moveUp(100, 50);
+		moveUp(100, 45);
 		hover(100);
 	}
 
