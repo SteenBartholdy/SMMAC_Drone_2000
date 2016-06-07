@@ -45,12 +45,21 @@ public class Emulator {
 			
 			mov.takeoff();
 			mov.waitFor(4000);
-			long startTime = System.currentTimeMillis();
-			mov.backwards(10, 10000);
 			
+			long startTime1 = System.currentTimeMillis();
+			mov.forward(80, 100);
+			long endTime1 = System.currentTimeMillis();
+			long totalTime1 = endTime1-startTime1;
+			System.out.println("Tiden backward: " + totalTime1 + "***************************************" );
+			
+			long startTime = System.currentTimeMillis();
+			mov.backwards(30, 100);
 			long endTime = System.currentTimeMillis();
 			long totalTime = endTime-startTime;
-			System.out.println("Tiden: " + totalTime + "***************************************" );
+			System.out.println("Tiden backward: " + totalTime + "***************************************" );
+			
+			mov.waitFor(2000);
+			
 			
 			mov.landing();
 			mov.landing();
