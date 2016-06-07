@@ -33,9 +33,7 @@ public class Emulator {
 			//drone.reset();
 			drone.start();
 			mov = new Movement(drone);
-			//cmd = new Commands(drone);
-			
-			
+			cmd = new Commands(drone);
 
 			new GUI(drone);
 			

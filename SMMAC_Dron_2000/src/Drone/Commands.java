@@ -13,6 +13,10 @@ public class Commands {
 	{
 		this.cmd = drone.getCommandManager();
 	}
+	
+	public void bitrate(int rate) {
+		cmd.setVideoBitrate(rate);
+	}
 
 	public void orangeBlink()
 	{

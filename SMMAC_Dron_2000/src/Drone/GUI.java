@@ -22,6 +22,8 @@ import de.yadrone.base.navdata.AttitudeListener;
 import de.yadrone.base.navdata.BatteryListener;
 import de.yadrone.base.video.ImageListener;
 
+import Math.Counter;
+
 public class GUI extends JFrame {
 
 	private BufferedImage image = null;
@@ -38,6 +40,7 @@ public class GUI extends JFrame {
 	private long count = 0;
 	private QRCode qr = new QRCode();
 	private OpticalFlow op = new OpticalFlow();
+	private Counter counter = new Counter();
 
 	public GUI (final IARDrone drone)
 	{
@@ -64,18 +67,13 @@ public class GUI extends JFrame {
 					old_matImage = matImage;
 				}
 
-				if(count == 0)
+				if(counter.ready())
 				{
 					imageP.useCircleDetection(matImage);
 					sWay = "Direction: " + op.useOpticalFlow(old_matImage, matImage);
 				}			
-				else if(count < 922337203)
-				{
-					count++;
-				}
-				else
-				{
-					count = 0;
+				else {
+					counter.count();
 				}
 
 				//Parameteren i toBufferedImage() skal v�re det sidst behandlede Mat objekt
