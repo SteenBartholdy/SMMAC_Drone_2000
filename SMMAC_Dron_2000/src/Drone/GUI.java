@@ -156,7 +156,7 @@ public class GUI extends JFrame {
 		}
 
 		g.setColor(backgroud);
-		g.fillRect(840, 0, 150, 275);
+		g.fillRect(840, 0, 175, 275);
 
 		g.setColor(Color.BLACK);
 
