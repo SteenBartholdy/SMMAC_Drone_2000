@@ -41,8 +41,8 @@ public class Emulator {
 			Thread.sleep(5000);
 			System.out.println("Køres denne??????");
 			
-//			mov.takeoff(4000);
-//			
+			mov.takeoff(4000);
+			
 //			long startTime1 = System.currentTimeMillis();
 //			mov.forward(80, 100);
 //			long endTime1 = System.currentTimeMillis();
@@ -54,10 +54,11 @@ public class Emulator {
 //			long endTime = System.currentTimeMillis();
 //			long totalTime = endTime-startTime;
 //			System.out.println("Tiden backward: " + totalTime + "***************************************" );
-//			
-//			mov.waitFor(2000);
-//			
-//			mov.landing();
+			mov.spinLeft(100, 1000);
+			
+			mov.waitFor(2000);
+			
+			mov.landing();
 			
 		}
 		catch (Exception e)
