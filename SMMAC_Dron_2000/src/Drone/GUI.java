@@ -50,10 +50,10 @@ public class GUI extends JFrame {
 		setSize(1040,560);
 		setBackground(backgroud);
 		setVisible(true);
-
+		
 		drone.getVideoManager().addImageListener(new ImageListener() {
 			public void imageUpdated(BufferedImage newImage)
-			{
+			{	
 				image = newImage;
 
 				qr.readQRCode(image);
@@ -67,8 +67,8 @@ public class GUI extends JFrame {
 
 				if(counter.ready())
 				{
-					imageP.useCircleDetection(matImage);
-					//sWay = "Direction: " + op.useOpticalFlow(old_matImage, matImage);
+					//imageP.useCircleDetection(matImage);
+					sWay = "Direction: " + op.useOpticalFlow(old_matImage, matImage);
 				}			
 				else {
 					counter.count();
@@ -146,7 +146,7 @@ public class GUI extends JFrame {
 
 	public synchronized void paint(Graphics g)
 	{
-		if (processedImage  != null)
+		if (processedImage != null)
 		{
 			g.drawImage(processedImage, 0, 0, 840, 560, null);
 		}
