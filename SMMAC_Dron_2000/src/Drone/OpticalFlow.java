@@ -17,7 +17,6 @@ import Math.Vector;
 
 public class OpticalFlow {
 
-	//private final Point center = new Point(500, 500);
 	private List<Vector> vectorList = new ArrayList<Vector>();;
 	private final double THRESHOLD = 40;
 	private final double NOISE_X = 0.8;
@@ -49,7 +48,7 @@ public class OpticalFlow {
 		
 		//drawVectors(imageNext);
 		
-		Vector v = avgVector();
+		System.out.println(getMovement(avgVector()));
 		//Imgproc.line(imageNext, v.getA(), v.getB(), new Scalar(233,121,255), 2);
 	}
 	
@@ -114,6 +113,24 @@ public class OpticalFlow {
 		by /= vectorList.size();
 		
 		return new Vector(new Point(ax, ay), new Point(bx, by));
+	}
+	
+	public String getMovement(Vector v) {
+		String str = "";
+		
+		if (v.getB().y > v.getA().y) {
+			str = "Op ";
+		} else {
+			str = "Ned ";
+		}
+		
+		if (v.getB().x > v.getA().x) {
+			str += "Højre";
+		} else {
+			str += "Venstre";
+		}
+		
+		return str;
 	}
 	
 }
