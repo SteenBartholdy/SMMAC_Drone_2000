@@ -66,7 +66,7 @@ public class GUI extends JFrame {
 
 				if(count == 0)
 				{
-					//imageP.useCircleDetection(matImage);
+					imageP.useCircleDetection(matImage);
 					sWay = "Direction: " + op.useOpticalFlow(old_matImage, matImage);
 				}			
 				else if(count < 922337203)
