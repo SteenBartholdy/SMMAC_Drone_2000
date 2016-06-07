@@ -119,15 +119,15 @@ public class OpticalFlow {
 		String str = "";
 		
 		if (v.getB().y > v.getA().y) {
-			str = "Op ";
+			str = "Up ";
 		} else {
-			str = "Ned ";
+			str = "Down ";
 		}
 		
 		if (v.getB().x > v.getA().x) {
-			str += "venstre";
+			str += "left";
 		} else {
-			str += "højre";
+			str += "right";
 		}
 		
 		return str;

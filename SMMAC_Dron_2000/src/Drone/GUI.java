@@ -67,6 +67,7 @@ public class GUI extends JFrame {
 				if(count == 0)
 				{
 					//imageP.useCircleDetection(matImage);
+					sWay = "Direction: " + op.useOpticalFlow(old_matImage, matImage);
 				}			
 				else if(count < 922337203)
 				{
@@ -145,12 +146,6 @@ public class GUI extends JFrame {
 				System.exit(0);
 			}
 		});
-
-		new Timer().schedule(new TimerTask() {
-			public void run()  {
-				sWay = op.useOpticalFlow(old_matImage, matImage);
-			}
-		}, 3000, 100);
 	}
 
 	public synchronized void paint(Graphics g)
