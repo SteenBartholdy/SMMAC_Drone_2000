@@ -102,6 +102,7 @@ public class ImageProcessor {
 		Mat greyImage = new Mat();
 		Mat circleImage = new Mat();
 
+		//Ingen sort/hvid. Treshhold til at fjerne alt andet en sort!
 		Imgproc.cvtColor(image, greyImage, Imgproc.COLOR_BGR2GRAY);
 		Imgproc.GaussianBlur(greyImage, blurImage, new Size(3,3), 2,2);
 		Imgproc.HoughCircles(blurImage, circleImage, Imgproc.CV_HOUGH_GRADIENT, 1, 1000, THRESHOLD, THRESHOLD*2, 80, 500);

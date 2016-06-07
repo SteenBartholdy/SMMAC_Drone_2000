@@ -37,13 +37,15 @@ public class Emulator {
 
 			new GUI(drone);
 			
+			mov.startUp();
+			
 			//cmd.orangeBlink();
 			Thread.sleep(5000);
 			System.out.println("Køres denne??????");
-			mov.flatTrim();
-			mov.takeoff(4000);
-			mov.forward(100, 50);
-			mov.moveUp(100, 100);
+			
+			mov.takeoff();
+			
+//			mov.moveUp(100, 100);
 //			long startTime1 = System.currentTimeMillis();
 //			mov.forward(80, 100);
 //			long endTime1 = System.currentTimeMillis();
@@ -55,10 +57,11 @@ public class Emulator {
 //			long endTime = System.currentTimeMillis();
 //			long totalTime = endTime-startTime;
 //			System.out.println("Tiden backward: " + totalTime + "***************************************" );
-			mov.spinLeft(100, 500);
+//			mov.spinLeft(100, 500);
 			
-			mov.waitFor(2000);
-			
+			mov.goRight(30, 100);
+			mov.goLeft(30, 100);
+			mov.hover(300);
 			mov.landing();
 			
 		}
