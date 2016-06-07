@@ -152,4 +152,9 @@ public class Movement {
 	{
 		cmd.setMaxAltitude(mm);
 	}
+	
+	public void flatTrim()
+	{
+		cmd.flatTrim();
+	}
 }
