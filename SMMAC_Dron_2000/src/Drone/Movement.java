@@ -13,11 +13,21 @@ public class Movement {
 	{
 		cmd = drone.getCommandManager();
 	}
+	
+	public void startUp()
+	{
+		maxAltitude(2000);
+		cmd.setOutdoor(false, false);
+	}
 
-	public void takeoff (int ms)
+	public void takeoff ()
 	{
 		cmd.takeOff();
-		waitFor(ms);		
+		waitFor(4000);	
+		forward(50, 50);
+		hover(100);
+		moveUp(100, 50);
+		hover(100);
 	}
 
 	public void landing()
@@ -37,7 +47,7 @@ public class Movement {
 			this.counter++;
 		}
 		cmd.goLeft(0);
-		waitFor(100);
+		waitFor(1000);
 		this.counter = 0;
 	}
 
@@ -50,7 +60,7 @@ public class Movement {
 			this.counter++;
 		}
 		cmd.goRight(0);
-		waitFor(100);
+		waitFor(1000);
 		this.counter = 0;
 	}
 
@@ -79,7 +89,7 @@ public class Movement {
 			this.counter++;
 		}
 		cmd.backward(0);
-		waitFor(100);
+		waitFor(1000);
 		this.counter = 0;
 	}
 
@@ -92,7 +102,7 @@ public class Movement {
 			this.counter++;
 		}
 		cmd.forward(0);
-		waitFor(100);
+		waitFor(1000);
 		this.counter = 0;
 	}
 
@@ -105,7 +115,7 @@ public class Movement {
 			this.counter++;
 		}
 		cmd.spinRight(0);
-		waitFor(100);
+		waitFor(1000);
 		this.counter = 0;
 	}
 
@@ -118,7 +128,7 @@ public class Movement {
 			this.counter++;
 		}
 		cmd.spinLeft(0);
-		waitFor(100);
+		waitFor(1000);
 		this.counter = 0;
 	}
 
@@ -131,7 +141,7 @@ public class Movement {
 			this.counter++;
 		}
 		cmd.up(0);
-		waitFor(100);
+		waitFor(1000);
 		this.counter = 0;
 	}
 
@@ -144,7 +154,7 @@ public class Movement {
 			this.counter++;
 		}
 		cmd.down(0);
-		waitFor(100);
+		waitFor(1000);
 		this.counter = 0;
 	}
 
