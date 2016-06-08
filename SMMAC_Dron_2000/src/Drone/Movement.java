@@ -46,8 +46,14 @@ public class Movement {
 			waitFor(10);
 			this.counter++;
 		}
+		this.counter = 0;
+		
+		while (this.counter < 200)
+		{
 		cmd.goLeft(0);
-		waitFor(1000);
+		waitFor(10);
+		this.counter++;
+		}
 		this.counter = 0;
 	}
 
@@ -59,8 +65,14 @@ public class Movement {
 			waitFor(10);
 			this.counter++;
 		}
+		this.counter = 0;
+		
+		while (this.counter < 200)
+		{
 		cmd.goRight(0);
 		waitFor(1000);
+		this.counter++;
+		}
 		this.counter = 0;
 	}
 

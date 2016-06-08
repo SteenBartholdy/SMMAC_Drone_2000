@@ -45,10 +45,11 @@ public class Emulator {
 			
 			mov.takeoff();
 			
-//			mov.goRight(30, 50);
-//			mov.forward(100, 100);
-			mov.hover(200);
-			mov.forward(100, 200);
+			mov.goRight(30, 50);
+			mov.hover(1000);
+			mov.goLeft(30, 50);
+			mov.hover(1000);
+			
 			mov.landing();
 			
 		}
