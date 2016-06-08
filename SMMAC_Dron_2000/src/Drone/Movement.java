@@ -38,6 +38,10 @@ public class Movement {
 			cmd.landing();
 		}
 	}
+	
+	public void emergencyLanding() {
+		cmd.landing();
+	}
 
 	public void goLeft(int speed, int time)
 	{
@@ -183,6 +187,10 @@ public class Movement {
 
 	public IARDrone getDrone() {
 		return this.drone;
+	}
+	
+	public CommandManager getCmd() {
+		return this.cmd;
 	}
 	
 }

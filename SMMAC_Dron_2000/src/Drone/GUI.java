@@ -17,11 +17,7 @@ import org.opencv.core.Core;
 import org.opencv.core.Mat;
 
 import Math.Counter;
-import de.yadrone.base.IARDrone;
 import de.yadrone.base.command.VideoChannel;
-import de.yadrone.base.navdata.AcceleroListener;
-import de.yadrone.base.navdata.AcceleroPhysData;
-import de.yadrone.base.navdata.AcceleroRawData;
 import de.yadrone.base.navdata.AttitudeListener;
 import de.yadrone.base.navdata.BatteryListener;
 import de.yadrone.base.video.ImageListener;
@@ -38,12 +34,10 @@ public class GUI extends JFrame {
 	private QRCode qr = new QRCode(6);
 	private OpticalFlow op = new OpticalFlow();
 	private Counter counter = new Counter();
-	private IARDrone drone;
 
 	public GUI (Movement mov)
 	{
 		super("SMMAC Drone 2000");
-		drone = mov.getDrone();
 		
 		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 
@@ -51,9 +45,9 @@ public class GUI extends JFrame {
 		setBackground(backgroud);
 		setVisible(true);
 
-		drone.getCommandManager().setVideoCodecFps(15);
+		mov.getCmd().setVideoCodecFps(15);
 
-		drone.getVideoManager().addImageListener(new ImageListener() {
+		mov.getDrone().getVideoManager().addImageListener(new ImageListener() {
 			public void imageUpdated(BufferedImage newImage)
 			{	
 				image = newImage;
@@ -90,7 +84,7 @@ public class GUI extends JFrame {
 			}
 		});
 
-		drone.getNavDataManager().addAttitudeListener(new AttitudeListener() {
+		mov.getDrone().getNavDataManager().addAttitudeListener(new AttitudeListener() {
 
 			@Override
 			public void attitudeUpdated(float pitch, float roll, float yaw) {
@@ -112,7 +106,7 @@ public class GUI extends JFrame {
 			public void windCompensation(float arg0, float arg1) { }
 		});	
 
-		drone.getNavDataManager().addBatteryListener(new BatteryListener() {
+		mov.getDrone().getNavDataManager().addBatteryListener(new BatteryListener() {
 
 			public void batteryLevelChanged(int percentage)
 			{
@@ -131,15 +125,14 @@ public class GUI extends JFrame {
 		addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e)
 			{
-				drone.getCommandManager().setVideoChannel(VideoChannel.NEXT);
+				mov.getCmd().setVideoChannel(VideoChannel.NEXT);
 			}
 		});
 
 		addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) 
 			{
-				mov.landing();
-				drone.stop();
+				mov.emergencyLanding();
 				System.exit(0);
 			}
 		});
@@ -153,9 +146,8 @@ public class GUI extends JFrame {
 
 			@Override
 			public void keyPressed(KeyEvent e) {
-				if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-					mov.landing();
-					drone.stop();
+				if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+					mov.emergencyLanding();
 				}
 			}
 
