@@ -25,7 +25,7 @@ public class Movement {
 	{
 		cmd.takeOff();
 		waitFor(4000);	
-		forward(50, 55);
+		forward(50, 20);
 		hover(100);
 		moveUp(100, 45);
 		hover(100);
@@ -48,18 +48,13 @@ public class Movement {
 		while (this.counter < time)
 		{
 			cmd.goLeft(speed);
-			waitFor(10);
+			waitFor(50);
 			this.counter++;
 		}
 		this.counter = 0;
-		
-		while (this.counter < 200)
-		{
-		cmd.goLeft(0);
-		waitFor(10);
-		this.counter++;
-		}
-		this.counter = 0;
+
+		cmd.hover();
+
 	}
 
 	public void goRight(int speed, int time)
@@ -67,18 +62,13 @@ public class Movement {
 		while (this.counter < time)
 		{
 			cmd.goRight(speed);
-			waitFor(10);
+			waitFor(50);
 			this.counter++;
 		}
 		this.counter = 0;
 		
-		while (this.counter < 200)
-		{
-		cmd.goRight(0);
-		waitFor(1000);
-		this.counter++;
-		}
-		this.counter = 0;
+		cmd.hover();
+		
 	}
 
 	public void hover(int time)
@@ -86,7 +76,7 @@ public class Movement {
 		while (this.counter < time)
 		{
 			cmd.hover();
-			waitFor(10);
+			waitFor(50);
 			this.counter++;
 		}
 		this.counter = 0;
@@ -102,12 +92,11 @@ public class Movement {
 		while (this.counter < time)
 		{
 			cmd.backward(speed);
-			waitFor(10);
+			waitFor(50);
 			this.counter++;
 		}
-		cmd.backward(0);
-		waitFor(1000);
-		this.counter = 0;
+
+		cmd.hover();
 	}
 
 	public void forward(int speed, int time)
@@ -115,12 +104,11 @@ public class Movement {
 		while (this.counter < time)
 		{
 			cmd.forward(speed);
-			waitFor(10);
+			waitFor(50);
 			this.counter++;
 		}
-		cmd.forward(0);
-		waitFor(1000);
-		this.counter = 0;
+
+		cmd.hover();
 	}
 
 	public void spinRight(int speed, int time)
@@ -128,12 +116,11 @@ public class Movement {
 		while (this.counter < time)
 		{
 			cmd.spinRight(speed);
-			waitFor(10);
+			waitFor(50);
 			this.counter++;
 		}
-		cmd.spinRight(0);
-		waitFor(1000);
-		this.counter = 0;
+
+		cmd.hover();
 	}
 
 	public void spinLeft(int speed, int time)
@@ -141,12 +128,11 @@ public class Movement {
 		while (this.counter < time)
 		{
 			cmd.spinLeft(speed);
-			waitFor(10);
+			waitFor(50);
 			this.counter++;
 		}
-		cmd.spinLeft(0);
-		waitFor(1000);
-		this.counter = 0;
+
+		cmd.hover();
 	}
 
 	public void moveUp(int speed, int time)
@@ -154,12 +140,11 @@ public class Movement {
 		while (this.counter < time)
 		{
 			cmd.up(speed);
-			waitFor(10);
+			waitFor(50);
 			this.counter++;
 		}
-		cmd.up(0);
-		waitFor(1000);
-		this.counter = 0;
+
+		cmd.hover();
 	}
 
 	public void moveDown(int speed, int time)
@@ -167,12 +152,11 @@ public class Movement {
 		while (this.counter < time)
 		{
 			cmd.down(speed);
-			waitFor(10);
+			waitFor(50);
 			this.counter++;
 		}
-		cmd.down(0);
-		waitFor(1000);
-		this.counter = 0;
+
+		cmd.hover();
 	}
 
 	public void maxAltitude(int mm)
