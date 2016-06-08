@@ -36,10 +36,13 @@ public class GUI extends JFrame {
 	private OpticalFlow op = new OpticalFlow();
 	private CircleDetection cd = new CircleDetection();
 	private Counter counter = new Counter();
+	private Movement mv;
 
 	public GUI (Movement mov)
 	{
 		super("SMMAC Drone 2000");
+		
+		mv = mov;
 		
 		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 
@@ -163,7 +166,9 @@ public class GUI extends JFrame {
 
 	public synchronized void paint(Graphics g)
 	{
-		if (processedImage == null) {
+		if (mv.getCmd().isConnected()) {
+			g.drawString("NOT CONNECTED TO THE DRONE", 450, 280);
+		} else if (processedImage == null) {
 			g.drawString("LOADING", 500, 280);
 		} else {
 			g.drawImage(processedImage, 0, 0, 840, 560, null);

@@ -14,7 +14,7 @@ public class CircleDetection {
 	private final double THRESHOLD = 40;
 	private final double VECTOR_LENGTH = 35;
 
-	public void useCircleDetection(Mat image, Movement mov) {
+	public boolean useCircleDetection(Mat image, Movement mov) {
 		Mat filterImage = new Mat();
 		Mat blurImage = new Mat();
 		Mat greyImage = new Mat();
@@ -30,6 +30,9 @@ public class CircleDetection {
 		if (circleCentrum != null) {
 			Imgproc.arrowedLine(image, center, circleCentrum, new Scalar(233,121,255));
 			VectorMovement(new Vector(center, circleCentrum), mov);
+			return true;
+		} else {
+			return false;
 		}
 	}
 
@@ -44,7 +47,7 @@ public class CircleDetection {
 			{
 				pt = new Point(Math.round(vCircle[0]), Math.round(vCircle[1]));
 				int radius = (int)Math.round(vCircle[2]);
-				Imgproc.circle(drawOnImg, pt, radius,new Scalar(0,255,0), 5);
+				Imgproc.circle(drawOnImg, pt, radius,new Scalar(0,255,0), 2);
 				//Imgproc.circle(drawOnImg, pt, 3, new Scalar(0,0,255), 2);
 			}
 		}
