@@ -200,12 +200,11 @@ public class GUI extends JFrame {
 			
 			if (!takeoff) {
 				takeoff = true;
-				mv.startUp();
-				mv.takeoff();
+				//mv.takeoff();
 				//				mv.goRight(25, 100);
 				//				mv.waitFor(5000);
 				//				mv.goLeft(25, 100);
-				mv.moveUp(25, 600);
+				//mv.moveUp(25, 800);
 			}
 		}
 	}

@@ -16,8 +16,8 @@ public class Emulator {
 		{
 			drone = new ARDrone();	
 			drone.start();
-
 			mov = new Movement(drone);
+			mov.startUp();
 			new GUI(mov);
 		}
 		catch (Exception e)
