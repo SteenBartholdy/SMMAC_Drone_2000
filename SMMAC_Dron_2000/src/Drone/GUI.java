@@ -2,6 +2,8 @@ package Drone;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
@@ -136,11 +138,32 @@ public class GUI extends JFrame {
 		addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) 
 			{
-				drone.getCommandManager().landing();
+				mov.landing();
 				drone.stop();
 				System.exit(0);
 			}
 		});
+		
+		addKeyListener(new KeyListener() {
+
+			@Override
+			public void keyTyped(KeyEvent e) {
+				
+			}
+
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+					mov.landing();
+				}
+			}
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+				
+			}
+		});
+		
 	}
 
 	public synchronized void paint(Graphics g)
