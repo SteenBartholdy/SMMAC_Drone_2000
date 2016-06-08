@@ -155,6 +155,7 @@ public class GUI extends JFrame {
 			public void keyPressed(KeyEvent e) {
 				if (e.getKeyCode() == KeyEvent.VK_SPACE) {
 					mov.landing();
+					drone.stop();
 				}
 			}
 
