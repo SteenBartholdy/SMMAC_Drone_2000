@@ -166,9 +166,8 @@ public class GUI extends JFrame {
 
 	public synchronized void paint(Graphics g)
 	{
-		if (mv.getCmd().isConnected()) {
-			g.drawString("NOT CONNECTED TO THE DRONE", 450, 280);
-		} else if (processedImage == null) {
+		
+		if (processedImage == null) {
 			g.drawString("LOADING", 500, 280);
 		} else {
 			g.drawImage(processedImage, 0, 0, 840, 560, null);

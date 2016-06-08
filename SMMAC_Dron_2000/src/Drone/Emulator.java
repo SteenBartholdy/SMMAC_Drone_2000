@@ -42,8 +42,9 @@ public class Emulator {
 
 
 			mov.takeoff();
-			mov.goLeft(25, 200);
-			mov.goRight(25, 200);
+			mov.goLeft(25, 150);
+			mov.waitFor(2000);
+			mov.goRight(25, 150);
 			//mov.landing();
 			
 
