@@ -34,15 +34,12 @@ public class GUI extends JFrame {
 	private QRCode qr = new QRCode(6);
 	private OpticalFlow op = new OpticalFlow();
 	private CircleDetection cd = new CircleDetection();
-	private Counter counter = new Counter(10);
-	private Movement mv;
+	private Counter counter = new Counter(15);
 	private boolean takeoff = false;
 
 	public GUI (Movement mov)
 	{
 		super("SMMAC Drone 2000");
-
-		mv = mov;
 
 		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 
@@ -63,23 +60,24 @@ public class GUI extends JFrame {
 				{
 					old_matImage = matImage;
 				}
-				
-				cd.useCircleDetection(matImage, mov);
-				
-				if(counter.ready())
-				{ 	
-					sWay = "Direction: " + op.useOpticalFlow(old_matImage, matImage);
-					sQR = "QR-code: " + qr.readQRCode(image);
-				}			
-				else {
-					counter.count();
-				}
 
-				//Parameteren i toBufferedImage() skal v�re det sidst behandlede Mat objekt
-				processedImage = (BufferedImage) imageP.toBufferedImage(matImage);
+				if (takeoff) {
+					if(counter.ready())
+					{ 	
+						sWay = "Direction: " + op.useOpticalFlow(old_matImage, matImage);
+						sQR = "QR-code: " + qr.readQRCode(image);
+						cd.useCircleDetection(matImage, mov);
+					}			
+					else {
+						counter.count();
+					}
+				}
 
 				//Gemmer billedet, så det kan bruges igen
 				old_matImage = matImage;
+				
+				//Parameteren i toBufferedImage() skal v�re det sidst behandlede Mat objekt
+				processedImage = (BufferedImage) imageP.toBufferedImage(matImage);
 
 				SwingUtilities.invokeLater(new Runnable() {
 					public void run()
@@ -133,6 +131,9 @@ public class GUI extends JFrame {
 			public void keyPressed(KeyEvent e) {
 				if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
 					mov.emergencyLanding();
+				} else if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+					mov.takeoff();
+					takeoff = true;
 				}
 			}
 
@@ -146,7 +147,6 @@ public class GUI extends JFrame {
 
 	public synchronized void paint(Graphics g)
 	{
-
 		if (processedImage == null) {
 			g.drawString("LOADING", 500, 280);
 		} else {
@@ -165,11 +165,6 @@ public class GUI extends JFrame {
 
 			if(sQR != null)
 				g.drawString(sQR, 865, 150);
-			
-			if (!takeoff) {
-				takeoff = true;
-				mv.takeoff();
-			}
 		}
 	}
 }

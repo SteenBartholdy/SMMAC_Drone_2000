@@ -13,6 +13,7 @@ public class Movement {
 	public Movement()
 	{
 		this.cmd = drone.getCommandManager();
+		this.cmd.setMinAltitude(1500);
 		//this.cmd.setSSIDSinglePlayer("SMMAC");
 		//this.cmd.setWifiMode(WifiMode.ADHOC);
 		//this.cmd.setOwnerMac("a8:66:7f:03:c9:05");
@@ -22,7 +23,9 @@ public class Movement {
 	{
 		cmd.takeOff();
 		cmd.hover();
-		waitFor(5500);
+		waitFor(4000);
+		moveUp(100, 50);
+		cmd.hover();
 	}
 
 	public void landing()
