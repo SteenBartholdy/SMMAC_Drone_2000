@@ -42,9 +42,9 @@ public class GUI extends JFrame {
 	public GUI (Movement mov)
 	{
 		super("SMMAC Drone 2000");
-		
+
 		mv = mov;
-		
+
 		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 
 		setSize(1040,560);
@@ -56,30 +56,30 @@ public class GUI extends JFrame {
 		mov.getDrone().getVideoManager().addImageListener(new ImageListener() {
 			public void imageUpdated(BufferedImage newImage)
 			{	
+				image = newImage;
+
+				matImage = imageP.toMatImage(image);
+
+				if(old_matImage == null)
+				{
+					old_matImage = matImage;
+				}
+				
 				if(counter.ready())
-				{ 
-					image = newImage;
-
-					matImage = imageP.toMatImage(image);
-
-					if(old_matImage == null)
-					{
-						old_matImage = matImage;
-					}
-					
+				{ 	
 					cd.useCircleDetection(matImage, mov);
 					sWay = "Direction: " + op.useOpticalFlow(old_matImage, matImage);
 					sQR = "QR-code: " + qr.readQRCode(image);
-					
-					//Parameteren i toBufferedImage() skal v�re det sidst behandlede Mat objekt
-					processedImage = (BufferedImage) imageP.toBufferedImage(matImage);
-
-					//Gemmer billedet, så det kan bruges igen
-					old_matImage = matImage;
 				}			
 				else {
 					counter.count();
 				}
+
+				//Parameteren i toBufferedImage() skal v�re det sidst behandlede Mat objekt
+				processedImage = (BufferedImage) imageP.toBufferedImage(matImage);
+
+				//Gemmer billedet, så det kan bruges igen
+				old_matImage = matImage;
 
 				SwingUtilities.invokeLater(new Runnable() {
 					public void run()
@@ -97,6 +97,13 @@ public class GUI extends JFrame {
 				sPitch = "Pitch: " + pitch;
 				sRoll = "Roll: " + roll;
 				sYaw = "Yaw: " + yaw;
+				
+				SwingUtilities.invokeLater(new Runnable() {
+					public void run()
+					{
+						repaint();
+					}
+				});
 			}
 
 			@Override
@@ -111,6 +118,13 @@ public class GUI extends JFrame {
 			public void batteryLevelChanged(int percentage)
 			{
 				sBattery = "Battery: " + percentage + " %";
+				
+				SwingUtilities.invokeLater(new Runnable() {
+					public void run()
+					{
+						repaint();
+					}
+				});
 			}
 
 			public void voltageChanged(int vbat_raw) { }
@@ -130,12 +144,12 @@ public class GUI extends JFrame {
 				System.exit(0);
 			}
 		});
-		
+
 		addKeyListener(new KeyListener() {
 
 			@Override
 			public void keyTyped(KeyEvent e) {
-				
+
 			}
 
 			@Override
@@ -147,30 +161,25 @@ public class GUI extends JFrame {
 
 			@Override
 			public void keyReleased(KeyEvent e) {
-				
+
 			}
 		});
-		
+
 	}
 
 	public synchronized void paint(Graphics g)
 	{
-		
+
 		if (processedImage == null) {
 			g.drawString("LOADING", 500, 280);
 		} else {
-			if (!takeoff) {
-				System.out.println("mv.takeoff()");
-				 takeoff = true;
-			}
-			
 			g.drawImage(processedImage, 0, 0, 840, 560, null);
 
 			g.setColor(backgroud);
 			g.fillRect(840, 0, 200, 325);
-			
+
 			g.setColor(Color.BLACK);
-			
+
 			if(sBattery != null)
 				g.drawString(sBattery, 865, 50);
 
@@ -188,6 +197,16 @@ public class GUI extends JFrame {
 
 			if(sQR != null)
 				g.drawString(sQR, 865, 300);
+			
+			if (!takeoff) {
+				takeoff = true;
+				mv.startUp();
+				mv.takeoff();
+				//				mv.goRight(25, 100);
+				//				mv.waitFor(5000);
+				//				mv.goLeft(25, 100);
+				mv.moveUp(25, 600);
+			}
 		}
 	}
 }
