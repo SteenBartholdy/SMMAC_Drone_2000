@@ -29,7 +29,7 @@ public class CircleDetection {
 		
 		if (circleCentrum != null) {
 			Imgproc.arrowedLine(image, center, circleCentrum, new Scalar(233,121,255));
-			VectorMovement(new Vector(center, circleCentrum), mov);
+			vectorMovement(new Vector(center, circleCentrum), mov);
 		}
 	}
 
@@ -53,7 +53,7 @@ public class CircleDetection {
 	}
 	
 
-	public void VectorMovement(Vector v, Movement mv) {		
+	public void vectorMovement(Vector v, Movement mv) {		
 		if (v.length() < VECTOR_LENGTH) {
 			//Forward
 			mv.forward(25, 800);
