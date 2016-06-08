@@ -1,10 +1,14 @@
 package Drone;
 
+import Data.Name;
+
 public class Emulator {
 
 	public static void main(String[] args)
 	{
-		new GUI(new Movement());
+		Movement mov = new Movement();
+		mov.setMAC(Name.MARTIN);
+		new GUI(mov);
 	}
 
 }

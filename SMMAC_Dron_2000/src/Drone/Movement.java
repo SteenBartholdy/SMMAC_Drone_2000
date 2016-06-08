@@ -1,4 +1,5 @@
 package Drone;
+import Data.Name;
 import de.yadrone.base.ARDrone;
 import de.yadrone.base.IARDrone;
 import de.yadrone.base.command.CommandManager;
@@ -15,10 +16,6 @@ public class Movement {
 	{
 		this.cmd = drone.getCommandManager();
 		this.cmd.setMinAltitude(1500);
-		//this.cmd.setSSIDSinglePlayer("SMMAC");
-		//this.cmd.setWifiMode(WifiMode.ADHOC);
-		//this.cmd.setOwnerMac("a8:66:7f:03:c9:05"); //Martin Roos
-		//this.cmd.setOwnerMac("80:e6:50:17:86:a8"); //Anders Thomsen
 	}
 
 	public void takeoff ()
@@ -37,7 +34,7 @@ public class Movement {
 			cmd.landing();
 		}
 	}
-	
+
 	public void emergencyLanding() {
 		cmd.landing();
 	}
@@ -67,9 +64,9 @@ public class Movement {
 			this.counter++;
 		}
 		this.counter = 0;
-		
+
 		cmd.hover();
-		
+
 	}
 
 	public void hover(int time)
@@ -171,7 +168,7 @@ public class Movement {
 	{
 		cmd.setMaxAltitude(mm);
 	}
-	
+
 	public void flatTrim()
 	{
 		cmd.flatTrim();
@@ -180,9 +177,37 @@ public class Movement {
 	public IARDrone getDrone() {
 		return this.drone;
 	}
-	
+
 	public CommandManager getCmd() {
 		return this.cmd;
 	}
-	
+
+	public void setMAC(Name input) {
+		String str = null;
+
+		switch (input) {
+		case MARTIN: 
+			str = "a8:66:7f:03:c9:05";
+			break;
+		case ANDERS: 
+			str = "a8:66:7f:03:c9:05"; 
+			break;
+		case CHRISTOFFER: 
+			str = "80:e6:50:09:6b:90"; 
+			break;
+		case MADS: 
+			str = "18:CF:5E:91:4B:A3"; 
+			break; 
+		case STEEN:
+			str = "60:36:DD:15:E5:55"; 
+			break;
+		default:
+			break;
+		}
+
+		this.cmd.setSSIDSinglePlayer("SMMAC");
+		this.cmd.setWifiMode(WifiMode.ADHOC);
+		this.cmd.setOwnerMac(str);
+	}
+
 }
