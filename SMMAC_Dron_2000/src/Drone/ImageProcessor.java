@@ -104,7 +104,6 @@ public class ImageProcessor {
 	}
 
 	public void useCircleDetection(Mat image) {
-		start = System.currentTimeMillis();
 		Mat filterImage = new Mat();
 		Mat blurImage = new Mat();
 		Mat greyImage = new Mat();
@@ -130,10 +129,6 @@ public class ImageProcessor {
 			Imgproc.circle(image, pt, 3, new Scalar(0,0,255), 2);
 			//System.out.println("Centrum af den fundne cirkel er: " + pt);
 		}
-		end = System.currentTimeMillis();
-		total = end - start;
-		//System.out.println("Find cirkler = " + total);
 	}
-
 
 }
