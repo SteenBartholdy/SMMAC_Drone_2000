@@ -11,7 +11,6 @@ public class Emulator {
 	{	
 		ARDrone drone = null;
 		Movement mov = null;
-		Commands cmd = null;
 		CommandManager c = null;
 
 		try
@@ -33,24 +32,20 @@ public class Emulator {
 			//drone.reset();
 			drone.start();
 
-			cmd = new Commands(drone);
 			mov = new Movement(drone);
 			new GUI(mov);
+			c = drone.getCommandManager();
+			mov.startUp();
+
+			//cmd.orangeBlink();
+			Thread.sleep(5000);
+
+
+			mov.takeoff();
+			mov.goLeft(25, 200);
+			mov.goRight(25, 200);
+			//mov.landing();
 			
-//			mov.startUp();
-//
-//			//cmd.orangeBlink();
-//			Thread.sleep(5000);
-//
-//
-//			mov.takeoff();
-//
-//			mov.goRight(30, 50);
-//			mov.hover(1000);
-//			mov.goLeft(30, 50);
-//			mov.hover(1000);
-//
-//			mov.landing();
 
 		}
 		catch (Exception e)

@@ -24,11 +24,13 @@ public class Movement {
 	public void takeoff ()
 	{
 		cmd.takeOff();
-		waitFor(4000);	
-		forward(50, 20);
-		hover(100);
-		moveUp(100, 45);
-		hover(100);
+//		waitFor(4000);	
+//		forward(50, 20);
+//		hover(100);
+//		moveUp(100, 45);
+//		hover(100);
+		cmd.hover();
+		waitFor(5500);
 	}
 
 	public void landing()
