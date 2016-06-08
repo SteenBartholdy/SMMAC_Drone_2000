@@ -13,7 +13,7 @@ public class Emulator {
 		Movement mov = null;
 		Commands cmd = null;
 		CommandManager c = null;
-		
+
 		try
 		{
 			drone = new ARDrone();	
@@ -23,35 +23,35 @@ public class Emulator {
 				@Override
 				public void exeptionOccurred(ARDroneException exc) {
 					exc.printStackTrace();
-//					ARDrone drone;
-//					drone = new ARDrone();
-//					drone.getCommandManager().landing();
+					//					ARDrone drone;
+					//					drone = new ARDrone();
+					//					drone.getCommandManager().landing();
 					System.out.println("Der skete en fejl__________________________________________________________________________________");
 				}
 			});
 
 			//drone.reset();
 			drone.start();
-			mov = new Movement(drone);
-			cmd = new Commands(drone);
 
+			cmd = new Commands(drone);
+			mov = new Movement(drone);
 			new GUI(drone);
-			
-			mov.startUp();
-			
-			//cmd.orangeBlink();
-			Thread.sleep(5000);
-			
-			
-			mov.takeoff();
-			
-			mov.goRight(30, 50);
-			mov.hover(1000);
-			mov.goLeft(30, 50);
-			mov.hover(1000);
-			
-			mov.landing();
-			
+
+//			mov.startUp();
+//
+//			//cmd.orangeBlink();
+//			Thread.sleep(5000);
+//
+//
+//			mov.takeoff();
+//
+//			mov.goRight(30, 50);
+//			mov.hover(1000);
+//			mov.goLeft(30, 50);
+//			mov.hover(1000);
+//
+//			mov.landing();
+
 		}
 		catch (Exception e)
 		{

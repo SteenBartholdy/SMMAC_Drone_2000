@@ -46,14 +46,14 @@ public class GUI extends JFrame {
 		setSize(1040,560);
 		setBackground(backgroud);
 		setVisible(true);
-		
+
+		drone.getCommandManager().setVideoCodecFps(15);
+
 		drone.getVideoManager().addImageListener(new ImageListener() {
 			public void imageUpdated(BufferedImage newImage)
 			{	
 				image = newImage;
-				
-				sQR = "QR-code: " + qr.readQRCode(image);
-				
+
 				matImage = imageP.toMatImage(image);
 
 				if(old_matImage == null)
@@ -65,6 +65,7 @@ public class GUI extends JFrame {
 				{ 
 					imageP.useCircleDetection(matImage);
 					sWay = "Direction: " + op.useOpticalFlow(old_matImage, matImage);
+					sQR = "QR-code: " + qr.readQRCode(image);
 				}			
 				else {
 					counter.count();
@@ -142,36 +143,36 @@ public class GUI extends JFrame {
 
 	public synchronized void paint(Graphics g)
 	{
-		if (processedImage != null)
-		{
+		if (processedImage == null) {
+			g.drawString("LOADING", 500, 280);
+		} else {
 			g.drawImage(processedImage, 0, 0, 840, 560, null);
+
+			g.setColor(backgroud);
+			g.fillRect(840, 0, 200, 325);
+			
+			g.setColor(Color.BLACK);
+			
+			if(sBattery != null)
+				g.drawString(sBattery, 865, 50);
+
+			if(sPitch != null)
+				g.drawString(sPitch, 865, 100);
+
+			if(sRoll != null)
+				g.drawString(sRoll, 865, 150);
+
+			if(sYaw != null) 
+				g.drawString(sYaw, 865, 200);
+
+			if(sWay != null)
+				g.drawString(sWay, 865, 250);
+
+			if(sQR != null)
+				g.drawString(sQR, 865, 300);
 		}
 
-		g.setColor(backgroud);
-		g.fillRect(840, 0, 200, 325);
 
-		g.setColor(Color.BLACK);
-
-		if(sBattery != null)
-			g.drawString(sBattery, 865, 50);
-
-		if(sPitch != null)
-			g.drawString(sPitch, 865, 100);
-
-		if(sRoll != null)
-			g.drawString(sRoll, 865, 150);
-
-		if(sYaw != null) 
-			g.drawString(sYaw, 865, 200);
-
-		if(sWay != null)
-			g.drawString(sWay, 865, 250);
-		
-		if(sQR != null)
-			g.drawString(sQR, 865, 300);
 	}
-
-
-
 }
 
