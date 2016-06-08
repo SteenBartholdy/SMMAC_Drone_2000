@@ -2,14 +2,15 @@ package Math;
 
 public class Counter {
 
-	private long a;
+	private long a, t;
 
-	public Counter() {
+	public Counter(long until) {
+		t = until;
 		a = 0;
 	}
 
 	public void count() {
-		if (a < 10) {
+		if (a < t) {
 			a++;
 		} else {
 			a = 0;

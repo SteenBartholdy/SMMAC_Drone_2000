@@ -18,7 +18,6 @@ import org.opencv.core.Mat;
 
 import Math.Counter;
 import de.yadrone.base.command.VideoChannel;
-import de.yadrone.base.navdata.AttitudeListener;
 import de.yadrone.base.navdata.BatteryListener;
 import de.yadrone.base.video.ImageListener;
 
@@ -27,7 +26,7 @@ public class GUI extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private BufferedImage image = null;
 	private BufferedImage processedImage = null;
-	private String sBattery, sPitch, sRoll, sYaw, sWay, sQR;
+	private String sBattery, sWay, sQR;
 	private Color backgroud = Color.WHITE;
 	private Mat matImage = null;
 	private Mat old_matImage = null;
@@ -35,7 +34,7 @@ public class GUI extends JFrame {
 	private QRCode qr = new QRCode(6);
 	private OpticalFlow op = new OpticalFlow();
 	private CircleDetection cd = new CircleDetection();
-	private Counter counter = new Counter();
+	private Counter counter = new Counter(10);
 	private Movement mv;
 	private boolean takeoff = false;
 
@@ -65,9 +64,10 @@ public class GUI extends JFrame {
 					old_matImage = matImage;
 				}
 				
+				cd.useCircleDetection(matImage, mov);
+				
 				if(counter.ready())
 				{ 	
-					cd.useCircleDetection(matImage, mov);
 					sWay = "Direction: " + op.useOpticalFlow(old_matImage, matImage);
 					sQR = "QR-code: " + qr.readQRCode(image);
 				}			
@@ -89,29 +89,6 @@ public class GUI extends JFrame {
 				});
 			}
 		});
-
-		mov.getDrone().getNavDataManager().addAttitudeListener(new AttitudeListener() {
-
-			@Override
-			public void attitudeUpdated(float pitch, float roll, float yaw) {
-				sPitch = "Pitch: " + pitch;
-				sRoll = "Roll: " + roll;
-				sYaw = "Yaw: " + yaw;
-				
-				SwingUtilities.invokeLater(new Runnable() {
-					public void run()
-					{
-						repaint();
-					}
-				});
-			}
-
-			@Override
-			public void attitudeUpdated(float arg0, float arg1) { }
-
-			@Override
-			public void windCompensation(float arg0, float arg1) { }
-		});	
 
 		mov.getDrone().getNavDataManager().addBatteryListener(new BatteryListener() {
 
@@ -183,28 +160,15 @@ public class GUI extends JFrame {
 			if(sBattery != null)
 				g.drawString(sBattery, 865, 50);
 
-			if(sPitch != null)
-				g.drawString(sPitch, 865, 100);
-
-			if(sRoll != null)
-				g.drawString(sRoll, 865, 150);
-
-			if(sYaw != null) 
-				g.drawString(sYaw, 865, 200);
-
 			if(sWay != null)
-				g.drawString(sWay, 865, 250);
+				g.drawString(sWay, 865, 100);
 
 			if(sQR != null)
-				g.drawString(sQR, 865, 300);
+				g.drawString(sQR, 865, 150);
 			
 			if (!takeoff) {
 				takeoff = true;
-				//mv.takeoff();
-				//				mv.goRight(25, 100);
-				//				mv.waitFor(5000);
-				//				mv.goLeft(25, 100);
-				//mv.moveUp(25, 800);
+				mv.takeoff();
 			}
 		}
 	}

@@ -1,34 +1,26 @@
 package Drone;
+import de.yadrone.base.ARDrone;
 import de.yadrone.base.IARDrone;
 import de.yadrone.base.command.CommandManager;
 
 public class Movement {
 
+	private final IARDrone drone = new ARDrone();
 	private CommandManager cmd;
-	private IARDrone drone;
 
 	private int counter = 0;
 
-	public Movement(final IARDrone drone)
+	public Movement()
 	{
-		this.drone = drone;
 		this.cmd = drone.getCommandManager();
-	}
-	
-	public void startUp()
-	{
-		maxAltitude(2000);
-		cmd.setOutdoor(false, false);
+		//this.cmd.setSSIDSinglePlayer("SMMAC");
+		//this.cmd.setWifiMode(WifiMode.ADHOC);
+		//this.cmd.setOwnerMac("a8:66:7f:03:c9:05");
 	}
 
 	public void takeoff ()
 	{
 		cmd.takeOff();
-//		waitFor(4000);	
-//		forward(50, 20);
-//		hover(100);
-//		moveUp(100, 45);
-//		hover(100);
 		cmd.hover();
 		waitFor(5500);
 	}

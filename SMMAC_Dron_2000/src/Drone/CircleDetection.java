@@ -14,25 +14,22 @@ public class CircleDetection {
 	private final double THRESHOLD = 40;
 	private final double VECTOR_LENGTH = 35;
 
-	public boolean useCircleDetection(Mat image, Movement mov) {
+	public void useCircleDetection(Mat image, Movement mov) {
 		Mat filterImage = new Mat();
 		Mat blurImage = new Mat();
 		Mat greyImage = new Mat();
 		Mat circleImage = new Mat();
 
-		Imgproc.threshold(image, filterImage, 50, 255, Imgproc.THRESH_BINARY);
+		Imgproc.threshold(image, filterImage, 80, 255, Imgproc.THRESH_BINARY);
 		Imgproc.cvtColor(filterImage, greyImage, Imgproc.COLOR_BGR2GRAY);
 		Imgproc.GaussianBlur(greyImage, blurImage, new Size(3,3), 2,2);
-		Imgproc.HoughCircles(blurImage, circleImage, Imgproc.CV_HOUGH_GRADIENT, 1, 1000, THRESHOLD, THRESHOLD*2, 80, 500);
+		Imgproc.HoughCircles(blurImage, circleImage, Imgproc.CV_HOUGH_GRADIENT, 1, 1000, THRESHOLD, THRESHOLD*2, 50, 500);
 		
 		Point circleCentrum = getCircleCentrum(circleImage, image);
 		
 		if (circleCentrum != null) {
 			Imgproc.arrowedLine(image, center, circleCentrum, new Scalar(233,121,255));
 			VectorMovement(new Vector(center, circleCentrum), mov);
-			return true;
-		} else {
-			return false;
 		}
 	}
 
@@ -56,22 +53,27 @@ public class CircleDetection {
 	}
 	
 
-	public void VectorMovement(Vector v, Movement mov) {		
+	public void VectorMovement(Vector v, Movement mv) {		
 		if (v.length() < VECTOR_LENGTH) {
 			//Forward
+			mv.forward(25, 800);
 			return;
 		}
 		
 		if (v.getB().y > v.getA().y) {
 			//Up
+			mv.moveUp(25, 100);
 		} else {
 			//Down
+			mv.moveDown(25, 100);
 		}
 		
 		if (v.getB().x > v.getA().x) {
 			//Left
+			mv.goLeft(25, 100);
 		} else {
 			//Right
+			mv.goRight(25, 100);
 		}
 	}
 	
