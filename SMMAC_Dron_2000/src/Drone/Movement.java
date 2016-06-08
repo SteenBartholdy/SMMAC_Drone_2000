@@ -45,6 +45,7 @@ public class Movement {
 
 	public void goLeft(int speed, int time)
 	{
+		time = time/50;
 		while (this.counter < time)
 		{
 			cmd.goLeft(speed);
@@ -59,6 +60,7 @@ public class Movement {
 
 	public void goRight(int speed, int time)
 	{
+		time = time/50;
 		while (this.counter < time)
 		{
 			cmd.goRight(speed);
@@ -73,6 +75,7 @@ public class Movement {
 
 	public void hover(int time)
 	{
+		time = time/50;
 		while (this.counter < time)
 		{
 			cmd.hover();
@@ -89,6 +92,7 @@ public class Movement {
 
 	public void backwards(int speed, int time)
 	{
+		time = time/50;
 		while (this.counter < time)
 		{
 			cmd.backward(speed);
@@ -101,6 +105,7 @@ public class Movement {
 
 	public void forward(int speed, int time)
 	{
+		time = time/50;
 		while (this.counter < time)
 		{
 			cmd.forward(speed);
@@ -113,6 +118,7 @@ public class Movement {
 
 	public void spinRight(int speed, int time)
 	{
+		time = time/50;
 		while (this.counter < time)
 		{
 			cmd.spinRight(speed);
@@ -125,6 +131,7 @@ public class Movement {
 
 	public void spinLeft(int speed, int time)
 	{
+		time = time/50;
 		while (this.counter < time)
 		{
 			cmd.spinLeft(speed);
@@ -137,6 +144,7 @@ public class Movement {
 
 	public void moveUp(int speed, int time)
 	{
+		time = time/50;
 		while (this.counter < time)
 		{
 			cmd.up(speed);
@@ -149,6 +157,7 @@ public class Movement {
 
 	public void moveDown(int speed, int time)
 	{
+		time = time/50;
 		while (this.counter < time)
 		{
 			cmd.down(speed);
