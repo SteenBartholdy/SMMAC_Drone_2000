@@ -7,8 +7,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
@@ -16,13 +14,15 @@ import javax.swing.SwingUtilities;
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
 
+import Math.Counter;
 import de.yadrone.base.IARDrone;
 import de.yadrone.base.command.VideoChannel;
+import de.yadrone.base.navdata.AcceleroListener;
+import de.yadrone.base.navdata.AcceleroPhysData;
+import de.yadrone.base.navdata.AcceleroRawData;
 import de.yadrone.base.navdata.AttitudeListener;
 import de.yadrone.base.navdata.BatteryListener;
 import de.yadrone.base.video.ImageListener;
-
-import Math.Counter;
 
 public class GUI extends JFrame {
 
@@ -36,11 +36,13 @@ public class GUI extends JFrame {
 	private QRCode qr = new QRCode(6);
 	private OpticalFlow op = new OpticalFlow();
 	private Counter counter = new Counter();
+	private IARDrone drone;
 
-	public GUI (final IARDrone drone)
+	public GUI (Movement mov)
 	{
 		super("SMMAC Drone 2000");
-
+		drone = mov.getDrone();
+		
 		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 
 		setSize(1040,560);
@@ -171,8 +173,6 @@ public class GUI extends JFrame {
 			if(sQR != null)
 				g.drawString(sQR, 865, 300);
 		}
-
-
 	}
 }
 

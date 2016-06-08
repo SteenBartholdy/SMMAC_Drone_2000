@@ -5,13 +5,14 @@ import de.yadrone.base.command.CommandManager;
 public class Movement {
 
 	private CommandManager cmd;
+	private IARDrone drone;
 
 	private int counter = 0;
 
-
 	public Movement(final IARDrone drone)
 	{
-		cmd = drone.getCommandManager();
+		this.drone = drone;
+		this.cmd = drone.getCommandManager();
 	}
 	
 	public void startUp()
@@ -179,4 +180,9 @@ public class Movement {
 	{
 		cmd.flatTrim();
 	}
+
+	public IARDrone getDrone() {
+		return this.drone;
+	}
+	
 }

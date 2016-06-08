@@ -6,13 +6,11 @@ import de.yadrone.base.exception.ARDroneException;
 import de.yadrone.base.exception.IExceptionListener;
 
 public class Emulator {
-
-	private static Movement mov;
 	
 	public static void main(String[] args)
 	{	
 		ARDrone drone = null;
-		mov = null;
+		Movement mov = null;
 		Commands cmd = null;
 		CommandManager c = null;
 
@@ -37,8 +35,8 @@ public class Emulator {
 
 			cmd = new Commands(drone);
 			mov = new Movement(drone);
-			new GUI(drone);
-
+			new GUI(mov);
+			
 //			mov.startUp();
 //
 //			//cmd.orangeBlink();
@@ -61,11 +59,6 @@ public class Emulator {
 			e.printStackTrace();
 		}
 
-	}
-	
-	public Movement getMovement()
-	{
-		return this.mov;
 	}
 
 }
