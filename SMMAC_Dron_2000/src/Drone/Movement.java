@@ -2,6 +2,7 @@ package Drone;
 import de.yadrone.base.ARDrone;
 import de.yadrone.base.IARDrone;
 import de.yadrone.base.command.CommandManager;
+import de.yadrone.base.command.WifiMode;
 
 public class Movement {
 
@@ -16,7 +17,8 @@ public class Movement {
 		this.cmd.setMinAltitude(1500);
 		//this.cmd.setSSIDSinglePlayer("SMMAC");
 		//this.cmd.setWifiMode(WifiMode.ADHOC);
-		//this.cmd.setOwnerMac("a8:66:7f:03:c9:05");
+		//this.cmd.setOwnerMac("a8:66:7f:03:c9:05"); //Martin Roos
+		//this.cmd.setOwnerMac("80:e6:50:17:86:a8"); //Anders Thomsen
 	}
 
 	public void takeoff ()
