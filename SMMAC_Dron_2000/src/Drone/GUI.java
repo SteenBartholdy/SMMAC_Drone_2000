@@ -24,6 +24,7 @@ import de.yadrone.base.video.ImageListener;
 
 public class GUI extends JFrame {
 
+	private static final long serialVersionUID = 1L;
 	private BufferedImage image = null;
 	private BufferedImage processedImage = null;
 	private String sBattery, sPitch, sRoll, sYaw, sWay, sQR;
@@ -33,6 +34,7 @@ public class GUI extends JFrame {
 	private ImageProcessor imageP = new ImageProcessor();
 	private QRCode qr = new QRCode(6);
 	private OpticalFlow op = new OpticalFlow();
+	private CircleDetection cd = new CircleDetection();
 	private Counter counter = new Counter();
 
 	public GUI (Movement mov)
@@ -61,7 +63,7 @@ public class GUI extends JFrame {
 
 				if(counter.ready())
 				{ 
-					imageP.useCircleDetection(matImage);
+					cd.useCircleDetection(matImage, mov);
 					sWay = "Direction: " + op.useOpticalFlow(old_matImage, matImage);
 					sQR = "QR-code: " + qr.readQRCode(image);
 				}			

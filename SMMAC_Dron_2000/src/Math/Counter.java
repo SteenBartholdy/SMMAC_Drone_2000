@@ -9,7 +9,7 @@ public class Counter {
 	}
 
 	public void count() {
-		if (a < 15) {
+		if (a < 10) {
 			a++;
 		} else {
 			a = 0;

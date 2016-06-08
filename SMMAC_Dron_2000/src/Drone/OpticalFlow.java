@@ -21,10 +21,8 @@ public class OpticalFlow {
 	private final double THRESHOLD = 40;
 	private final double NOISE_X = 0.9;
 	private final double NOISE_Y = 1.1;
-	private long end, start, total;
 	
 	public String useOpticalFlow (Mat imagePrev, Mat imageNext) {
-		start = System.currentTimeMillis();
 		vectorList.clear();
 		
 		Mat processedImagePrev = new Mat();
@@ -49,9 +47,7 @@ public class OpticalFlow {
 		removeNoise();
 		
 		//drawVectors(imageNext);
-		end = System.currentTimeMillis();
-		total = end - start;
-		//System.out.println("Optical flow = " + total);
+
 		return get2Dmovement(avgVector());
 		//Imgproc.line(imageNext, v.getA(), v.getB(), new Scalar(233,121,255), 2);
 	}
