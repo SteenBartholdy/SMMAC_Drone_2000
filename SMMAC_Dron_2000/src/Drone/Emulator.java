@@ -7,10 +7,12 @@ import de.yadrone.base.exception.IExceptionListener;
 
 public class Emulator {
 
+	private static Movement mov;
+	
 	public static void main(String[] args)
 	{	
 		ARDrone drone = null;
-		Movement mov = null;
+		mov = null;
 		Commands cmd = null;
 		CommandManager c = null;
 
@@ -58,6 +60,12 @@ public class Emulator {
 			System.out.println("catch");
 			e.printStackTrace();
 		}
+
+	}
+	
+	public Movement getMovement()
+	{
+		return this.mov;
 	}
 
 }
