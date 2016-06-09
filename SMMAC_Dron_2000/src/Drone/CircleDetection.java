@@ -58,8 +58,6 @@ public class CircleDetection {
 	public void circleMovement(Circle c, Movement mv) {
 		Vector v = new Vector(center, c.getCentrum());
 		
-		System.out.println(c.getRadius());
-		
 		if (v.length() < VECTOR_LENGTH && c.getRadius() > 140) {
 			//Forward
 			mv.forward(25, 200);
@@ -67,7 +65,7 @@ public class CircleDetection {
 			return;
 		} else if (v.length() < VECTOR_LENGTH) {
 			//Forward
-			mv.forward(25, 50);
+			mv.forward(40, 50);
 			System.out.println("FREM");
 			return;
 		}
