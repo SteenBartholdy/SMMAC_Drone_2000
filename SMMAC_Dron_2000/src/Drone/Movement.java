@@ -23,7 +23,7 @@ public class Movement {
 		cmd.takeOff();
 		cmd.hover();
 		waitFor(4000);
-		moveUp(100, 50);
+//		moveUp(100, 50);
 		cmd.hover();
 	}
 
@@ -205,8 +205,8 @@ public class Movement {
 			break;
 		}
 
-		this.cmd.setSSIDSinglePlayer("SMMAC");
 		this.cmd.setWifiMode(WifiMode.ADHOC);
+		this.cmd.setSSIDSinglePlayer("SMMAC");
 		this.cmd.setOwnerMac(str);
 	}
 

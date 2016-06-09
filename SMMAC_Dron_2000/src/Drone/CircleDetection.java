@@ -6,6 +6,7 @@ import org.opencv.core.Scalar;
 import org.opencv.core.Size;
 import org.opencv.imgproc.Imgproc;
 
+import Math.Circle;
 import Math.Vector;
 
 public class CircleDetection {
@@ -14,7 +15,7 @@ public class CircleDetection {
 	private final double THRESHOLD = 40;
 	private final double VECTOR_LENGTH = 25;
 
-	public void useCircleDetection(Mat image, Movement mov) {
+	public boolean useCircleDetection(Mat image, Movement mov) {
 		Mat filterImage = new Mat();
 		Mat blurImage = new Mat();
 		Mat greyImage = new Mat();
@@ -25,16 +26,20 @@ public class CircleDetection {
 		Imgproc.GaussianBlur(greyImage, blurImage, new Size(3,3), 2,2);
 		Imgproc.HoughCircles(blurImage, circleImage, Imgproc.CV_HOUGH_GRADIENT, 1, 1000, THRESHOLD, THRESHOLD*2, 27, 500);
 		
-		Point circleCentrum = getCircleCentrum(circleImage, image);
+		Circle circle = getCircle(circleImage);
 		
-		if (circleCentrum != null) {
-			Imgproc.arrowedLine(image, center, circleCentrum, new Scalar(233,121,255));
-			vectorMovement(new Vector(center, circleCentrum), mov);
+		if (circle != null) {
+			Imgproc.circle(image, circle.getCentrum(), circle.getRadius(),new Scalar(0,255,0), 2);
+			Imgproc.arrowedLine(image, center, circle.getCentrum(), new Scalar(233,121,255));
+			circleMovement(circle, mov);
+			return true;
+		} else {
+			return false;
 		}
 	}
 
-	public Point getCircleCentrum(Mat circleImage, Mat drawOnImg) {
-		Point pt = null;
+	public Circle getCircle(Mat circleImage) {
+		Circle circle = null;
 
 		for(int i = 0; i < circleImage.cols(); i++)
 		{
@@ -42,42 +47,48 @@ public class CircleDetection {
 
 			if(vCircle != null)
 			{
-				pt = new Point(Math.round(vCircle[0]), Math.round(vCircle[1]));
-				int radius = (int)Math.round(vCircle[2]);
-				Imgproc.circle(drawOnImg, pt, radius,new Scalar(0,255,0), 2);
-				//Imgproc.circle(drawOnImg, pt, 3, new Scalar(0,0,255), 2);
+				circle = new Circle(new Point(Math.round(vCircle[0]), Math.round(vCircle[1])), (int)Math.round(vCircle[2]));
 			}
 		}
 
-		return pt;
+		return circle;
 	}
 	
 
-	public void vectorMovement(Vector v, Movement mv) {		
-		if (v.length() < VECTOR_LENGTH) {
+	public void circleMovement(Circle c, Movement mv) {
+		Vector v = new Vector(center, c.getCentrum());
+		
+		System.out.println(c.getRadius());
+		
+		if (v.length() < VECTOR_LENGTH && c.getRadius() > 140) {
 			//Forward
-			mv.forward(25, 500);
+			mv.forward(25, 200);
+			System.out.println("FREM");
+			return;
+		} else if (v.length() < VECTOR_LENGTH) {
+			//Forward
+			mv.forward(25, 50);
 			System.out.println("FREM");
 			return;
 		}
 		
-//		if (v.getB().y > v.getA().y) {
-//			//Up
-//			mv.moveUp(25, 100);
-//			System.out.println("OP");
-//		} else {
-//			//Down
-//			mv.moveDown(25, 100);
-//			System.out.println("NED");
-//		}
+		if (v.getB().y > v.getA().y) {
+			//Down
+			mv.moveDown(18, 100);
+			System.out.println("NED");
+		} else {
+			//Up
+			mv.moveUp(18, 100);
+			System.out.println("OP");
+		}
 		
 		if (v.getB().x > v.getA().x) {
 			//Left
-			mv.goLeft(25, 100);
+			mv.goLeft(18, 100);
 			System.out.println("VENSTRE");
 		} else {
 			//Right
-			mv.goRight(25, 100);
+			mv.goRight(18, 100);
 			System.out.println("HØJRE");
 		}
 	}

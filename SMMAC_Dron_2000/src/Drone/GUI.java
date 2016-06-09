@@ -61,12 +61,16 @@ public class GUI extends JFrame {
 					old_matImage = matImage;
 				}
 
-				if (takeoff) {
+				if (!takeoff) {
 					if(counter.ready())
 					{ 	
-						sWay = "Direction: " + op.useOpticalFlow(old_matImage, matImage);
-						sQR = "QR-code: " + qr.readQRCode(image);
-						cd.useCircleDetection(matImage, mov);
+						//sWay = "Direction: " + op.useOpticalFlow(old_matImage, matImage);
+						//sQR = "QR-code: " + qr.readQRCode(image);
+						boolean isCircle = cd.useCircleDetection(matImage, mov);
+						if(!isCircle) {
+//							mov.spinRight(100, 50);
+							System.out.println("SPIN HØJRE");
+						}
 					}			
 					else {
 						counter.count();
@@ -88,22 +92,22 @@ public class GUI extends JFrame {
 			}
 		});
 
-		mov.getDrone().getNavDataManager().addBatteryListener(new BatteryListener() {
-
-			public void batteryLevelChanged(int percentage)
-			{
-				sBattery = "Battery: " + percentage + " %";
-				
-				SwingUtilities.invokeLater(new Runnable() {
-					public void run()
-					{
-						repaint();
-					}
-				});
-			}
-
-			public void voltageChanged(int vbat_raw) { }
-		});
+//		mov.getDrone().getNavDataManager().addBatteryListener(new BatteryListener() {
+//
+//			public void batteryLevelChanged(int percentage)
+//			{
+//				sBattery = "Battery: " + percentage + " %";
+//				
+//				SwingUtilities.invokeLater(new Runnable() {
+//					public void run()
+//					{
+//						repaint();
+//					}
+//				});
+//			}
+//
+//			public void voltageChanged(int vbat_raw) { }
+//		});
 
 		addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e)
