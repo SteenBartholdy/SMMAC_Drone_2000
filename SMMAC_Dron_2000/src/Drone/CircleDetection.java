@@ -24,7 +24,7 @@ public class CircleDetection {
 		Imgproc.threshold(image, filterImage, 80, 255, Imgproc.THRESH_BINARY);
 		Imgproc.cvtColor(filterImage, greyImage, Imgproc.COLOR_BGR2GRAY);
 		Imgproc.GaussianBlur(greyImage, blurImage, new Size(3,3), 2,2);
-		Imgproc.HoughCircles(blurImage, circleImage, Imgproc.CV_HOUGH_GRADIENT, 1, 1000, THRESHOLD, THRESHOLD*2, 27, 500);
+		Imgproc.HoughCircles(blurImage, circleImage, Imgproc.CV_HOUGH_GRADIENT, 1, 1000, THRESHOLD, THRESHOLD*2, 15, 500);
 		
 		Circle circle = getCircle(circleImage);
 		
@@ -59,35 +59,29 @@ public class CircleDetection {
 		Vector v = new Vector(center, c.getCentrum());
 		
 		if (v.length() < VECTOR_LENGTH && c.getRadius() > 140) {
-			//Forward
 			mv.forward(25, 200);
 			System.out.println("FREM");
 			return;
-		} else if (v.length() < VECTOR_LENGTH) {
-			//Forward
-			mv.forward(40, 50);
-			System.out.println("FREM");
+		} else if (v.length() < VECTOR_LENGTH*1.5) {
+			mv.forward(18, 50);
+			System.out.println("LIDT FREM");
 			return;
 		}
 		
 		if (v.getB().y > v.getA().y) {
-			//Down
 			mv.moveDown(18, 100);
 			System.out.println("NED");
 		} else {
-			//Up
 			mv.moveUp(18, 100);
 			System.out.println("OP");
 		}
 		
 		if (v.getB().x > v.getA().x) {
-			//Left
-			mv.goLeft(18, 100);
-			System.out.println("VENSTRE");
-		} else {
-			//Right
 			mv.goRight(18, 100);
 			System.out.println("HØJRE");
+		} else {
+			mv.goLeft(18, 100);
+			System.out.println("VENSTRE");
 		}
 	}
 	

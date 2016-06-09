@@ -4,6 +4,8 @@ import de.yadrone.base.ARDrone;
 import de.yadrone.base.IARDrone;
 import de.yadrone.base.command.CommandManager;
 import de.yadrone.base.command.WifiMode;
+import de.yadrone.base.navdata.Altitude;
+import de.yadrone.base.navdata.AltitudeListener;
 
 public class Movement {
 
@@ -11,6 +13,7 @@ public class Movement {
 	private CommandManager cmd;
 
 	private int counter = 0;
+	private int altitude = 0;
 
 	public Movement()
 	{
@@ -21,9 +24,7 @@ public class Movement {
 	public void takeoff ()
 	{
 		cmd.takeOff();
-		cmd.hover();
 		waitFor(4000);
-//		moveUp(100, 50);
 		cmd.hover();
 	}
 
@@ -209,5 +210,39 @@ public class Movement {
 		this.cmd.setSSIDSinglePlayer("SMMAC");
 		this.cmd.setOwnerMac(str);
 	}
+	
+	public int getAltitude() {
+		return altitude;
+	}
+	
+	public void startAltitude() {
+		this.drone.getNavDataManager().addAltitudeListener(new AltitudeListener() {
 
+			@Override
+			public void receivedAltitude(int alt) {
+				altitude = alt;
+			}
+
+			@Override
+			public void receivedExtendedAltitude(Altitude arg0) {
+			}
+		});
+	}
+	
+	public void altitudeAjustment(boolean b) {
+		int alt = altitude;
+		
+		if (!b && alt < 1400) 
+			{
+			moveUp(18, 100);
+			System.out.println("LIDT OP");
+		} else if (!b && alt > 1900) {
+			moveDown(22, 100);
+			System.out.println("LIDT NED");
+		} else {
+			spinLeft(100, 25);
+			System.out.println("SPIN VENSTRE");
+		}
+	}
+	
 }

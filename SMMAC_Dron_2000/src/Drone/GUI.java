@@ -18,6 +18,8 @@ import org.opencv.core.Mat;
 
 import Math.Counter;
 import de.yadrone.base.command.VideoChannel;
+import de.yadrone.base.navdata.Altitude;
+import de.yadrone.base.navdata.AltitudeListener;
 import de.yadrone.base.navdata.BatteryListener;
 import de.yadrone.base.video.ImageListener;
 
@@ -48,6 +50,8 @@ public class GUI extends JFrame {
 		setVisible(true);
 
 		mov.getCmd().setVideoCodecFps(15);
+		
+		//mov.startAltitude();
 
 		mov.getDrone().getVideoManager().addImageListener(new ImageListener() {
 			public void imageUpdated(BufferedImage newImage)
@@ -66,11 +70,7 @@ public class GUI extends JFrame {
 					{ 	
 						//sWay = "Direction: " + op.useOpticalFlow(old_matImage, matImage);
 						//sQR = "QR-code: " + qr.readQRCode(image);
-						boolean isCircle = cd.useCircleDetection(matImage, mov);
-						if(!isCircle) {
-							mov.moveUp(18, 100);
-							System.out.println("LIDT OP");
-						}
+						mov.altitudeAjustment(cd.useCircleDetection(matImage, mov));
 					}			
 					else {
 						counter.count();
@@ -79,7 +79,7 @@ public class GUI extends JFrame {
 
 				//Gemmer billedet, så det kan bruges igen
 				old_matImage = matImage;
-				
+
 				//Parameteren i toBufferedImage() skal v�re det sidst behandlede Mat objekt
 				processedImage = (BufferedImage) imageP.toBufferedImage(matImage);
 
@@ -92,22 +92,22 @@ public class GUI extends JFrame {
 			}
 		});
 
-//		mov.getDrone().getNavDataManager().addBatteryListener(new BatteryListener() {
-//
-//			public void batteryLevelChanged(int percentage)
-//			{
-//				sBattery = "Battery: " + percentage + " %";
-//				
-//				SwingUtilities.invokeLater(new Runnable() {
-//					public void run()
-//					{
-//						repaint();
-//					}
-//				});
-//			}
-//
-//			public void voltageChanged(int vbat_raw) { }
-//		});
+		//		mov.getDrone().getNavDataManager().addBatteryListener(new BatteryListener() {
+		//
+		//			public void batteryLevelChanged(int percentage)
+		//			{
+		//				sBattery = "Battery: " + percentage + " %";
+		//				
+		//				SwingUtilities.invokeLater(new Runnable() {
+		//					public void run()
+		//					{
+		//						repaint();
+		//					}
+		//				});
+		//			}
+		//
+		//			public void voltageChanged(int vbat_raw) { }
+		//		});
 
 		addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e)
@@ -135,6 +135,7 @@ public class GUI extends JFrame {
 			public void keyPressed(KeyEvent e) {
 				if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
 					mov.emergencyLanding();
+					takeoff = false;
 				} else if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 					mov.takeoff();
 					takeoff = true;
