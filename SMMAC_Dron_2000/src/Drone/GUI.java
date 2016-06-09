@@ -45,13 +45,11 @@ public class GUI extends JFrame {
 
 		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 
-		setSize(1040,560);
+		setSize(840,560);
 		setBackground(backgroud);
 		setVisible(true);
 
 		mov.getCmd().setVideoCodecFps(15);
-		
-		//mov.startAltitude();
 
 		mov.getDrone().getVideoManager().addImageListener(new ImageListener() {
 			public void imageUpdated(BufferedImage newImage)
@@ -70,7 +68,7 @@ public class GUI extends JFrame {
 					{ 	
 						//sWay = "Direction: " + op.useOpticalFlow(old_matImage, matImage);
 						//sQR = "QR-code: " + qr.readQRCode(image);
-						mov.altitudeAjustment(cd.useCircleDetection(matImage, mov));
+						cd.useCircleDetection(matImage, mov);
 					}			
 					else {
 						counter.count();
@@ -153,23 +151,9 @@ public class GUI extends JFrame {
 	public synchronized void paint(Graphics g)
 	{
 		if (processedImage == null) {
-			g.drawString("LOADING", 500, 280);
+			g.drawString("LOADING", 400, 280);
 		} else {
 			g.drawImage(processedImage, 0, 0, 840, 560, null);
-
-			g.setColor(backgroud);
-			g.fillRect(840, 0, 200, 325);
-
-			g.setColor(Color.BLACK);
-
-			if(sBattery != null)
-				g.drawString(sBattery, 865, 50);
-
-			if(sWay != null)
-				g.drawString(sWay, 865, 100);
-
-			if(sQR != null)
-				g.drawString(sQR, 865, 150);
 		}
 	}
 }
