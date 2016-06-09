@@ -17,13 +17,17 @@ public class Movement {
 	public Movement()
 	{
 		this.cmd = drone.getCommandManager();
-		this.cmd.setMinAltitude(1500);
+		//this.cmd.setMinAltitude(1500);
 	}
 
 	public void takeoff ()
 	{
+		
 		cmd.takeOff();
+		backwards(0, 100);
 		waitFor(4000);
+		spinLeft(0, 50);
+		spinRight(0, 50);
 		cmd.hover();
 	}
 
@@ -162,6 +166,31 @@ public class Movement {
 		}
 
 		cmd.hover();
+	}
+	
+	public void correctionUp()
+	{
+		moveUp(100,200);
+	}
+	
+	public void correctionDown()
+	{
+		moveDown(100,200);
+	}
+	
+	public void correctionSpinLeft()
+	{
+		spinLeft(100, 150);
+	}
+	
+	public void correctionSpinRight()
+	{
+		spinRight(100, 150);
+	}
+	
+	public void correctionForward()
+	{
+		forward(100, 750);
 	}
 
 	public void maxAltitude(int mm)
