@@ -59,28 +59,31 @@ public class CircleDetection {
 		Vector v = new Vector(center, c.getCentrum());
 		
 		if (v.length() < VECTOR_LENGTH && c.getRadius() > 140) {
-//			mv.forward(25, 200);
+			mv.forwardCorrection();
 			System.out.println("FREM");
 			return;
 		} else if (v.length() < VECTOR_LENGTH*1.5) {
 //			mv.forward(18, 50);
+			mv.forwardCorrection();
 			System.out.println("LIDT FREM");
 			return;
 		}
 		
 		if (v.getB().y > v.getA().y) {
 //			mv.moveDown(18, 100);
+			mv.downCorrection();
 			System.out.println("NED");
 		} else {
 //			mv.moveUp(18, 100);
+			mv.upCorrection();
 			System.out.println("OP");
 		}
 		
 		if (v.getB().x > v.getA().x) {
-//			mv.goRight(18, 100);
+			mv.goRight(18, 100);
 			System.out.println("HØJRE");
 		} else {
-//			mv.goLeft(18, 100);
+			mv.goLeft(18, 100);
 			System.out.println("VENSTRE");
 		}
 	}
