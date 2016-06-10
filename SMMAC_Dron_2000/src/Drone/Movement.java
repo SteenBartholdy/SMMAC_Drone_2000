@@ -21,7 +21,6 @@ public class Movement {
 		waitFor(4000);
 		spinLeft(0, 50);
 		spinRight(0, 50);
-		upCorrection();
 		cmd.hover();
 	}
 
@@ -164,7 +163,7 @@ public class Movement {
 	
 	public void upCorrection()
 	{
-		moveUp(100,100);
+		moveUp(100,200);
 	}
 	
 	public void downCorrection()
@@ -175,6 +174,7 @@ public class Movement {
 	public void spinLeftCorrection()
 	{
 		spinLeft(100, 150);
+		System.out.println("Spin left");
 	}
 	
 	public void spinRightCorrection()
