@@ -161,29 +161,44 @@ public class Movement {
 		cmd.hover();
 	}
 	
-	public void correctionUp()
+	public void upCorrection()
 	{
 		moveUp(100,200);
 	}
 	
-	public void correctionDown()
+	public void downCorrection()
 	{
 		moveDown(100,200);
 	}
 	
-	public void correctionSpinLeft()
+	public void spinLeftCorrection()
 	{
 		spinLeft(100, 150);
 	}
 	
-	public void correctionSpinRight()
+	public void spinRightCorrection()
 	{
 		spinRight(100, 150);
 	}
 	
-	public void correctionForward()
+	public void forwardCorrection()
 	{
 		forward(100, 750);
+	}
+	
+	public void backwardCorrection()
+	{
+		//TODO
+	}
+	
+	public void leftCorrection()
+	{
+		//TODO
+	}
+	
+	public void rightCorrection()
+	{
+		//TODO
 	}
 
 	public void maxAltitude(int mm)
