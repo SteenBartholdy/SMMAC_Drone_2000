@@ -28,41 +28,43 @@ public class Keys implements KeyListener {
 	@Override
 	public void keyPressed(KeyEvent e) {
 		if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-			mv.emergencyLanding();
+			mv.landing();
 			moving = false;
 		} else if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 			mv.takeoff();
+		}
+		else if (e.getKeyCode() == KeyEvent.VK_SHIFT) {
 			moving = true;
 		}
-//		else if(e.getKeyCode() == KeyEvent.VK_Q)
-//		{
-//			mv.spinLeftCorrection();
-//		}
-//		else if(e.getKeyCode() == KeyEvent.VK_E)
-//		{
-//			mv.spinRightCorrection();
-//		}
-//		else if(e.getKeyCode() == KeyEvent.VK_W)
-//		{
-//			mv.upCorrection();
-//		}
-//		else if(e.getKeyCode() == KeyEvent.VK_S)
-//		{
-//			mv.downCorrection();
-//		}
-//		else if(e.getKeyCode() == KeyEvent.VK_UP)
-//		{
-//			mv.forwardCorrection();
-//		}
-//		else if(e.getKeyCode() == KeyEvent.VK_DOWN)
-//		{
-//			mv.backwardCorrection();
-//		}
+		else if(e.getKeyCode() == KeyEvent.VK_Q)
+		{
+			mv.spinLeftCorrection();
+		}
+		else if(e.getKeyCode() == KeyEvent.VK_E)
+		{
+			mv.spinRightCorrection();
+		}
+		else if(e.getKeyCode() == KeyEvent.VK_W)
+		{
+			mv.upCorrection();
+		}
+		else if(e.getKeyCode() == KeyEvent.VK_S)
+		{
+			mv.downCorrection();
+		}
+		else if(e.getKeyCode() == KeyEvent.VK_UP)
+		{
+			mv.forwardCorrection();
+		}
+		else if(e.getKeyCode() == KeyEvent.VK_DOWN)
+		{
+			mv.backwardCorrection();
+		}
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		
+		mv.hover();
 	}
 
 }

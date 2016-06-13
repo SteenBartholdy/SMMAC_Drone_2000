@@ -2,20 +2,16 @@ package Drone;
 
 import org.opencv.core.Mat;
 import org.opencv.core.Point;
-import org.opencv.core.Scalar;
 import org.opencv.core.Size;
 import org.opencv.imgproc.Imgproc;
 
 import Math.Circle;
-import Math.Vector;
 
 public class CircleDetection {
 
-	private final Point center = new Point(320, 180);
 	private final double THRESHOLD = 40;
-	private final double VECTOR_LENGTH = 25;
 
-	public boolean useCircleDetection(Mat image, Movement mov) {
+	public Circle useCircleDetection(Mat image) {
 		Mat filterImage = new Mat();
 		Mat blurImage = new Mat();
 		Mat greyImage = new Mat();
@@ -26,16 +22,7 @@ public class CircleDetection {
 		Imgproc.GaussianBlur(greyImage, blurImage, new Size(3,3), 2,2);
 		Imgproc.HoughCircles(blurImage, circleImage, Imgproc.CV_HOUGH_GRADIENT, 1, 1000, THRESHOLD, THRESHOLD*2, 15, 500);
 		
-		Circle circle = getCircle(circleImage);
-		
-		if (circle != null) {
-			Imgproc.circle(image, circle.getCentrum(), circle.getRadius(),new Scalar(0,255,0), 2);
-			Imgproc.arrowedLine(image, center, circle.getCentrum(), new Scalar(233,121,255));
-			circleMovement(circle, mov);
-			return true;
-		} else {
-			return false;
-		}
+		return getCircle(circleImage);
 	}
 
 	public Circle getCircle(Mat circleImage) {
@@ -53,36 +40,4 @@ public class CircleDetection {
 
 		return circle;
 	}
-	
-
-	public void circleMovement(Circle c, Movement mv) {
-		Vector v = new Vector(center, c.getCentrum());
-		
-		if (v.length() < VECTOR_LENGTH && c.getRadius() > 140) {
-//			mv.forwardCorrection();
-			System.out.println("FREM");
-			return;
-		} else if (v.length() < VECTOR_LENGTH*1.5) {
-//			mv.forwardCorrection();
-			System.out.println("LIDT FREM");
-			return;
-		}
-		
-		if (v.getB().y > v.getA().y) {
-//			mv.downCorrection();
-			System.out.println("NED");
-		} else {
-//			mv.upCorrection();
-			System.out.println("OP");
-		}
-		
-		if (v.getB().x > v.getA().x) {
-//			mv.rightCorrection();
-			System.out.println("HØJRE");
-		} else {
-//			mv.leftCorrection();
-			System.out.println("VENSTRE");
-		}
-	}
-	
 }

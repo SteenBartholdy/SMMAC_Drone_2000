@@ -6,7 +6,7 @@ public class Counter {
 
 	public Counter(long until) {
 		t = until;
-		a = 0;
+		a = 1;
 	}
 
 	public void count() {

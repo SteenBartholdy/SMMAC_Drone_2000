@@ -21,7 +21,7 @@ public class Window implements WindowListener {
 
 	@Override
 	public void windowClosing(WindowEvent e) {
-		mv.emergencyLanding();
+		mv.landing();
 		System.exit(0);
 	}
 

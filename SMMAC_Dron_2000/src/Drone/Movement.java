@@ -1,10 +1,14 @@
 package Drone;
+import org.opencv.core.Point;
+
+import Math.Circle;
+import Math.Vector;
 import de.yadrone.base.command.CommandManager;
 
 public class Movement {
 
 	private CommandManager cmd;
-
+	private final double VECTOR_LENGTH = 25;
 	private int counter = 0;
 
 	public Movement(CommandManager cmd)
@@ -13,26 +17,11 @@ public class Movement {
 		//this.cmd.setMinAltitude(1500);
 	}
 
-	public void takeoff ()
-	{
-		
+	public void takeoff() {
 		cmd.takeOff();
-		backwards(0, 100);
-		waitFor(4000);
-		spinLeft(0, 50);
-		spinRight(0, 50);
-		cmd.hover();
 	}
 
-	public void landing()
-	{
-		while (true)
-		{
-			cmd.landing();
-		}
-	}
-
-	public void emergencyLanding() {
+	public void landing() {
 		cmd.landing();
 	}
 
@@ -64,18 +53,6 @@ public class Movement {
 
 		cmd.hover();
 
-	}
-
-	public void hover(int time)
-	{
-		time = time/50;
-		while (this.counter < time)
-		{
-			cmd.hover();
-			waitFor(50);
-			this.counter++;
-		}
-		this.counter = 0;
 	}
 
 	public void waitFor(long ms)
@@ -163,12 +140,12 @@ public class Movement {
 	
 	public void upCorrection()
 	{
-		moveUp(100,200);
+		moveUp(25,50);
 	}
 	
 	public void downCorrection()
 	{
-		moveDown(100,200);
+		moveDown(25,50);
 	}
 	
 	public void spinLeftCorrection()
@@ -193,12 +170,12 @@ public class Movement {
 	
 	public void leftCorrection()
 	{
-		//TODO
+		goLeft(20, 50);
 	}
 	
 	public void rightCorrection()
 	{
-		//TODO
+		goRight(20, 50);
 	}
 
 	public void maxAltitude(int mm)
@@ -214,4 +191,76 @@ public class Movement {
 	public CommandManager getCmd() {
 		return this.cmd;
 	}	
+	
+	public void circleMovement(Circle c, Point center) {
+		Vector v = new Vector(center, c.getCentrum());
+		
+		if (v.length() < VECTOR_LENGTH && c.getRadius() > 140) {
+			forwardCorrection();
+			System.out.println("FREM");
+			return;
+		} else if (v.length() < VECTOR_LENGTH*1.5) {
+			forward();
+			System.out.println("LIDT FREM");
+			return;
+		}
+		
+		if (v.getB().y > v.getA().y) {
+			down();
+			System.out.println("NED");
+		} else {
+			up();
+			System.out.println("OP");
+		}
+		
+		if (v.getB().x > v.getA().x) {
+			right();
+			System.out.println("HØJRE");
+		} else {
+			left();
+			System.out.println("VENSTRE");
+		}
+		
+		spinLeft();
+	}
+	
+	public void up() {
+		cmd.up(20);
+		cmd.waitFor(10);
+		cmd.hover();
+	}
+	
+	public void down() {
+		cmd.down(20);
+		cmd.waitFor(10);
+		cmd.hover();
+	}
+	
+	public void right() {
+		cmd.goRight(20);
+		cmd.waitFor(10);
+		cmd.hover();
+	}
+	
+	public void left() {
+		cmd.goLeft(20);
+		cmd.waitFor(10);
+		cmd.hover();
+	}
+	
+	public void spinLeft() {
+		cmd.spinRight(0);
+		cmd.hover();
+	}
+	
+	public void forward() {
+		cmd.forward(20);
+		cmd.waitFor(10);
+		cmd.hover();
+	}
+
+	public void hover()
+	{
+		cmd.hover();
+	}
 }

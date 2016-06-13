@@ -9,10 +9,14 @@ import javax.swing.SwingUtilities;
 
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
+import org.opencv.core.Point;
+import org.opencv.core.Scalar;
+import org.opencv.imgproc.Imgproc;
 
 import Drone.CircleDetection;
 import Drone.ImageProcessor;
 import Drone.Movement;
+import Math.Circle;
 import Math.Counter;
 import de.yadrone.base.video.ImageListener;
 
@@ -28,6 +32,7 @@ public class Image extends JFrame implements ImageListener {
 	private Counter counter;
 	private Movement mv;
 	private CircleDetection cd;
+	private final Point center = new Point(320, 180);
 	
 	public Image(Movement mov) {
 		super("SMMAC Drone 2000");
@@ -61,8 +66,17 @@ public class Image extends JFrame implements ImageListener {
 		
 		if (key.isFlying()) {
 			if(counter.ready())
-			{ 	
-				cd.useCircleDetection(mat, mv);
+			{
+				Circle circle = cd.useCircleDetection(mat);
+				if (circle != null) {
+					Imgproc.circle(mat, circle.getCentrum(), circle.getRadius(),new Scalar(0,255,0), 2);
+					Imgproc.arrowedLine(mat, center, circle.getCentrum(), new Scalar(233,121,255));
+					mv.circleMovement(circle, center);
+				} else {
+					mv.up();
+					mv.spinLeft();
+					System.out.println("LIDT OP");
+				}
 			}			
 			else {
 				counter.count();
