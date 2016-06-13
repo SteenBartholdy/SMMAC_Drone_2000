@@ -174,7 +174,6 @@ public class Movement {
 	public void spinLeftCorrection()
 	{
 		spinLeft(100, 150);
-		System.out.println("Spin left");
 	}
 	
 	public void spinRightCorrection()

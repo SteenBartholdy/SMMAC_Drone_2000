@@ -34,22 +34,30 @@ public class Keys implements KeyListener {
 			mv.takeoff();
 			moving = true;
 		}
-		else if(e.getKeyCode() == KeyEvent.VK_Q)
-		{
-			mv.spinLeftCorrection();
-		}
-		else if(e.getKeyCode() == KeyEvent.VK_R)
-		{
-			mv.spinRightCorrection();
-		}
-		else if(e.getKeyCode() == KeyEvent.VK_W)
-		{
-			mv.upCorrection();
-		}
-		else if(e.getKeyCode() == KeyEvent.VK_S)
-		{
-			mv.downCorrection();
-		}
+//		else if(e.getKeyCode() == KeyEvent.VK_Q)
+//		{
+//			mv.spinLeftCorrection();
+//		}
+//		else if(e.getKeyCode() == KeyEvent.VK_E)
+//		{
+//			mv.spinRightCorrection();
+//		}
+//		else if(e.getKeyCode() == KeyEvent.VK_W)
+//		{
+//			mv.upCorrection();
+//		}
+//		else if(e.getKeyCode() == KeyEvent.VK_S)
+//		{
+//			mv.downCorrection();
+//		}
+//		else if(e.getKeyCode() == KeyEvent.VK_UP)
+//		{
+//			mv.forwardCorrection();
+//		}
+//		else if(e.getKeyCode() == KeyEvent.VK_DOWN)
+//		{
+//			mv.backwardCorrection();
+//		}
 	}
 
 	@Override
