@@ -73,9 +73,7 @@ public class Image extends JFrame implements ImageListener {
 					Imgproc.arrowedLine(mat, center, circle.getCentrum(), new Scalar(233,121,255));
 					mv.circleMovement(circle, center);
 				} else {
-					mv.up();
-					mv.spinLeft();
-					System.out.println("LIDT OP");
+					mv.search();
 				}
 			}			
 			else {
