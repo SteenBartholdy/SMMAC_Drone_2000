@@ -10,8 +10,6 @@ import javax.swing.SwingUtilities;
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.core.Point;
-import org.opencv.core.Scalar;
-import org.opencv.imgproc.Imgproc;
 
 import Drone.CircleDetection;
 import Drone.ImageProcessor;
@@ -24,7 +22,7 @@ import de.yadrone.base.video.ImageListener;
 public class Image extends JFrame implements ImageListener {
 
 	private BufferedImage img;
-	private Mat mat, old;
+	private Mat mat;
 	private ImageProcessor imgP;
 	private Keys key;
 	private Window win;
@@ -61,28 +59,18 @@ public class Image extends JFrame implements ImageListener {
 		
 		mat = imgP.toMatImage(img);
 		
-		if (old == null)
-			old = mat;
-		
 		if (key.isFlying()) {
-			if(counter.ready())
-			{
+			if(counter.ready()) {
 				Circle circle = cd.useCircleDetection(mat);
 				if (circle != null) {
-					Imgproc.circle(mat, circle.getCentrum(), circle.getRadius(),new Scalar(0,255,0), 2);
-					Imgproc.arrowedLine(mat, center, circle.getCentrum(), new Scalar(233,121,255));
 					mv.circleMovement(circle, center);
 				} else {
-					mv.search();
+					//mv.search();
+					mv.up();
+					System.out.println("LIDT OP");
 				}
-			}			
-			else {
-				counter.count();
 			}
 		}
-		
-		old = mat;
-		img = (BufferedImage) imgP.toBufferedImage(mat);
 		
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run()

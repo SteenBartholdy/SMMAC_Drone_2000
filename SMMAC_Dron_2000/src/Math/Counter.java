@@ -23,6 +23,7 @@ public class Counter {
 			return true;
 		}
 		else {
+			count();
 			return false; 
 		}
 	}

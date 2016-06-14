@@ -73,8 +73,8 @@ public class Movement {
 	}
 
 	public void fastForward() {
-		cmd.forward(20);
-		cmd.waitFor(30);
+		cmd.forward(45);
+		cmd.waitFor(40);
 		cmd.hover();
 	}
 
