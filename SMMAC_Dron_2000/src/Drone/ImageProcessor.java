@@ -9,11 +9,17 @@ import java.util.List;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfPoint;
+import org.opencv.core.Point;
 import org.opencv.core.Scalar;
 import org.opencv.core.Size;
 import org.opencv.imgproc.Imgproc;
 
+import Math.Circle;
+
 public class ImageProcessor {
+
+	private CircleDetection cd = new CircleDetection();
+	private final Point center = new Point(320, 180);
 
 	public Mat erode(Mat input, int elementSize, int elementShape) {
 		Mat outputImage = new Mat();
@@ -87,4 +93,22 @@ public class ImageProcessor {
 		return contourOutput;
 	}
 
+	public void start(BufferedImage img, Movement mv, boolean isFlying) {
+		if (img == null || !isFlying)
+			return;
+
+		Mat mat = toMatImage(img);
+
+		Circle circle = cd.useCircleDetection(mat);
+		
+		if (circle != null) {
+			mv.circleMovement(circle, center);
+		} else {
+			//mv.search();
+			mv.up();
+			System.out.println("LIDT OP");
+		}
+
+
+	}
 }

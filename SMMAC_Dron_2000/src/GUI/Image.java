@@ -8,45 +8,18 @@ import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
 import org.opencv.core.Core;
-import org.opencv.core.Mat;
-import org.opencv.core.Point;
 
-import Drone.CircleDetection;
-import Drone.ImageProcessor;
-import Drone.Movement;
-import Math.Circle;
-import Math.Counter;
 import de.yadrone.base.video.ImageListener;
 
 @SuppressWarnings("serial")
 public class Image extends JFrame implements ImageListener {
 
 	private BufferedImage img;
-	private Mat mat;
-	private ImageProcessor imgP;
-	private Keys key;
-	private Window win;
-	private Mouse ms;
-	private Counter counter;
-	private Movement mv;
-	private CircleDetection cd;
-	private final Point center = new Point(320, 180);
 	
-	public Image(Movement mov) {
+	public Image() {
 		super("SMMAC Drone 2000");
 
 		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
-		
-		mv = mov;
-		cd = new CircleDetection();
-		imgP = new ImageProcessor();
-		counter = new Counter(15);
-		key = new Keys(mv);
-		addKeyListener(key);
-		win = new Window(mv);
-		addWindowListener(win);
-		ms = new Mouse(mv);
-		addMouseListener(ms);
 		
 		setSize(840,560);
 		setBackground(Color.WHITE);
@@ -57,27 +30,16 @@ public class Image extends JFrame implements ImageListener {
 	public void imageUpdated(BufferedImage image) {
 		img = image;
 		
-		mat = imgP.toMatImage(img);
-		
-		if (key.isFlying()) {
-			if(counter.ready()) {
-				Circle circle = cd.useCircleDetection(mat);
-				if (circle != null) {
-					mv.circleMovement(circle, center);
-				} else {
-					//mv.search();
-					mv.up();
-					System.out.println("LIDT OP");
-				}
-			}
-		}
-		
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run()
 			{
 				repaint();
 			}
 		});
+	}
+	
+	public BufferedImage getImage() {
+		return img;
 	}
 	
 	public synchronized void paint(Graphics g)

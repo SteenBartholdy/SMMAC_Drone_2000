@@ -6,12 +6,9 @@ import java.awt.event.WindowListener;
 import Drone.Movement;
 
 public class Window implements WindowListener {
-
-	private Movement mv;
 	
-	public Window(Movement mov) {
+	public Window() {
 		super();
-		mv = mov;
 	}
 
 	@Override
@@ -21,7 +18,6 @@ public class Window implements WindowListener {
 
 	@Override
 	public void windowClosing(WindowEvent e) {
-		mv.landing();
 		System.exit(0);
 	}
 
