@@ -32,25 +32,25 @@ public class Movement {
 
 	public void up() {
 		cmd.up(100);
-		cmd.waitFor(10);
+		cmd.waitFor(15);
 		cmd.hover();
 	}
 
 	public void down() {
 		cmd.down(100);
-		cmd.waitFor(10);
+		cmd.waitFor(15);
 		cmd.hover();
 	}
 
 	public void right() {
 		cmd.goRight(20);
-		cmd.waitFor(10);
+		cmd.waitFor(15);
 		cmd.hover();
 	}
 
 	public void left() {
 		cmd.goLeft(20);
-		cmd.waitFor(10);
+		cmd.waitFor(15);
 		cmd.hover();
 	}
 	
@@ -68,13 +68,13 @@ public class Movement {
 
 	public void forward() {
 		cmd.forward(45);
-		cmd.waitFor(20);
+		cmd.waitFor(25);
 		cmd.hover();
 	}
 
 	public void fastForward() {
 		cmd.forward(45);
-		cmd.waitFor(40);
+		cmd.waitFor(45);
 		cmd.hover();
 	}
 
@@ -108,10 +108,11 @@ public class Movement {
 			return;
 		}
 
-		if (v.getB().y > v.getA().y) {
+		if (v.getB().y < v.getA().y) {
 			down();
 			System.out.println("NED");
-		} else {
+		} 
+		else if(v.getB().y > v.getA().y){
 			up();
 			System.out.println("OP");
 		}
@@ -119,7 +120,8 @@ public class Movement {
 		if (v.getB().x > v.getA().x) {
 			right();
 			System.out.println("HØJRE");
-		} else {
+		} 
+		else if(v.getB().x < v.getA().x){
 			left();
 			System.out.println("VENSTRE");
 		}

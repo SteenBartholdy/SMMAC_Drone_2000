@@ -8,6 +8,6 @@
 	<classpathentry kind="lib" path="libs/xuggle-xuggler-5.4.jar"/>
 	<classpathentry kind="lib" path="libs/zxing-2.1.jar"/>
 	<classpathentry kind="lib" path="libs/zxing-javase.jar"/>
-	<classpathentry kind="lib" path="libs/YADrone.jar"/>
+	<classpathentry kind="lib" path="libs/YADrone-v.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
