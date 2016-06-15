@@ -14,8 +14,8 @@ public class Emulator {
 	{
 		IARDrone drone = new ARDrone();
 
-		//		Settings settings = new Settings(drone.getCommandManager());
-		//		settings.setMAC(Name.ANDERS);
+//		Settings settings = new Settings(drone.getCommandManager());
+//		settings.setMAC(Name.MARTIN);
 
 		Movement mov = new Movement(drone.getCommandManager());
 		Image img = new Image();
@@ -28,7 +28,6 @@ public class Emulator {
 		Mouse ms = new Mouse(mov);
 		img.addMouseListener(ms);
 
-		drone.getCommandManager().setVideoCodecFps(30);
 		drone.getVideoManager().addImageListener(img);
 
 		while (true) {

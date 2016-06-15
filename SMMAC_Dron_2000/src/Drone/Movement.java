@@ -43,13 +43,13 @@ public class Movement {
 	}
 
 	public void right() {
-		cmd.goRight(20);
+		cmd.goRight(100);
 		cmd.waitFor(15);
 		cmd.hover();
 	}
 
 	public void left() {
-		cmd.goLeft(20);
+		cmd.goLeft(100);
 		cmd.waitFor(15);
 		cmd.hover();
 	}
@@ -97,6 +97,7 @@ public class Movement {
 
 	public void circleMovement(Circle c, Point center) {
 		Vector v = new Vector(center, c.getCentrum());
+		System.out.println(v.toString());
 
 		if (v.length() < VECTOR_LENGTH && c.getRadius() > 100) {
 			fastForward();

@@ -23,4 +23,8 @@ public class Vector {
 		return this.b;
 	}
 	
+	public String toString() {
+		return "(" + this.a + ";" + this.b + ")";
+	}
+	
 }
