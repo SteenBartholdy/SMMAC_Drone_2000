@@ -31,13 +31,13 @@ public class Movement {
 	}	
 
 	public void up() {
-		cmd.up(20);
+		cmd.up(100);
 		cmd.waitFor(10);
 		cmd.hover();
 	}
 
 	public void down() {
-		cmd.down(20);
+		cmd.down(100);
 		cmd.waitFor(10);
 		cmd.hover();
 	}

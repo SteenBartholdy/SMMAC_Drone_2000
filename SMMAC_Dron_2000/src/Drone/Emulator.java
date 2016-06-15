@@ -5,7 +5,6 @@ import GUI.Image;
 import GUI.Keys;
 import GUI.Mouse;
 import GUI.Window;
-import Math.Counter;
 import de.yadrone.base.ARDrone;
 import de.yadrone.base.IARDrone;
 
@@ -34,7 +33,7 @@ public class Emulator {
 
 		while (true) {
 			try {
-				Thread.sleep(1000);
+				Thread.sleep(1500);
 				pro.start(img.getImage(), mov, key.isFlying());
 			} catch (InterruptedException e) {
 				e.printStackTrace();

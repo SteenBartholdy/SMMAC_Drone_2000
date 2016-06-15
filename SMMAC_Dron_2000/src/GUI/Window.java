@@ -3,8 +3,6 @@ package GUI;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
-import Drone.Movement;
-
 public class Window implements WindowListener {
 	
 	public Window() {

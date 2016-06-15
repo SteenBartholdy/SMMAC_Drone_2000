@@ -9,24 +9,11 @@ public class Keys implements KeyListener {
 
 	private Movement mv;
 	private boolean moving;
-	private Thread takeoff;
 
 	public Keys (Movement mov) {
 		super();
 		mv = mov;
 		moving = false;
-
-		takeoff = new Thread() {
-			public void run() {
-				try {
-					mv.takeoff();
-					sleep(5500);
-					moving = true;
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			}
-		};
 	}
 
 	public boolean isFlying() {
@@ -44,6 +31,18 @@ public class Keys implements KeyListener {
 			moving = false;
 			mv.landing();
 		} else if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+			Thread takeoff = new Thread() {
+				public void run() {
+					try {
+						mv.takeoff();
+						sleep(5500);
+						moving = true;
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+			};
+			
 			takeoff.start();
 		}
 	}
