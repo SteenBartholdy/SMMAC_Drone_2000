@@ -97,7 +97,6 @@ public class Movement {
 
 	public void circleMovement(Circle c, Point center) {
 		Vector v = new Vector(center, c.getCentrum());
-		System.out.println(v.toString());
 
 		if (v.length() < VECTOR_LENGTH && c.getRadius() > 100) {
 			fastForward();

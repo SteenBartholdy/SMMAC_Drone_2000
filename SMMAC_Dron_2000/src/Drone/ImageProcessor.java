@@ -19,7 +19,7 @@ import Math.Circle;
 public class ImageProcessor {
 
 	private CircleDetection cd = new CircleDetection();
-	private final Point center = new Point(320, 180);
+	private final Point center = new Point(640, 360);
 
 	public Mat erode(Mat input, int elementSize, int elementShape) {
 		Mat outputImage = new Mat();
