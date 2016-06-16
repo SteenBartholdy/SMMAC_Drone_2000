@@ -66,7 +66,7 @@ public class Emulator {
 				while (true) {
 					try {
 						Thread.sleep(1500);
-						pro.start(img.getImage(), mov, key.isFlying());
+						pro.start(img.getMatImg(), img.getCentrum(), mov, key.isFlying());
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
@@ -84,7 +84,7 @@ public class Emulator {
 				while (true) {
 					try {
 						Thread.sleep(500);
-						pic.savePicture(name, "" + i++, img.getImage());
+						pic.savePicture(name, "" + i++, img.getMatImg());
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}

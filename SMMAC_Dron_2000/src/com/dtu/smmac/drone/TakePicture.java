@@ -1,7 +1,5 @@
 package com.dtu.smmac.drone;
 
-import java.awt.image.BufferedImage;
-
 import org.opencv.core.Mat;
 import org.opencv.imgcodecs.Imgcodecs;
 
@@ -9,14 +7,7 @@ import com.dtu.smmac.data.Name;
 
 public class TakePicture {
 
-	public void savePicture(Name input, String filename, BufferedImage img) {
-		if (img == null)
-			return;
-		
-		ImageProcessor imgP = new ImageProcessor();
-		
-		Mat mat = imgP.toMatImage(img);
-		
+	public void savePicture(Name input, String filename, Mat img) {
 		String str = "";
 		
 		switch (input) {
@@ -40,7 +31,7 @@ public class TakePicture {
 		}
 		
 		System.out.println("Done. Writing " + str);
-		Imgcodecs.imwrite(str, mat);
+		Imgcodecs.imwrite(str, img);
 		System.out.println("Image saved");
 	}
 	

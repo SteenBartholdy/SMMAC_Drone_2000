@@ -91,16 +91,14 @@ public class ImageProcessor {
 		return contourOutput;
 	}
 
-	public void start(BufferedImage img, Movement mv, boolean isFlying) {
+	public void start(Mat img, Point centrum, Movement mv, boolean isFlying) {
 		if (img == null || !isFlying)
 			return;
 
-		Mat mat = toMatImage(img);
-
-		Circle circle = cd.useCircleDetection(mat);
+		Circle circle = cd.useCircleDetection(img);
 		
 		if (circle != null) {
-			mv.circleMovement(circle, new Point(img.getWidth()/2, img.getHeight()/2));
+			mv.circleMovement(circle, centrum);
 		} else {
 			//mv.search();
 			mv.up();

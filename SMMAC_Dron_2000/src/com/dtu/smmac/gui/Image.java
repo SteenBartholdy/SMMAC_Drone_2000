@@ -12,6 +12,7 @@ import javax.swing.SwingUtilities;
 
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
+import org.opencv.core.Point;
 import org.opencv.imgproc.Imgproc;
 
 import com.dtu.smmac.drone.ImageProcessor;
@@ -44,13 +45,6 @@ public class Image extends JFrame implements ImageListener {
 	
 	@Override
 	public void imageUpdated(BufferedImage image) {		
-//		Mat mat = imgP.toMatImage(image);
-//		Mat newMat = new Mat(); 
-//		
-//		Imgproc.undistort(mat, newMat, getCameraMat(), getDistCoeffs());
-//		
-//		img = imgP.toBufferedImage(newMat);
-		
 		img = image;
 		
 		SwingUtilities.invokeLater(new Runnable() {
@@ -61,8 +55,17 @@ public class Image extends JFrame implements ImageListener {
 		});
 	}
 	
-	public BufferedImage getImage() {
-			return img;
+	public Point getCentrum() {
+		return new Point(img.getWidth()/2, img.getHeight()/2);
+	}
+	
+	public Mat getMatImg() {
+		Mat mat = imgP.toMatImage(img);
+		Mat newMat = new Mat(); 
+		
+		Imgproc.undistort(mat, newMat, getCameraMat(), getDistCoeffs());
+		
+		return newMat;
 	}
 	
 	public synchronized void paint(Graphics g)
@@ -77,8 +80,8 @@ public class Image extends JFrame implements ImageListener {
 	public Mat getDistCoeffs()
 	{
 		Mat dCoef = new Mat(1, 4, 5);
-		dCoef.put(0, 0, -0.5617);
-		dCoef.put(0, 1, 0,3568);
+		dCoef.put(0, 0, -0.5564);
+		dCoef.put(0, 1, 0.3382);
 		dCoef.put(0, 2, 0);
 		dCoef.put(0, 3, 0);
 		
@@ -87,12 +90,12 @@ public class Image extends JFrame implements ImageListener {
 	
 	public Mat getCameraMat() {
 		Mat cMatrix = new Mat(3, 3, 5);
-		cMatrix.put(0, 0, 1.1274e03);
+		cMatrix.put(0, 0, 1.1311e03);
 		cMatrix.put(0, 1, 0.0);
-		cMatrix.put(0, 2, 667.8330);
+		cMatrix.put(0, 2, 666.5773);
 		cMatrix.put(1, 0, 0.0);
-		cMatrix.put(1, 1, 1.1277e03);
-		cMatrix.put(1, 2, 297.3012);
+		cMatrix.put(1, 1, 1.1321e03);
+		cMatrix.put(1, 2, 292.8758);
 		cMatrix.put(2, 0, 0.0);
 		cMatrix.put(2, 1, 0.0);
 		cMatrix.put(2, 2, 1);
