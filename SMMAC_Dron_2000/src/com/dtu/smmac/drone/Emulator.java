@@ -1,10 +1,11 @@
-package Drone;
+package com.dtu.smmac.drone;
 
-import Data.Name;
-import GUI.Image;
-import GUI.Keys;
-import GUI.Mouse;
-import GUI.Window;
+import com.dtu.smmac.data.Name;
+import com.dtu.smmac.gui.Image;
+import com.dtu.smmac.gui.Keys;
+import com.dtu.smmac.gui.Mouse;
+import com.dtu.smmac.gui.Window;
+
 import de.yadrone.base.ARDrone;
 import de.yadrone.base.IARDrone;
 

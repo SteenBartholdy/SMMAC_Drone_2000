@@ -1,5 +1,5 @@
 
-package Test;
+package com.dtu.smmac.test;
 
 import org.opencv.core.Core;
 import org.opencv.core.Mat;

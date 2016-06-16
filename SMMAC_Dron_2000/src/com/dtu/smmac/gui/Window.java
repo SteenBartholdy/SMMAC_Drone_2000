@@ -1,4 +1,4 @@
-package GUI;
+package com.dtu.smmac.gui;
 
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;

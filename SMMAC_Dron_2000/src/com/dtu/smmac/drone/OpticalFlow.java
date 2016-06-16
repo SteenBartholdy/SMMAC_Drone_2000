@@ -1,4 +1,4 @@
-package Drone;
+package com.dtu.smmac.drone;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +13,7 @@ import org.opencv.core.Scalar;
 import org.opencv.imgproc.Imgproc;
 import org.opencv.video.Video;
 
-import Math.Vector;
+import com.dtu.smmac.math.Vector;
 
 public class OpticalFlow {
 

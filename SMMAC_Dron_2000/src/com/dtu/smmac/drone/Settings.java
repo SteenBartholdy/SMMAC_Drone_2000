@@ -1,6 +1,7 @@
-package Drone;
+package com.dtu.smmac.drone;
 
-import Data.Name;
+import com.dtu.smmac.data.Name;
+
 import de.yadrone.base.command.CommandManager;
 import de.yadrone.base.command.WifiMode;
 

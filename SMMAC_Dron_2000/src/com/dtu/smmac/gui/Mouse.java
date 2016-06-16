@@ -1,9 +1,10 @@
-package GUI;
+package com.dtu.smmac.gui;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import Drone.Movement;
+import com.dtu.smmac.drone.Movement;
+
 import de.yadrone.base.command.VideoChannel;
 
 public class Mouse implements MouseListener {

@@ -1,4 +1,4 @@
-package Drone;
+package com.dtu.smmac.drone;
 
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
@@ -13,7 +13,7 @@ import org.opencv.core.Scalar;
 import org.opencv.core.Size;
 import org.opencv.imgproc.Imgproc;
 
-import Math.Circle;
+import com.dtu.smmac.math.Circle;
 
 public class ImageProcessor {
 

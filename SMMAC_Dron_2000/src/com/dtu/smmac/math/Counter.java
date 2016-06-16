@@ -1,4 +1,4 @@
-package Math;
+package com.dtu.smmac.math;
 
 public class Counter {
 

@@ -1,4 +1,4 @@
-package Test;
+package com.dtu.smmac.test;
 
 public class OpticalTest {
 	

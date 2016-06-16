@@ -1,4 +1,4 @@
-package Drone;
+package com.dtu.smmac.drone;
 
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;

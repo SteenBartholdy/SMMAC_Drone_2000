@@ -1,9 +1,9 @@
-package GUI;
+package com.dtu.smmac.gui;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import Drone.Movement;
+import com.dtu.smmac.drone.Movement;
 
 public class Keys implements KeyListener {
 

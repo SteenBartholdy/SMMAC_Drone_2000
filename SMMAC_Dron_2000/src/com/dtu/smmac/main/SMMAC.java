@@ -1,7 +1,7 @@
-package Main;
+package com.dtu.smmac.main;
 
-import Data.Name;
-import Drone.Emulator;
+import com.dtu.smmac.data.Name;
+import com.dtu.smmac.drone.Emulator;
 
 public class SMMAC {
 

@@ -1,10 +1,11 @@
-package Drone;
+package com.dtu.smmac.drone;
 import java.util.Random;
 
 import org.opencv.core.Point;
 
-import Math.Circle;
-import Math.Vector;
+import com.dtu.smmac.math.Circle;
+import com.dtu.smmac.math.Vector;
+
 import de.yadrone.base.command.CommandManager;
 
 public class Movement {

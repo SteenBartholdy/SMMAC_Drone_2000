@@ -1,11 +1,11 @@
-package Drone;
+package com.dtu.smmac.drone;
 
 import org.opencv.core.Mat;
 import org.opencv.core.Point;
 import org.opencv.core.Size;
 import org.opencv.imgproc.Imgproc;
 
-import Math.Circle;
+import com.dtu.smmac.math.Circle;
 
 public class CircleDetection {
 

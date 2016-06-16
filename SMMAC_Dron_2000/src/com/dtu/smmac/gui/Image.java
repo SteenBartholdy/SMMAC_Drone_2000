@@ -1,4 +1,4 @@
-package GUI;
+package com.dtu.smmac.gui;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -14,7 +14,8 @@ import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.imgproc.Imgproc;
 
-import Drone.ImageProcessor;
+import com.dtu.smmac.drone.ImageProcessor;
+
 import de.yadrone.base.video.ImageListener;
 
 @SuppressWarnings("serial")

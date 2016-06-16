@@ -1,11 +1,11 @@
-package Drone;
+package com.dtu.smmac.drone;
 
 import java.awt.image.BufferedImage;
 
 import org.opencv.core.Mat;
 import org.opencv.imgcodecs.Imgcodecs;
 
-import Data.Name;
+import com.dtu.smmac.data.Name;
 
 public class TakePicture {
 
