@@ -8,6 +8,9 @@ import com.dtu.smmac.data.Name;
 public class TakePicture {
 
 	public void savePicture(Name input, String filename, Mat img) {
+		if(img == null) 
+			return;
+		
 		String str = "";
 		
 		switch (input) {

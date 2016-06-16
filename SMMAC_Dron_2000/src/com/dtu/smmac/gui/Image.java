@@ -56,16 +56,26 @@ public class Image extends JFrame implements ImageListener {
 	}
 	
 	public Point getCentrum() {
+		if (img == null)
+			return null;
+		
 		return new Point(img.getWidth()/2, img.getHeight()/2);
 	}
 	
 	public Mat getMatImg() {
+		if (img == null)
+			return null;
+		
 		Mat mat = imgP.toMatImage(img);
 		Mat newMat = new Mat(); 
 		
 		Imgproc.undistort(mat, newMat, getCameraMat(), getDistCoeffs());
 		
 		return newMat;
+	}
+	
+	public BufferedImage getImg() {
+		return img;
 	}
 	
 	public synchronized void paint(Graphics g)

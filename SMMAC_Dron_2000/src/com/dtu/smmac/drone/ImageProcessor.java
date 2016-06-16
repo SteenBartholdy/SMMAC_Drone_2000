@@ -101,8 +101,10 @@ public class ImageProcessor {
 			mv.circleMovement(circle, centrum);
 		} else {
 			//mv.search();
-			mv.up();
-			System.out.println("LIDT OP");
+//			mv.up();
+//			System.out.println("LIDT OP");
+			mv.forward();
+			System.out.println("LIDT FREM");
 		}
 
 
