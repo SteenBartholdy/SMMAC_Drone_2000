@@ -65,7 +65,7 @@ public class Emulator {
 
 				while (true) {
 					try {
-						Thread.sleep(1500);
+						Thread.sleep(2500);
 						pro.start(img.getMatImg(), img.getCentrum(), mov, key.isFlying());
 					} catch (InterruptedException e) {
 						e.printStackTrace();
