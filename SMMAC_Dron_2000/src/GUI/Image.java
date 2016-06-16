@@ -61,7 +61,7 @@ public class Image extends JFrame implements ImageListener {
 	}
 	
 	public BufferedImage getImage() {
-		return img;
+			return img;
 	}
 	
 	public synchronized void paint(Graphics g)
