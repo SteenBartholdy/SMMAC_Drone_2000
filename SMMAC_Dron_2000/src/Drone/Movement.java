@@ -32,34 +32,34 @@ public class Movement {
 
 	public void up() {
 		cmd.up(100);
-		cmd.waitFor(15);
+		cmd.waitFor(10);
 		cmd.hover();
 	}
 
 	public void down() {
 		cmd.down(100);
-		cmd.waitFor(15);
+		cmd.waitFor(10);
 		cmd.hover();
 	}
 
 	public void right() {
 		cmd.goRight(100);
-		cmd.waitFor(15);
+		cmd.waitFor(10);
 		cmd.hover();
 	}
 
 	public void left() {
 		cmd.goLeft(100);
-		cmd.waitFor(15);
+		cmd.waitFor(10);
 		cmd.hover();
 	}
-	
+
 	public void spinRight() {
 		cmd.spinRight(20);
 		cmd.waitFor(10);
 		cmd.hover();
 	}
-	
+
 	public void spinLeft() {
 		cmd.spinLeft(20);
 		cmd.waitFor(10);
@@ -74,7 +74,7 @@ public class Movement {
 
 	public void fastForward() {
 		cmd.forward(45);
-		cmd.waitFor(45);
+		cmd.waitFor(2000);
 		cmd.hover();
 	}
 
@@ -108,22 +108,27 @@ public class Movement {
 			return;
 		}
 
-		if (v.getB().y < v.getA().y) {
-			down();
-			System.out.println("NED");
-		} 
-		else if(v.getB().y > v.getA().y){
-			up();
-			System.out.println("OP");
+		if(Math.abs(v.getA().y-v.getB().y) > Math.abs(v.getA().x-v.getB().x))
+		{
+			if (v.getB().y > v.getA().y) {
+				down();
+				System.out.println("NED");
+			} 
+			else if(v.getB().y < v.getA().y){
+				up();
+				System.out.println("OP");
+			}
 		}
-
-		if (v.getB().x > v.getA().x) {
-			right();
-			System.out.println("HØJRE");
-		} 
-		else if(v.getB().x < v.getA().x){
-			left();
-			System.out.println("VENSTRE");
+		else if(Math.abs(v.getA().y-v.getB().y) < Math.abs(v.getA().x-v.getB().x))
+		{
+			if (v.getB().x > v.getA().x) {
+				right();
+				System.out.println("HØJRE");
+			} 
+			else if(v.getB().x < v.getA().x){
+				left();
+				System.out.println("VENSTRE");
+			}
 		}
 
 		stopMoveing();
@@ -152,7 +157,7 @@ public class Movement {
 			System.out.println("LIDT OP");
 			break;
 		}
-		
+
 		stopMoveing();
 	}
 

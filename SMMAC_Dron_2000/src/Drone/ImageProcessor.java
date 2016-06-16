@@ -19,7 +19,6 @@ import Math.Circle;
 public class ImageProcessor {
 
 	private CircleDetection cd = new CircleDetection();
-	private final Point center = new Point(640, 360);
 
 	public Mat erode(Mat input, int elementSize, int elementShape) {
 		Mat outputImage = new Mat();
@@ -102,7 +101,7 @@ public class ImageProcessor {
 		Circle circle = cd.useCircleDetection(mat);
 		
 		if (circle != null) {
-			mv.circleMovement(circle, center);
+			mv.circleMovement(circle, new Point(img.getWidth()/2, img.getHeight()/2));
 		} else {
 			//mv.search();
 			mv.up();

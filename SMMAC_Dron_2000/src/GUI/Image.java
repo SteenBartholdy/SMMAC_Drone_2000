@@ -11,6 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
 import org.opencv.core.Core;
+import org.opencv.core.Point;
 
 import de.yadrone.base.video.ImageListener;
 
