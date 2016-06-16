@@ -5,19 +5,23 @@ import org.opencv.core.Point;
 import org.opencv.core.Size;
 import org.opencv.imgproc.Imgproc;
 
+import com.dtu.smmac.gui.Image;
 import com.dtu.smmac.math.Circle;
 
 public class CircleDetection {
 
 	private final double THRESHOLD = 40;
 
-	public Circle useCircleDetection(Mat image) {
+	public Circle useCircleDetection(Mat image, Image img) {
 		Mat filterImage = new Mat();
 		Mat blurImage = new Mat();
 		Mat greyImage = new Mat();
 		Mat circleImage = new Mat();
 
 		Imgproc.threshold(image, filterImage, 80, 255, Imgproc.THRESH_BINARY);
+		
+		img.setThresholdImage(filterImage);
+		
 		Imgproc.cvtColor(filterImage, greyImage, Imgproc.COLOR_BGR2GRAY);
 		Imgproc.GaussianBlur(greyImage, blurImage, new Size(3,3), 2,2);
 		Imgproc.HoughCircles(blurImage, circleImage, Imgproc.CV_HOUGH_GRADIENT, 1, 1000, THRESHOLD, THRESHOLD*2, 15, 500);

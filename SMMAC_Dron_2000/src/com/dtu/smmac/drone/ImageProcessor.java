@@ -13,6 +13,7 @@ import org.opencv.core.Scalar;
 import org.opencv.core.Size;
 import org.opencv.imgproc.Imgproc;
 
+import com.dtu.smmac.gui.Image;
 import com.dtu.smmac.math.Circle;
 
 public class ImageProcessor {
@@ -91,20 +92,21 @@ public class ImageProcessor {
 		return contourOutput;
 	}
 
-	public void start(Mat img, Point centrum, Movement mv, boolean isFlying) {
+	public void start(Mat img, Point centrum, Movement mv, boolean isFlying, Image image) {
 		if (img == null || !isFlying)
 			return;
 
-		Circle circle = cd.useCircleDetection(img);
+		Circle circle = cd.useCircleDetection(img, image);
 		
 		if (circle != null) {
+			image.setCircleImage(circle);
 			mv.circleMovement(circle, centrum);
 		} else {
 			//mv.search();
-//			mv.up();
-//			System.out.println("LIDT OP");
-			mv.forward();
-			System.out.println("LIDT FREM");
+			mv.up();
+			System.out.println("LIDT OP");
+//			mv.forward();
+//			System.out.println("LIDT FREM");
 		}
 
 
