@@ -12,19 +12,23 @@ import javax.swing.SwingUtilities;
 
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
-import org.opencv.core.Point;
+import org.opencv.imgproc.Imgproc;
 
+import Drone.ImageProcessor;
 import de.yadrone.base.video.ImageListener;
 
 @SuppressWarnings("serial")
 public class Image extends JFrame implements ImageListener {
 
 	private BufferedImage img, w8;
+	private ImageProcessor imgP;
 	
 	public Image() {
 		super("SMMAC Drone 2000");
 
 		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+		
+		imgP = new ImageProcessor();
 		
 		try {
 			w8 = ImageIO.read(new File("images/loading.jpg"));
@@ -38,7 +42,14 @@ public class Image extends JFrame implements ImageListener {
 	}
 	
 	@Override
-	public void imageUpdated(BufferedImage image) {
+	public void imageUpdated(BufferedImage image) {		
+//		Mat mat = imgP.toMatImage(image);
+//		Mat newMat = new Mat(); 
+//		
+//		Imgproc.undistort(mat, newMat, getCameraMat(), getDistCoeffs());
+//		
+//		img = imgP.toBufferedImage(newMat);
+		
 		img = image;
 		
 		SwingUtilities.invokeLater(new Runnable() {
@@ -62,10 +73,19 @@ public class Image extends JFrame implements ImageListener {
 		}
 	}
 
-	public void removeFish()
+	public Mat getDistCoeffs()
 	{
+		Mat dCoef = new Mat(1, 4, 5);
+		dCoef.put(0, 0, -0.5719);
+		dCoef.put(0, 1, 0,3844);
+		dCoef.put(0, 2, 0);
+		dCoef.put(0, 3, 0);
+		
+		return dCoef;
+	}
+	
+	public Mat getCameraMat() {
 		Mat cMatrix = new Mat(3, 3, 5);
-		printMatrixMat(cMatrix);
 		cMatrix.put(0, 0, 1.1333e03);
 		cMatrix.put(0, 1, 0.0);
 		cMatrix.put(0, 2, 670.4082);
@@ -75,18 +95,8 @@ public class Image extends JFrame implements ImageListener {
 		cMatrix.put(2, 0, 0.0);
 		cMatrix.put(2, 1, 0.0);
 		cMatrix.put(2, 2, 1);
-		printMatrixMat(cMatrix);
-		Mat dCoef = new Mat(1, 4, 5);
-		dCoef.put(0, 0, -0.5719);
-		dCoef.put(0, 1, 0,3844);
-		dCoef.put(0, 2, 0);
-		dCoef.put(0, 3, 0);
-		printMatrixMat(dCoef);
-	}
-	
-	public void printMatrixMat(Mat matrixMat)
-	{
-		System.out.println("MatMatrix: " + matrixMat.dump());
+		
+		return cMatrix;
 	}
 	
 }

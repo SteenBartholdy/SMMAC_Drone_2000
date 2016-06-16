@@ -1,6 +1,5 @@
 package Drone;
 
-import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 import java.util.ArrayList;
@@ -52,7 +51,7 @@ public class ImageProcessor {
 		return Imgproc.getStructuringElement(elementShape, new Size(elementSize * 2 + 1, elementSize * 2 + 1));
 	}
 
-	public Image toBufferedImage(Mat matrix){
+	public BufferedImage toBufferedImage(Mat matrix){
 		int type = BufferedImage.TYPE_BYTE_GRAY;
 		if ( matrix.channels() > 1 ) {
 			type = BufferedImage.TYPE_3BYTE_BGR;

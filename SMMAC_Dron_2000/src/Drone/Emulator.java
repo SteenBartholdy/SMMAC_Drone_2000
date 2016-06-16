@@ -16,6 +16,8 @@ public class Emulator {
 
 //		Settings settings = new Settings(drone.getCommandManager());
 //		settings.setMAC(Name.MARTIN);
+//		TakePicture pic = new TakePicture();
+//		int i = 0;
 
 		Movement mov = new Movement(drone.getCommandManager());
 		Image img = new Image();
@@ -34,6 +36,8 @@ public class Emulator {
 			try {
 				Thread.sleep(1500);
 				pro.start(img.getImage(), mov, key.isFlying());
+//				Thread.sleep(500);
+//				pic.savePicture(Name.MARTIN, ""+i++, img.getImage());
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
