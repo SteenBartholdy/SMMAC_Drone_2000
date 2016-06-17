@@ -11,7 +11,7 @@ import de.yadrone.base.IARDrone;
 
 public class Emulator {
 
-	private Runnable imgAnalyze, takePhoto, setSetting;
+	private Runnable imgAnalyze, takePhoto, setSetting, threshold;
 	private Movement mov;
 	private Image img;
 	private ImageProcessor pro;
@@ -26,15 +26,16 @@ public class Emulator {
 		setObjects();
 		setRunnables();
 
+		new Thread(threshold).start();
+
 		if (setSettings) 
 			new Thread(setSetting).start();
 
 		if (takePhotos)
 			new Thread(takePhoto).start();
 
-		if (imageAnalyzing)
+		if (imageAnalyzing) 
 			new Thread(imgAnalyze).start();
-
 	}
 
 	public void setObjects() {
@@ -98,6 +99,22 @@ public class Emulator {
 			@Override
 			public void run() {
 				settings.setMAC(name);
+			}
+
+		};
+
+		threshold = new Runnable() {
+
+			@Override
+			public void run() {
+				while(true) {
+					try {
+						Thread.sleep(10);
+						img.setThresholdImage();
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
 			}
 
 		};

@@ -24,7 +24,7 @@ import de.yadrone.base.video.ImageListener;
 @SuppressWarnings("serial")
 public class Image extends JFrame implements ImageListener {
 
-	private BufferedImage img, w8, threshold, circle, logo;
+	private BufferedImage img, w8, threshold, circle;
 	private ImageProcessor imgP;
 
 	public Image() {
@@ -36,7 +36,6 @@ public class Image extends JFrame implements ImageListener {
 
 		try {
 			w8 = ImageIO.read(new File("images/loading.jpg"));
-			logo = ImageIO.read(new File("images/logo.png"));
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
 		}
@@ -107,19 +106,22 @@ public class Image extends JFrame implements ImageListener {
 		return cMatrix;
 	}
 
-	public void setThresholdImage(Mat image) {
-		threshold = imgP.toBufferedImage(image);
-	}
-	
-	public void setCircleImage(Circle c) {
-		Mat image = imgP.toMatImage(img);
-		
-		Imgproc.circle(image, c.getCentrum(), c.getRadius(),new Scalar(0,255,0), 5);
-		Imgproc.circle(image, c.getCentrum(), 3, new Scalar(0,0,255), 2);
-		
-		circle = imgP.toBufferedImage(image);
+	public void setThresholdImage() {
+		if (img == null)
+			return;
+
+		threshold = imgP.toBufferedImage(imgP.setThreshold(imgP.toMatImage(img)));
 	}
 
+	public void setCircleImage(Circle c) {
+		Mat image = imgP.toMatImage(img);
+
+		Imgproc.circle(image, c.getCentrum(), c.getRadius(),new Scalar(0,255,0), 5);
+		Imgproc.circle(image, c.getCentrum(), 3, new Scalar(0,0,255), 2);
+
+		circle = imgP.toBufferedImage(image);
+	}
+	
 	public synchronized void paint(Graphics g)
 	{
 		if (img == null) {
@@ -131,12 +133,10 @@ public class Image extends JFrame implements ImageListener {
 		if (threshold != null) {
 			g.drawImage(threshold, 960, 0, 320, 180, null);
 		}
-		
+
 		if (circle != null) {
 			g.drawImage(circle, 960, 180, 320, 180, null);
 		}
-		
-		g.drawImage(logo, 960, 360, 320, 180, null);
 	}
 
 }

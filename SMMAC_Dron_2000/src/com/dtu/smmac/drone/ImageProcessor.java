@@ -96,7 +96,7 @@ public class ImageProcessor {
 		if (img == null || !isFlying)
 			return;
 
-		Circle circle = cd.useCircleDetection(img, image);
+		Circle circle = cd.useCircleDetection(setThreshold(img));
 		
 		if (circle != null) {
 			image.setCircleImage(circle);
@@ -105,10 +105,15 @@ public class ImageProcessor {
 			//mv.search();
 			mv.up();
 			System.out.println("LIDT OP");
-//			mv.forward();
-//			System.out.println("LIDT FREM");
 		}
 
-
+	}
+	
+	public Mat setThreshold(Mat input) {
+		Mat output = new Mat();
+		
+		Imgproc.threshold(input, output, 80, 255, Imgproc.THRESH_BINARY);
+		
+		return output;
 	}
 }
