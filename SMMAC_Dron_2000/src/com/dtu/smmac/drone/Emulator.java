@@ -18,6 +18,7 @@ public class Emulator {
 	private Settings settings;
 	private TakePicture pic;
 	private Keys key;
+//	private Altitude alt;
 	private Name name;
 
 	public void run(Name input, boolean imageAnalyzing, boolean takePhotos, boolean setSettings) {
@@ -47,6 +48,7 @@ public class Emulator {
 		img = new Image();
 		pro = new ImageProcessor();
 		pic = new TakePicture();
+//		alt = new Altitude();
 
 		key = new Keys(mov);
 		img.addKeyListener(key);
@@ -56,6 +58,7 @@ public class Emulator {
 		img.addMouseListener(ms);
 
 		drone.getVideoManager().addImageListener(img);
+		//drone.getNavDataManager().addAltitudeListener(alt);
 	}
 
 	public void setRunnables() {
@@ -66,7 +69,7 @@ public class Emulator {
 
 				while (true) {
 					try {
-						Thread.sleep(1500);
+						Thread.sleep(2500);
 						pro.start(img.getMatImg(), img.getCentrum(), mov, key.isFlying(), img);
 					} catch (InterruptedException e) {
 						e.printStackTrace();

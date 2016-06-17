@@ -133,8 +133,6 @@ public class Movement {
 				System.out.println("VENSTRE");
 			}
 		}
-
-		stopMoveing();
 		
 		return false;
 	}
@@ -162,8 +160,6 @@ public class Movement {
 			System.out.println("LIDT OP");
 			break;
 		}
-
-		stopMoveing();
 	}
 
 	//	public void goLeft(int speed, int time)
