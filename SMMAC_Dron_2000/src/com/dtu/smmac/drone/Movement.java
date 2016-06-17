@@ -69,14 +69,16 @@ public class Movement {
 
 	public void forward() {
 		cmd.forward(20);
-		cmd.waitFor(100);
+		cmd.waitFor(75);
 		cmd.hover();
+		cmd.waitFor(20);
 	}
 
 	public void fastForward() {
 		cmd.forward(45);
-		cmd.waitFor(1000);
+		cmd.waitFor(200);
 		cmd.hover();
+		cmd.waitFor(20);
 	}
 
 	public void hover()
@@ -96,17 +98,17 @@ public class Movement {
 		cmd.hover();
 	}
 
-	public void circleMovement(Circle c, Point center) {
+	public boolean circleMovement(Circle c, Point center) {
 		Vector v = new Vector(center, c.getCentrum());
 
 		if (v.length() < VECTOR_LENGTH && c.getRadius() > 100) {
 			fastForward();
 			System.out.println("FREM");
-			return;
+			return true;
 		} else if (v.length() < VECTOR_LENGTH*2) {
 			forward();
 			System.out.println("LIDT FREM");
-			return;
+			return false;
 		}
 
 		if(Math.abs(v.getA().y-v.getB().y) > Math.abs(v.getA().x-v.getB().x))
@@ -133,6 +135,8 @@ public class Movement {
 		}
 
 		stopMoveing();
+		
+		return false;
 	}
 
 	public void search() {

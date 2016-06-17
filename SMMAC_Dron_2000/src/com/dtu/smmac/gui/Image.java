@@ -24,7 +24,7 @@ import de.yadrone.base.video.ImageListener;
 @SuppressWarnings("serial")
 public class Image extends JFrame implements ImageListener {
 
-	private BufferedImage img, w8, threshold, circle;
+	private BufferedImage img, w8, threshold, circle, logo;
 	private ImageProcessor imgP;
 
 	public Image() {
@@ -36,6 +36,7 @@ public class Image extends JFrame implements ImageListener {
 
 		try {
 			w8 = ImageIO.read(new File("images/loading.jpg"));
+			logo = ImageIO.read(new File("images/logo.jpeg"));
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
 		}
@@ -137,6 +138,8 @@ public class Image extends JFrame implements ImageListener {
 		if (circle != null) {
 			g.drawImage(circle, 960, 180, 320, 180, null);
 		}
+		
+		g.drawImage(logo, 960, 360, 320, 180, null);
 	}
 
 }

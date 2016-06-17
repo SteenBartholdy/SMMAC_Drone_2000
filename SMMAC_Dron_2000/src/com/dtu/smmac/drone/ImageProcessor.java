@@ -19,6 +19,7 @@ import com.dtu.smmac.math.Circle;
 public class ImageProcessor {
 
 	private CircleDetection cd = new CircleDetection();
+	private boolean flyThrough = false;
 
 	public Mat erode(Mat input, int elementSize, int elementShape) {
 		Mat outputImage = new Mat();
@@ -100,13 +101,13 @@ public class ImageProcessor {
 		
 		if (circle != null) {
 			image.setCircleImage(circle);
-			mv.circleMovement(circle, centrum);
+			flyThrough = mv.circleMovement(circle, centrum);
+		} else if (flyThrough) {
+			mv.search();
 		} else {
-			//mv.search();
 			mv.up();
 			System.out.println("LIDT OP");
 		}
-
 	}
 	
 	public Mat setThreshold(Mat input) {
