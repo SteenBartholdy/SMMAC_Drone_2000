@@ -33,7 +33,7 @@ public class Movement {
 
 	public void up() {
 		cmd.up(100);
-		cmd.waitFor(10);
+		cmd.waitFor(25);
 		cmd.hover();
 	}
 

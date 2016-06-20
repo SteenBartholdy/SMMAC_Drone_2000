@@ -115,7 +115,7 @@ public class ImageProcessor {
 	public Mat setThreshold(Mat input) {
 		Mat output = new Mat();
 		
-		Imgproc.threshold(input, output, 80, 255, Imgproc.THRESH_BINARY);
+		Imgproc.threshold(input, output, 70, 255, Imgproc.THRESH_BINARY);
 		
 		return output;
 	}
