@@ -87,7 +87,7 @@ public class Emulator {
 				while (true) {
 					try {
 						Thread.sleep(500);
-						pic.savePicture(name, "" + i++, img.getMatImg());
+						pic.savePicture(name.getPhotoLibary("" + i++), img.getMatImg());
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
@@ -100,7 +100,7 @@ public class Emulator {
 
 			@Override
 			public void run() {
-				settings.setMAC(name);
+				settings.setMAC(name.getMAC());
 			}
 
 		};
