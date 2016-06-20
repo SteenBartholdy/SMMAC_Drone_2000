@@ -81,6 +81,12 @@ public class Movement {
 		cmd.waitFor(10);
 		cmd.hover();
 	}
+	
+	public void backward() {
+		cmd.backward(20);
+		cmd.waitFor(10);
+		cmd.hover();
+	}
 
 	public void forward() {
 		cmd.forward(15);
@@ -184,7 +190,7 @@ public class Movement {
 
 	public void search() {
 		Random rn = new Random();
-		int search = rn.nextInt() % 5;
+		int search = rn.nextInt() % 4;
 
 		switch(search) {
 		case 0: 
@@ -196,13 +202,44 @@ public class Movement {
 			System.out.println("LIDT SPIN HØJRE");
 			break;
 		case 2: 
+			right();
+			System.out.println("LIDT HØJRE");
+			break;
+		case 3: 
+			left();
+			System.out.println("LIDT VENSTRE");
+			break;
+		}
+	}
+	
+	public void landingSearch() {
+		Random rn = new Random();
+		int search = rn.nextInt() % 6;
+
+		switch(search) {
+		case 0: 
+			up();
+			System.out.println("LIDT SPIN VENSTRE");
+			break;
+		case 1: 
+			left();
+			System.out.println("LIDT VENSTRE");
+			break;
+		case 2: 
+			right();
+			System.out.println("LIDT HØJRE");
+			break;
+		case 3: 
 			down();
 			System.out.println("LIDT NED");
 			break;
-		case 3: 
 		case 4:
-			up();
-			System.out.println("LIDT OP");
+			forward();
+			System.out.println("LIDT FREM");
+			break;
+		case 5:
+			backward();
+			System.out.println("LIDT TILBAGE");
 			break;
 		}
 	}
