@@ -18,8 +18,12 @@ import com.google.zxing.qrcode.QRCodeReader;
 public class QRCode {
 	
 	private List<String> circleQR = new ArrayList<String>();
+	private int counter = 0;
+	private int circleAmount;
 
 	public QRCode(int circleAmount) {
+		this.circleAmount = circleAmount;
+		
 		for (int i = 1; i <= circleAmount; i++) {
 			circleQR.add("P." + String.format("%02d", i));
 		}
@@ -49,12 +53,28 @@ public class QRCode {
     }
     
     public boolean isCircle(BufferedImage image) {
-    	for(String str : circleQR) {
+    	for (String str : circleQR) {
     		if (str.equals(readQRCode(image))) 
         		return true;
     	}
     	
     	return false;
+    }
+    
+    public boolean isCorrectCircle(BufferedImage image) {
+    	if (readQRCode(image).equals(circleQR.get(counter))) {
+    		return true;
+    	}
+    	
+    	return false;
+    }
+    
+    public void count() {
+    	if (counter == circleAmount) {
+    		counter  = 0;
+    	} else {
+    		counter++;
+    	}
     }
     
 }

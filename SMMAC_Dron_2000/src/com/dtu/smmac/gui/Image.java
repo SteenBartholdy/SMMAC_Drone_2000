@@ -111,7 +111,7 @@ public class Image extends JFrame implements ImageListener {
 		if (img == null)
 			return;
 
-		threshold = imgP.toBufferedImage(imgP.setThreshold(imgP.toMatImage(img)));
+		threshold = imgP.toBufferedImage(imgP.setThreshold(img));
 	}
 
 	public void setCircleImage(Circle c) {

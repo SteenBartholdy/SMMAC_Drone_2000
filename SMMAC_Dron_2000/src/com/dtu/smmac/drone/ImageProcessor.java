@@ -8,22 +8,11 @@ import java.util.List;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfPoint;
-import org.opencv.core.Point;
 import org.opencv.core.Scalar;
 import org.opencv.core.Size;
 import org.opencv.imgproc.Imgproc;
 
-import com.dtu.smmac.gui.Image;
-import com.dtu.smmac.math.Circle;
-
 public class ImageProcessor {
-
-	private CircleDetection cd = new CircleDetection();
-	private boolean flyThrough;
-
-	public void setFlyThrough(boolean value) {
-		flyThrough = value;
-	}
 	
 	public Mat erode(Mat input, int elementSize, int elementShape) {
 		Mat outputImage = new Mat();
@@ -96,28 +85,9 @@ public class ImageProcessor {
 
 		return contourOutput;
 	}
-
-	public void start(Mat img, Point centrum, Movement mv, boolean isFlying, Image image) {
-		if (img == null || !isFlying)
-			return;
-
-		Circle circle = cd.useCircleDetection(setThreshold(img));
-		
-		if (circle != null) {
-			image.setCircleImage(circle);
-			flyThrough = mv.circleMovement(circle, centrum);
-		} else if (flyThrough) {
-			mv.spinRight();
-			mv.search();
-		} else {
-			mv.up();
-			System.out.println("LIDT OP");
-		}
-		
-		mv.stopMoving();
-	}
 	
-	public Mat setThreshold(Mat input) {
+	public Mat setThreshold(BufferedImage img) {
+		Mat input = toMatImage(img);
 		Mat output = new Mat();
 		
 		Imgproc.threshold(input, output, 70, 255, Imgproc.THRESH_BINARY);

@@ -54,7 +54,7 @@ public class Emulator {
 		pic = new TakePicture();
 //		alt = new Altitude();
 
-		key = new Keys(mov, pro);
+		key = new Keys(mov);
 		img.addKeyListener(key);
 		Window win = new Window();
 		img.addWindowListener(win);
@@ -73,7 +73,7 @@ public class Emulator {
 				while (true) {
 					try {
 						Thread.sleep(2500);
-						pro.start(img.getMatImg(), img.getCentrum(), mov, key.isFlying(), img);
+						mov.start(key.isFlying(), img, pro);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}

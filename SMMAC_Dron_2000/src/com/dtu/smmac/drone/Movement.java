@@ -1,8 +1,10 @@
 package com.dtu.smmac.drone;
+import java.awt.image.BufferedImage;
 import java.util.Random;
 
 import org.opencv.core.Point;
 
+import com.dtu.smmac.gui.Image;
 import com.dtu.smmac.math.Circle;
 import com.dtu.smmac.math.Vector;
 
@@ -13,10 +15,17 @@ public class Movement {
 	private CommandManager cmd;
 	private final double VECTOR_LENGTH = 45;
 	//	private int counter = 0;
+	
+	private CircleDetection cd = new CircleDetection();
+	private boolean flyThrough;
 
 	public Movement(CommandManager cmd)
 	{
 		this.cmd = cmd;
+	}
+	
+	public void setFlyThrough(boolean value) {
+		flyThrough = value;
 	}
 
 	public void takeoff() {
@@ -190,6 +199,28 @@ public class Movement {
 			System.out.println("LIDT OP");
 			break;
 		}
+	}
+	
+	public void start(boolean isFlying, Image image, ImageProcessor pro) {
+		BufferedImage img = image.getImg();
+		
+		if (img == null || !isFlying)
+			return;
+
+		Circle circle = cd.useCircleDetection(pro.setThreshold(img));
+		
+		if (circle != null) {
+			image.setCircleImage(circle);
+			flyThrough = circleMovement(circle, image.getCentrum());
+		} else if (flyThrough) {
+			spinRight();
+			search();
+		} else {
+			up();
+			System.out.println("LIDT OP");
+		}
+		
+		stopMoving();
 	}
 
 	//	public void goLeft(int speed, int time)

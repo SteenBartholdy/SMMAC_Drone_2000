@@ -3,7 +3,6 @@ package com.dtu.smmac.gui;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import com.dtu.smmac.drone.ImageProcessor;
 import com.dtu.smmac.drone.Movement;
 
 public class Keys implements KeyListener {
@@ -11,12 +10,10 @@ public class Keys implements KeyListener {
 	private Movement mv;
 	private boolean moving;
 	private Runnable takeoff;
-	private ImageProcessor imgP;
 
-	public Keys (Movement mov, ImageProcessor pro) {
+	public Keys (Movement mov) {
 		super();
 		mv = mov;
-		imgP = pro;
 		moving = false;
 
 		takeoff = new Runnable() {
@@ -24,7 +21,7 @@ public class Keys implements KeyListener {
 			@Override
 			public void run() {
 				try {
-					imgP.setFlyThrough(false);
+					mv.setFlyThrough(false);
 					mv.takeoff();
 					Thread.sleep(5500);
 					moving = true;
