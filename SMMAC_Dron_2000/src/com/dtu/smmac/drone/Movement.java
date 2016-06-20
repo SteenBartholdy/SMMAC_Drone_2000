@@ -11,7 +11,7 @@ import de.yadrone.base.command.CommandManager;
 public class Movement {
 
 	private CommandManager cmd;
-	private final double VECTOR_LENGTH = 25;
+	private final double VECTOR_LENGTH = 30;
 	//	private int counter = 0;
 
 	public Movement(CommandManager cmd)
@@ -45,13 +45,13 @@ public class Movement {
 
 	public void right() {
 		cmd.goRight(100);
-		cmd.waitFor(10);
+		cmd.waitFor(20);
 		cmd.hover();
 	}
 
 	public void left() {
 		cmd.goLeft(100);
-		cmd.waitFor(10);
+		cmd.waitFor(20);
 		cmd.hover();
 	}
 
@@ -68,7 +68,7 @@ public class Movement {
 	}
 
 	public void forward() {
-		cmd.forward(20);
+		cmd.forward(30);
 		cmd.waitFor(75);
 		cmd.hover();
 		cmd.waitFor(20);
@@ -101,7 +101,7 @@ public class Movement {
 	public boolean circleMovement(Circle c, Point center) {
 		Vector v = new Vector(center, c.getCentrum());
 
-		if (v.length() < VECTOR_LENGTH && c.getRadius() > 100) {
+		if (v.length() < VECTOR_LENGTH && c.getRadius() > 75) {
 			fastForward();
 			System.out.println("FREM");
 			return true;
