@@ -70,9 +70,9 @@ public class Image extends JFrame implements ImageListener {
 			return null;
 
 		Mat mat = imgP.toMatImage(img);
-		Mat newMat = new Mat(); 
+//		Mat newMat = new Mat(); 
 
-		//Imgproc.undistort(mat, newMat, getCameraMat(), getDistCoeffs());
+//		Imgproc.undistort(mat, newMat, getCameraMat(), getDistCoeffs());
 
 		return mat;
 	}
