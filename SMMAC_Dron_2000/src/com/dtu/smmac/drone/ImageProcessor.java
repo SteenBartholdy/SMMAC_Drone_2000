@@ -109,7 +109,7 @@ public class ImageProcessor {
 			System.out.println("LIDT OP");
 		}
 		
-		mv.stopMoveing();
+		mv.stopMoving();
 	}
 	
 	public Mat setThreshold(Mat input) {

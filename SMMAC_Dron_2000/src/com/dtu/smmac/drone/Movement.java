@@ -33,7 +33,7 @@ public class Movement {
 
 	public void up() {
 		cmd.up(100);
-		cmd.waitFor(25);
+		cmd.waitFor(10);
 		cmd.hover();
 	}
 
@@ -68,8 +68,9 @@ public class Movement {
 	}
 
 	public void forward() {
-		cmd.forward(30);
+		cmd.forward(15);
 		cmd.waitFor(75);
+		stopMoving();
 		cmd.hover();
 		cmd.waitFor(20);
 	}
@@ -77,6 +78,7 @@ public class Movement {
 	public void fastForward() {
 		cmd.forward(45);
 		cmd.waitFor(200);
+		stopMoving();
 		cmd.hover();
 		cmd.waitFor(20);
 	}
@@ -86,7 +88,7 @@ public class Movement {
 		cmd.hover();
 	}
 
-	public void stopMoveing() {
+	public void stopMoving() {
 		cmd.spinRight(0);
 		cmd.spinLeft(0);
 		cmd.forward(0);
@@ -101,13 +103,26 @@ public class Movement {
 	public boolean circleMovement(Circle c, Point center) {
 		Vector v = new Vector(center, c.getCentrum());
 
-		if (v.length() < VECTOR_LENGTH && c.getRadius() > 75) {
-			fastForward();
-			System.out.println("FREM");
-			return true;
-		} else if (v.length() < VECTOR_LENGTH*2) {
+		if (v.length() < VECTOR_LENGTH) {
+			if(c.getRadius() > 60)
+			{
+				fastForward();
+				System.out.println("FREM");	
+				System.out.println("Vektor længde: " + v.length() + " Radius: " + c.getRadius());
+				return true;
+			}
+			else
+			{
+				forward();
+				System.out.println("LIDT FREM, MEN TÆT PÅ CENTRUM");
+				System.out.println("Vektor længde: " + v.length() + " Radius: " + c.getRadius());
+				return false;	
+			}
+			
+		} else if (v.length() < VECTOR_LENGTH+15) {
 			forward();
 			System.out.println("LIDT FREM");
+			System.out.println("Vektor længde: " + v.length() + " Radius: " + c.getRadius());
 			return false;
 		}
 
