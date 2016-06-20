@@ -45,6 +45,12 @@ public class Movement {
 		cmd.waitFor(10);
 		cmd.hover();
 	}
+	
+	public void up2() {
+		cmd.up(100);
+		cmd.waitFor(100);
+		cmd.hover();
+	}
 
 	public void down() {
 		cmd.down(100);
@@ -216,7 +222,7 @@ public class Movement {
 			spinRight();
 			search();
 		} else {
-			up();
+			up2();
 			System.out.println("LIDT OP");
 		}
 		
