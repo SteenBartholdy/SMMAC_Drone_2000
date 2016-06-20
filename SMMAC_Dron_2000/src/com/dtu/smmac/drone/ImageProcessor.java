@@ -103,6 +103,7 @@ public class ImageProcessor {
 			image.setCircleImage(circle);
 			flyThrough = mv.circleMovement(circle, centrum);
 		} else if (flyThrough) {
+			mv.spinRight();
 			mv.search();
 		} else {
 			mv.up();
