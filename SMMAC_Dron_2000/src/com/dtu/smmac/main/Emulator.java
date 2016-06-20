@@ -1,6 +1,10 @@
-package com.dtu.smmac.drone;
+package com.dtu.smmac.main;
 
 import com.dtu.smmac.data.Name;
+import com.dtu.smmac.drone.ImageProcessor;
+import com.dtu.smmac.drone.Movement;
+import com.dtu.smmac.drone.Settings;
+import com.dtu.smmac.drone.TakePicture;
 import com.dtu.smmac.gui.Image;
 import com.dtu.smmac.gui.Keys;
 import com.dtu.smmac.gui.Mouse;
