@@ -19,8 +19,12 @@ import com.dtu.smmac.math.Circle;
 public class ImageProcessor {
 
 	private CircleDetection cd = new CircleDetection();
-	private boolean flyThrough = false;
+	private boolean flyThrough;
 
+	public void setFlyThrough(boolean value) {
+		flyThrough = value;
+	}
+	
 	public Mat erode(Mat input, int elementSize, int elementShape) {
 		Mat outputImage = new Mat();
 		Mat element = getKernelFromShape(elementSize, elementShape);

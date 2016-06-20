@@ -11,7 +11,7 @@ import de.yadrone.base.command.CommandManager;
 public class Movement {
 
 	private CommandManager cmd;
-	private final double VECTOR_LENGTH = 30;
+	private final double VECTOR_LENGTH = 45;
 	//	private int counter = 0;
 
 	public Movement(CommandManager cmd)
@@ -82,6 +82,14 @@ public class Movement {
 		cmd.hover();
 		cmd.waitFor(20);
 	}
+	
+	public void fastForward2() {
+		cmd.forward(45);
+		cmd.waitFor(100);
+		stopMoving();
+		cmd.hover();
+		cmd.waitFor(20);
+	}
 
 	public void hover()
 	{
@@ -104,10 +112,17 @@ public class Movement {
 		Vector v = new Vector(center, c.getCentrum());
 
 		if (v.length() < VECTOR_LENGTH) {
-			if(c.getRadius() > 60)
+			if(c.getRadius() > 60 && c.getRadius() < 100)
 			{
 				fastForward();
 				System.out.println("FREM");	
+				System.out.println("Vektor længde: " + v.length() + " Radius: " + c.getRadius());
+				return true;
+			}
+			else if(c.getRadius() > 100)
+			{
+				fastForward2();
+				System.out.println("FREM 2");	
 				System.out.println("Vektor længde: " + v.length() + " Radius: " + c.getRadius());
 				return true;
 			}

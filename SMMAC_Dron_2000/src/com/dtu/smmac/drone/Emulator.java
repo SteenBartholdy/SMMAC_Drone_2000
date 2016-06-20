@@ -50,7 +50,7 @@ public class Emulator {
 		pic = new TakePicture();
 //		alt = new Altitude();
 
-		key = new Keys(mov);
+		key = new Keys(mov, pro);
 		img.addKeyListener(key);
 		Window win = new Window();
 		img.addWindowListener(win);
@@ -66,7 +66,6 @@ public class Emulator {
 
 			@Override
 			public void run() {
-
 				while (true) {
 					try {
 						Thread.sleep(2500);
