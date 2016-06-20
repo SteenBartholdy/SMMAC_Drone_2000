@@ -85,7 +85,7 @@ public class Movement {
 	}
 
 	public void fastForward() {
-		cmd.forward(45);
+		cmd.forward(80);
 		cmd.waitFor(200);
 		stopMoving();
 		cmd.hover();
@@ -143,7 +143,7 @@ public class Movement {
 				return false;	
 			}
 			
-		} else if (v.length() < VECTOR_LENGTH+15) {
+		} else if (v.length() < VECTOR_LENGTH+15 && c.getRadius() > 110) {
 			forward();
 			System.out.println("LIDT FREM");
 			System.out.println("Vektor længde: " + v.length() + " Radius: " + c.getRadius());

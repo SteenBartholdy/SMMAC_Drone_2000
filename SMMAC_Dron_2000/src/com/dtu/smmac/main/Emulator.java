@@ -72,7 +72,7 @@ public class Emulator {
 			public void run() {
 				while (true) {
 					try {
-						Thread.sleep(2500);
+						Thread.sleep(2000);
 						mov.start(key.isFlying(), img, pro);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
