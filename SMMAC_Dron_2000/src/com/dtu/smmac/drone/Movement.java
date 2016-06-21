@@ -190,7 +190,7 @@ public class Movement {
 
 	public void search() {
 		Random rn = new Random();
-		int search = rn.nextInt() % 4;
+		int search = rn.nextInt() % 6;
 
 		switch(search) {
 		case 0: 
@@ -208,6 +208,14 @@ public class Movement {
 		case 3: 
 			left();
 			System.out.println("LIDT VENSTRE");
+			break;
+		case 4: 
+			up();
+			System.out.println("LIDT OP");
+			break;
+		case 5: 
+			down();
+			System.out.println("LIDT NED");
 			break;
 		}
 	}
