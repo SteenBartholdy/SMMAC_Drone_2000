@@ -40,7 +40,6 @@ public class OpticalFlow {
 		
 		for (int i = 0; i < status.rows(); i++) {
 			int statusInt = (int) status.get(i, 0)[0];
-			// System.out.print(statusInt+" ");
 			if (statusInt == 1) {
 				double[] cornerPoints1 = c1.get(i, 0);
 				double[] cornerPoints2 = c2.get(i, 0);
@@ -50,10 +49,8 @@ public class OpticalFlow {
 		}
 		
 		String filename = "/Users/Christoffer/Pictures/opticalFlows1.png";
-//		String filename = "/Users/Simon/Pictures/optical1mPunkter.png";
 		System.out.println("Done. Writing " + filename);
 		Imgcodecs.imwrite(filename, imageNext);
-//		Imgcodecs.imwrite(filename, imagePrev);
 		System.out.println("Image saved");
 	}
 
