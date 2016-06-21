@@ -42,7 +42,7 @@ public class Movement {
 
 	public void up() {
 		cmd.up(100);
-		cmd.waitFor(10);
+		cmd.waitFor(200);
 		cmd.hover();
 	}
 	
@@ -54,19 +54,19 @@ public class Movement {
 
 	public void down() {
 		cmd.down(100);
-		cmd.waitFor(10);
+		cmd.waitFor(20);
 		cmd.hover();
 	}
 
 	public void right() {
 		cmd.goRight(100);
-		cmd.waitFor(15);
+		cmd.waitFor(200);
 		cmd.hover();
 	}
 
 	public void left() {
 		cmd.goLeft(100);
-		cmd.waitFor(15);
+		cmd.waitFor(200);
 		cmd.hover();
 	}
 
@@ -90,7 +90,7 @@ public class Movement {
 
 	public void forward() {
 		cmd.forward(15);
-		cmd.waitFor(75);
+		cmd.waitFor(275);
 		stopMoving();
 		cmd.hover();
 		cmd.waitFor(20);
@@ -98,7 +98,7 @@ public class Movement {
 
 	public void fastForward() {
 		cmd.forward(80);
-		cmd.waitFor(200);
+		cmd.waitFor(2000);
 		stopMoving();
 		cmd.hover();
 		cmd.waitFor(20);
@@ -106,7 +106,7 @@ public class Movement {
 	
 	public void fastForward2() {
 		cmd.forward(45);
-		cmd.waitFor(150);
+		cmd.waitFor(1500);
 		stopMoving();
 		cmd.hover();
 		cmd.waitFor(20);
